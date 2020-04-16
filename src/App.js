@@ -70,10 +70,23 @@ function App() {
     event.target.reset();
   }
 
-  function updateBird(event, bird) {
+  function updateBird(event, newBird) {
     event.preventDefault();
-    console.log(bird);
-    setBird()
+    console.log(newBird);
+    setBird(
+      birdData.map((bird => {
+        if (bird.id === newBird.id) {
+          return {
+            id: newBird.id,
+            name: event.target.name.value,
+            scientific: event.target.scientific.value,
+            location: event.target.location.value,
+            date: event.target.date.value,
+            image: event.target.url.value,
+          }
+        } else {return bird}
+      }))
+    )
   }
 
   function setEditing(event, id) {
