@@ -4,7 +4,7 @@ import BirdForm from "./bird-form";
 import cuid from "cuid";
 
 function App() {
-  const [birdData, setBird] = useState([
+  const [birdData, setBirds] = useState([
     {
       id: 1,
       name: "blackbird",
@@ -45,7 +45,7 @@ function App() {
             <button onClick={(event) => setEditing(event, bird.id)}>
               Edit
             </button>
-            <button>Delete</button>
+            <button onClick={(event) => deleteBird(event, bird.id)}>Delete</button>
           </div>
         </div>
       );
@@ -66,14 +66,14 @@ function App() {
       date: event.target.date.value,
       image: event.target.url.value,
     };
-    setBird([...birdData, newBird]);
+    setBirds([...birdData, newBird]);
     event.target.reset();
   }
 
   function updateBird(event, newBird) {
     event.preventDefault();
     console.log(newBird);
-    setBird(
+    setBirds(
       birdData.map((bird => {
         if (bird.id === newBird.id) {
           return {
@@ -90,7 +90,7 @@ function App() {
   }
 
   function setEditing(event, id) {
-    setBird(
+    setBirds(
       birdData.map((bird) => {
         if (bird.id === id) {
           return { ...bird, isEditing: true };
@@ -99,6 +99,12 @@ function App() {
         }
       })
     );
+  }
+
+  function deleteBird(event, id) {
+    setBirds(
+      birdData.filter(bird => bird.id !== id)
+    )
   }
 
   return (
