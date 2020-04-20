@@ -10,10 +10,10 @@ function App() {
     async function fetchBirds() {
       const res = await fetch("/api/birds");
       const birds = await res.json();
-      setBirds(birds)
-    };
+      setBirds(birds); // why doesn't this have to wait?
+      console.log(res);
+    }
     fetchBirds();
-
   }, []);
 
   const birdList = birdData.map((bird) => {
@@ -22,7 +22,7 @@ function App() {
         <div className="birdEntry">
           <h2 className="birdName">{bird.name}</h2>
           <h3>{bird.scientific}</h3>
-          <img src={bird.image} width="100"></img>
+          <img src={bird.image} width="100" alt={bird.name}></img>
           <ul>
             <li>
               <p className="label">Place seen: </p>
@@ -50,18 +50,30 @@ function App() {
     }
   });
 
-  function submitBird(event, bird) {
+  async function submitBird(event) {
     event.preventDefault();
+    console.log(event.target);
     const newBird = {
-      id: cuid(),
       name: event.target.name.value,
       scientific: event.target.scientific.value,
       location: event.target.location.value,
       date: event.target.date.value,
       image: event.target.url.value,
     };
-    setBirds([...birdData, newBird]);
     event.target.reset();
+
+    const url = "/api/birds";
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newBird),
+    });
+
+    const bird = await res.json();
+
+    setBirds([...birdData, bird]);
+    
   }
 
   function updateBird(event, newBird) {

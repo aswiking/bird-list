@@ -7,7 +7,7 @@ export default function BirdForm(props) {
             </h2>
         <form onSubmit={(event) => props.submitBird(event, props.bird)}>
         <ul>
-            {props.formType === 'editBird' && (<li>
+            {props.formType === 'addBird' && (<li>
                 <label htmlFor='name'>Name</label> <input type='text' id='name'></input>
             </li>)}
             <li>
