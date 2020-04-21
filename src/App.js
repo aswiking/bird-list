@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import BirdForm from "./bird-form";
-import cuid from "cuid";
 
 function App() {
   const [birdData, setBirds] = useState([]);
@@ -19,16 +18,16 @@ function App() {
   const birdList = birdData.map((bird) => {
     if (!bird.isEditing) {
       return (
-        <div className="birdEntry">
+        <div className="birdEntry" key={bird.id}>
           <h2 className="birdName">{bird.name}</h2>
           <h3>{bird.scientific}</h3>
           <img src={bird.image} width="100" alt={bird.name}></img>
           <ul>
-            <li>
+            <li >
               <p className="label">Place seen: </p>
               {bird.location}
             </li>
-            <li>
+            <li >
               <p className="label">Date seen: </p>
               {bird.date}
             </li>
@@ -45,7 +44,7 @@ function App() {
       );
     } else {
       return (
-        <BirdForm formtype="editBird" bird={bird} submitBird={updateBird} />
+        <BirdForm formtype="editBird" bird={bird} submitBird={updateBird} key={bird.name}/>
       );
     }
   });
@@ -73,23 +72,36 @@ function App() {
     const bird = await res.json();
 
     setBirds([...birdData, bird]);
-    
   }
 
-  function updateBird(event, newBird) {
+  async function updateBird(event, originalBird) {
     event.preventDefault();
-    console.log(newBird);
+    console.log(event.target)
+
+    const updatedBird = {
+      id: originalBird.id,
+      name: originalBird.name,
+      scientific: event.target.scientific.value,
+      location: event.target.location.value,
+      date: event.target.date.value,
+      image: event.target.url.value,
+    };
+    console.log(originalBird)
+
+    const url = `/api/birds/${originalBird.id}`;
+
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedBird),
+    });
+
+    console.log(res)
+
     setBirds(
       birdData.map((bird) => {
-        if (bird.id === newBird.id) {
-          return {
-            id: newBird.id,
-            name: event.target.name.value,
-            scientific: event.target.scientific.value,
-            location: event.target.location.value,
-            date: event.target.date.value,
-            image: event.target.url.value,
-          };
+        if (bird.id === updatedBird.id) {
+          return  updatedBird ;
         } else {
           return bird;
         }
