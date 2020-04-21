@@ -121,7 +121,15 @@ function App() {
     );
   }
 
-  function deleteBird(event, id) {
+  async function deleteBird(event, id) {
+
+    const url = `/api/birds/${id}`;
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"}
+    })
+
     setBirds(birdData.filter((bird) => bird.id !== id));
   }
 
