@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import BirdForm from "./bird-form";
+import BirdForm from "./BirdForm";
+import BirdEntry from "./BirdEntry";
 
 function App() {
   const [birdData, setBirds] = useState([]);
@@ -9,47 +10,13 @@ function App() {
     async function fetchBirds() {
       const res = await fetch("/api/birds");
       const birds = await res.json();
-      setBirds(birds); // why doesn't this have to wait?
+      setBirds(birds); 
       console.log(res);
     }
     fetchBirds();
   }, []);
 
-  const birdList = birdData.map((bird) => {
-    if (!bird.isEditing) {
-      return (
-        <div className="birdEntry" key={bird.id}>
-          <h2 className="birdName">{bird.name}</h2>
-          <h3>{bird.scientific}</h3>
-          <img src={bird.image} width="100" alt={bird.name}></img>
-          <ul>
-            <li >
-              <p className="label">Place seen: </p>
-              {bird.location}
-            </li>
-            <li >
-              <p className="label">Date seen: </p>
-              {bird.date}
-            </li>
-          </ul>
-          <div className="buttons">
-            <button onClick={(event) => setEditing(event, bird.id)}>
-              Edit
-            </button>
-            <button onClick={(event) => deleteBird(event, bird.id)}>
-              Delete
-            </button>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <BirdForm formtype="editBird" bird={bird} submitBird={updateBird} key={bird.name}/>
-      );
-    }
-  });
-
-  async function submitBird(event) {
+  async function addBird(event) {
     event.preventDefault();
     console.log(event.target);
     const newBird = {
@@ -126,18 +93,29 @@ function App() {
     const url = `/api/birds/${id}`;
 
     const res = await fetch(url, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"}
+      method: "DELETE"
     })
 
     setBirds(birdData.filter((bird) => bird.id !== id));
   }
 
+  const birdList = birdData.map((bird) => {
+    if (!bird.isEditing) {
+      return (
+        <BirdEntry bird={bird} setEditing={setEditing} deleteBird={deleteBird}/>
+      );
+    } else {
+      return (
+        <BirdForm formType="editBird" bird={bird} submitBird={updateBird} key={bird.id}/>
+      );
+    }
+  });
+
   return (
     <div className="App">
       <h1>Birds we seen</h1>
       {birdList}
-      <BirdForm submitBird={submitBird} formType="addBird" />
+      <BirdForm submitBird={addBird} formType="addBird" />
     </div>
   );
 }
