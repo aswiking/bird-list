@@ -21,7 +21,7 @@ function App() {
     event.preventDefault();
     console.log(event.target);
     const newBird = {
-      //name: event.target.name.value,
+      name: event.target.name.value,
       scientific: event.target.scientific.value,
       location: event.target.location.value,
       date: event.target.date.value,
@@ -59,7 +59,7 @@ function App() {
 
     const updatedBird = {
       id: originalBird.id,
-      //name: originalBird.name,
+      name: originalBird.name,
       scientific: event.target.scientific.value,
       location: event.target.location.value,
       date: event.target.date.value,
@@ -112,11 +112,18 @@ function App() {
   }
 
   async function deleteBird(event, id) {
-    const url = `/api/birds/${id}`;
+    const url = `/api/birds/${id}/huhnk`;
 
-    const res = await fetch(url, {
+    let res;
+    try {
+     res = await apiFetch(url, {
       method: "DELETE",
-    });
+    }, "Could not delete bird");
+  } catch (error) {
+    console.error(error);
+    setError(error);
+    return;
+  }
 
     setBirds(birdData.filter((bird) => bird.id !== id));
   }
