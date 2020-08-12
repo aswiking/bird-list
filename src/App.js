@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import BirdForm from "./BirdForm";
 import BirdEntry from "./BirdEntry";
+import apiFetch from "./api";
 
 function App() {
   const [birdData, setBirds] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchBirds() {
       const res = await fetch("/api/birds");
       const birds = await res.json();
-      setBirds(birds); 
-      console.log(res);
+      setBirds(birds);
     }
     fetchBirds();
   }, []);
@@ -20,7 +21,7 @@ function App() {
     event.preventDefault();
     console.log(event.target);
     const newBird = {
-      name: event.target.name.value,
+      //name: event.target.name.value,
       scientific: event.target.scientific.value,
       location: event.target.location.value,
       date: event.target.date.value,
@@ -30,11 +31,18 @@ function App() {
 
     const url = "/api/birds";
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newBird),
-    });
+    let res;
+    try {
+      res = await apiFetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newBird),
+      }, "Could not add bird");
+    } catch (error) {
+      console.error(error);
+      setError(error);
+      return;
+    }
 
     const bird = await res.json();
 
@@ -43,7 +51,7 @@ function App() {
 
   async function updateBird(event, originalBird) {
     event.preventDefault();
-    console.log(event.target)
+    console.log(event.target);
 
     const updatedBird = {
       id: originalBird.id,
@@ -53,7 +61,7 @@ function App() {
       date: event.target.date.value,
       image: event.target.url.value,
     };
-    console.log(originalBird)
+    console.log(originalBird);
 
     const url = `/api/birds/${originalBird.id}`;
 
@@ -63,12 +71,12 @@ function App() {
       body: JSON.stringify(updatedBird),
     });
 
-    console.log(res)
+    console.log(res);
 
     setBirds(
       birdData.map((bird) => {
         if (bird.id === updatedBird.id) {
-          return  updatedBird ;
+          return updatedBird;
         } else {
           return bird;
         }
@@ -89,12 +97,11 @@ function App() {
   }
 
   async function deleteBird(event, id) {
-
     const url = `/api/birds/${id}`;
 
     const res = await fetch(url, {
-      method: "DELETE"
-    })
+      method: "DELETE",
+    });
 
     setBirds(birdData.filter((bird) => bird.id !== id));
   }
@@ -102,11 +109,20 @@ function App() {
   const birdList = birdData.map((bird) => {
     if (!bird.isEditing) {
       return (
-        <BirdEntry bird={bird} setEditing={setEditing} deleteBird={deleteBird}/>
+        <BirdEntry
+          bird={bird}
+          setEditing={setEditing}
+          deleteBird={deleteBird}
+        />
       );
     } else {
       return (
-        <BirdForm formType="editBird" bird={bird} submitBird={updateBird} key={bird.id}/>
+        <BirdForm
+          formType="editBird"
+          bird={bird}
+          submitBird={updateBird}
+          key={bird.id}
+        />
       );
     }
   });
@@ -115,6 +131,17 @@ function App() {
     <div className="App">
       <h1>Birds we seen</h1>
       {birdList}
+      {error &&
+        (error.status ? (
+          <div className="error">
+            {error.message} because: {" "}
+            {error.messages.map((message) => (
+              <span>{message}</span>
+            ))}
+          </div>
+        ) : (
+          <div className="error">Could not fetch data</div>
+        ))}
       <BirdForm submitBird={addBird} formType="addBird" />
     </div>
   );
