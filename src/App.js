@@ -33,11 +33,15 @@ function App() {
 
     let res;
     try {
-      res = await apiFetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newBird),
-      }, "Could not add bird");
+      res = await apiFetch(
+        url,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newBird),
+        },
+        "Could not add bird"
+      );
     } catch (error) {
       console.error(error);
       setError(error);
@@ -55,7 +59,7 @@ function App() {
 
     const updatedBird = {
       id: originalBird.id,
-      name: originalBird.name,
+      //name: originalBird.name,
       scientific: event.target.scientific.value,
       location: event.target.location.value,
       date: event.target.date.value,
@@ -65,11 +69,22 @@ function App() {
 
     const url = `/api/birds/${originalBird.id}`;
 
-    const res = await fetch(url, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedBird),
-    });
+    let res;
+    try {
+      res = await apiFetch(
+        url,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedBird),
+        },
+        "Could not update bird"
+      );
+    } catch (error) {
+      console.error(error);
+      setError(error);
+      return;
+    }
 
     console.log(res);
 
@@ -134,7 +149,7 @@ function App() {
       {error &&
         (error.status ? (
           <div className="error">
-            {error.message} because: {" "}
+            {error.message} because:{" "}
             {error.messages.map((message) => (
               <span>{message}</span>
             ))}
