@@ -1,0 +1,16 @@
+$primary-color: honeydew;
+$secondary-color: rgb(0, 128, 128);
+$contrast-color: rgb(255, 94, 0);
+
+.header {
+    display: flex;
+    border-bottom: solid 2px $primary-color;
+  }
+  
+  .fledglingLogo {
+    width: 20%;
+  }
+  
+  .header h1 {
+    width: 80%;
+  }

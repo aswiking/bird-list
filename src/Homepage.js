@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import firebase from 'firebase';
+import "./HomePage.scss";
+import Header from './Header.js';
 import BirdForm from "./BirdForm";
 import BirdEntry from "./BirdEntry";
 import apiFetch from "./api";
@@ -151,6 +153,7 @@ export default function HomePage() {
 
   return (
     <div className="homepage">
+      <Header loggedin='true' />
       <h1>Birds we seen</h1>
       {birdList}
       {error &&
@@ -165,6 +168,7 @@ export default function HomePage() {
           <div className="error">Could not fetch data</div>
         ))}
       <BirdForm submitBird={addBird} formType="addBird" />
+      <button onClick={() => firebase.auth().signOut()}>Log out</button>
     </div>
   );
 }

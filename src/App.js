@@ -1,11 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Route, Switch } from "react-router-dom";
-import HomePage from "./Homepage.js";
-import LoginPage from "./Loginpage.js";
+import firebase from 'firebase';
+import HomePage from "./HomePage.js";
+import LoginPage from "./LoginPage.js";
 import ErrorMessage from "./ErrorMessage.js";
+import "./App.scss";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+
+
+  useEffect(() => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      (user) => setLoggedIn(user !== null)
+    );
+
+    return () => unregisterAuthObserver();
+  }, []);
+
   return (
     <Switch>
       <Route path="/" exact>
