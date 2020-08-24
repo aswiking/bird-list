@@ -8,11 +8,15 @@ import "./App.scss";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
 
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-      (user) => setLoggedIn(user !== null)
+      (user) => {
+        setCurrentUser(user);
+        setLoggedIn(user !== null);
+      }
     );
 
     return () => unregisterAuthObserver();
@@ -21,7 +25,7 @@ export default function App() {
   return (
     <Switch>
       <Route path="/" exact>
-        {loggedIn ? <HomePage /> : <LoginPage />}
+        {loggedIn ? <HomePage currentUser={currentUser} /> : <LoginPage />}
       </Route>
       <Route path="/*">
         <ErrorMessage />

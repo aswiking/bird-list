@@ -1,37 +1,59 @@
 import React, { useState, useEffect } from "react";
-import firebase from 'firebase';
+import firebase from "firebase";
 import "./HomePage.scss";
-import Header from './Header.js';
-import BirdForm from "./BirdForm";
-import BirdEntry from "./BirdEntry";
+import Header from "./Header.js";
+import SightingForm from "./SightingForm";
+import SightingEntry from "./SightingEntry";
 import apiFetch from "./api";
 
-export default function HomePage() {
-  const [birdData, setBirds] = useState([]);
+export default function HomePage(props) {
+  const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchBirds() {
-      const res = await fetch("/api/birds");
-      const birds = await res.json();
-      setBirds(birds);
+    async function fetchSightings() {
+      let token;
+      try {
+        token = await props.currentUser.getIdToken();
+      } catch (error) {
+        console.error(error);
+        setError({
+          message: "Could not authorise",
+        });
+        return;
+      }
+
+      let res;
+      res = await apiFetch(
+        "/api/sightings",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        "Could not fetch sightings"
+      );
+      const sightings = await res.json();
+      setSightings(sightings);
     }
-    fetchBirds();
+    fetchSightings();
   }, []);
 
-  async function addBird(event) {
+  async function addSighting(event) {
     event.preventDefault();
     console.log(event.target);
-    const newBird = {
-      name: event.target.name.value,
+    const newSighting = {
+
+      common: event.target.common.value,
       scientific: event.target.scientific.value,
-      location: event.target.location.value,
-      date: event.target.date.value,
-      image: event.target.url.value,
+      datetime: event.target.datetime.value,
+      lat: event.target.lat.value, 
+      lng: event.target.lng.value,
+      notes: event.target.notes.value
     };
     event.target.reset();
 
-    const url = "/api/birds";
+    const url = "/api/sightings";
 
     let res;
     try {
@@ -40,9 +62,9 @@ export default function HomePage() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newBird),
+          body: JSON.stringify(newSighting),
         },
-        "Could not add bird"
+        "Could not add sighting"
       );
     } catch (error) {
       console.error(error);
@@ -50,26 +72,27 @@ export default function HomePage() {
       return;
     }
 
-    const bird = await res.json();
+    const sighting = await res.json();
 
-    setBirds([...birdData, bird]);
+    setSightings([...sightingsData, sighting]);
   }
 
-  async function updateBird(event, originalBird) {
+  async function updateSighting(event, originalSighting) {
     event.preventDefault();
     console.log(event.target);
 
-    const updatedBird = {
-      id: originalBird.id,
-      name: originalBird.name,
-      scientific: event.target.scientific.value,
-      location: event.target.location.value,
-      date: event.target.date.value,
-      image: event.target.url.value,
+    const updatedSighting = {
+      id: originalSighting.id,
+      common: originalSighting.common,
+      scientific: originalSighting.scientific,
+      datetime: event.target.datetime.value,
+      lat: event.target.lat.value, 
+      lng: event.target.lng.value,
+      notes: event.target.notes.value
     };
-    console.log(originalBird);
+    console.log(originalSighting);
 
-    const url = `/api/birds/${originalBird.id}`;
+    const url = `/api/sightings/${originalSighting.id}`;
 
     let res;
     try {
@@ -78,9 +101,9 @@ export default function HomePage() {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updatedBird),
+          body: JSON.stringify(updatedSighting),
         },
-        "Could not update bird"
+        "Could not update sighting"
       );
     } catch (error) {
       console.error(error);
@@ -90,62 +113,66 @@ export default function HomePage() {
 
     console.log(res);
 
-    setBirds(
-      birdData.map((bird) => {
-        if (bird.id === updatedBird.id) {
-          return updatedBird;
+    setSightings(
+      sightingsData.map((sighting) => {
+        if (sighting.id === updatedSighting.id) {
+          return updatedSighting;
         } else {
-          return bird;
+          return sighting;
         }
       })
     );
   }
 
   function setEditing(event, id) {
-    setBirds(
-      birdData.map((bird) => {
-        if (bird.id === id) {
-          return { ...bird, isEditing: true };
+    setSightings(
+      sightingsData.map((sighting) => {
+        if (sighting.id === id) {
+          return { ...sighting, isEditing: true };
         } else {
-          return bird;
+          return sighting;
         }
       })
     );
   }
 
-  async function deleteBird(event, id) {
-    const url = `/api/birds/${id}`;
+  async function deleteSighting(event, id) {
+    const url = `/api/sighting/${id}`;
 
     let res;
     try {
-     res = await apiFetch(url, {
-      method: "DELETE",
-    }, "Could not delete bird");
-  } catch (error) {
-    console.error(error);
-    setError(error);
-    return;
+      res = await apiFetch(
+        url,
+        {
+          method: "DELETE",
+        },
+        "Could not delete sighting"
+      );
+    } catch (error) {
+      console.error(error);
+      setError(error);
+      return;
+    }
+
+    setSightings(sightingsData.filter((sighting) => sighting.id !== id));
   }
 
-    setBirds(birdData.filter((bird) => bird.id !== id));
-  }
-
-  const birdList = birdData.map((bird) => {
-    if (!bird.isEditing) {
+  const sightingsList = sightingsData.map((sighting) => {
+    if (!sighting.isEditing) {
       return (
-        <BirdEntry
-          bird={bird}
+        <SightingEntry
+          sighting={sighting}
           setEditing={setEditing}
-          deleteBird={deleteBird}
+          deleteSighting={deleteSighting}
         />
       );
     } else {
       return (
-        <BirdForm
-          formType="editBird"
-          bird={bird}
-          submitBird={updateBird}
-          key={bird.id}
+        <SightingForm
+          formType="editSighting"
+          sighting={sighting}
+          submitSighting={updateSighting}
+          key={sighting.id}
         />
       );
     }
@@ -153,9 +180,9 @@ export default function HomePage() {
 
   return (
     <div className="homepage">
-      <Header loggedin='true' />
-      <h1>Birds we seen</h1>
-      {birdList}
+      <Header loggedin="true" />
+      <h1>Recent sightings</h1>
+      {sightingsList}
       {error &&
         (error.status ? (
           <div className="error">
@@ -167,9 +194,8 @@ export default function HomePage() {
         ) : (
           <div className="error">Could not fetch data</div>
         ))}
-      <BirdForm submitBird={addBird} formType="addBird" />
+      <SightingForm submitSighting={addSighting} formType="addSighting" />
       <button onClick={() => firebase.auth().signOut()}>Log out</button>
     </div>
   );
 }
-

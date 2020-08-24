@@ -5,11 +5,11 @@ import "./Header.scss";
 
 export default function Header(props) {
   return (
-    <div classname="header">
-      <img classname='fledglingLogo' src={logo}></img>
+    <div className="header">
+      <img className='fledglingLogo' src={logo}></img>
       <h1>Fledgling</h1>
       {props.loggedin &&
-      <img classname='userIcon' src={userIcon}></img>
+      <img className='userIcon' src={userIcon}></img>
       }
     </div>
   )
