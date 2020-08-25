@@ -29,7 +29,7 @@ export default function App() {
         {loggedIn ? <HomePage currentUser={currentUser} /> : <LoginPage />}
       </Route>
       <Route path="/new-sighting" exact>
-        <SightingForm />
+        <SightingForm currentUser={currentUser} />
       </Route>
       <Route path="/*">
         <ErrorMessage />

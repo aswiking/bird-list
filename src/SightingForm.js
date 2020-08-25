@@ -1,25 +1,27 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
+import BirdDropDown from "./BirdDropDown";
+import "./SightingForm.scss";
 
 export default function SightingForm(props) {
-  console.log("params is", useLocation().pathname);
   return (
-    <div>
-      <Header loggedin="true"/>
-      <div>
-        <h2>
+    <div className="sightingForm">
+      <Header loggedin="true" />
+      <div className="bodyBox">
+        <h1>
           {" "}
           {useLocation().pathname === "/new-sighting"
             ? "New sighting"
             : props.sighting.common}
-        </h2>
+        </h1>
         <form onSubmit={(event) => props.submitSighting(event, props.sighting)}>
           <ul>
             {useLocation().pathname === "/new-sighting" && (
               <li>
-                <label htmlFor="name">Name</label>{" "}
-                <input type="text" id="name"></input>
+                <label htmlFor="name">Species</label>{" "}
+                <input type="text" id="name" list="birdnames" placeholder="Start typing to see options"></input>
+                <BirdDropDown currentUser={props.currentUser} />
               </li>
             )}
             {/* <li>
@@ -54,13 +56,14 @@ export default function SightingForm(props) {
                 defaultValue={props.sighting.datetime}
               ></input>
             </li>
-            <li>
+            <li className="notes">
               <label htmlFor="notes">Notes</label>{" "}
-              <input
+              <textarea
+                rows="8"
                 id="notes"
                 type="text"
                 defaultValue={props.sighting.notes}
-              ></input>
+              ></textarea>
             </li>
           </ul>
           <button>Submit</button>

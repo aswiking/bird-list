@@ -2,20 +2,7 @@ $primary-color: rgb(254, 255, 240);
 $secondary-color: rgb(0, 128, 128);
 $contrast-color: rgb(255, 128, 128);
 
-.recentSightingsLog {
-  background-color: rgba(254, 255, 240, 0.9);
-  -webkit-box-shadow: -5px 5px 21px 2px rgba(0,128,128,0.65);
-  -moz-box-shadow: -5px 5px 21px 2px rgba(0,128,128,0.65);
-  box-shadow: -5px 5px 21px 2px rgba(0,128,128,0.65);
-  margin: 20px;
-  padding: 10px 20px 15px 20px;
-}
 
-.recentSightingsLog h1 {
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  font-weight: 600;
-}
 
 .recentSightingsHeader {
   color: $contrast-color;

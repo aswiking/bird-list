@@ -39,7 +39,6 @@ export default function HomePage(props) {
       );
       const sightings = await res.json();
       setSightings(sightings);
-      console.log(sightings);
     }
     fetchSightings();
   }, []);
@@ -185,10 +184,10 @@ export default function HomePage(props) {
   return (
     <div className="homepage">
       <Header loggedin="true" />
-      <div className="recentSightingsLog">
-        <div className="recentSightingsHeader">
+      <div className="bodyBox recentSightingsLog">
+        <div className="bodyBoxHeader recentSightingsHeader">
           <h1>Recent sightings</h1>
-          <Link to={"/new-sighting"}>
+          <Link to="/new-sighting">
             <FontAwesomeIcon icon={faPlusCircle} />
           </Link>
         </div>
