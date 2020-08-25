@@ -1,10 +1,28 @@
 import React from "react";
 
+export default function SightingEntry(props) {
+  function dateDifference() {
+    const todaysDate = new Date();
 
-export default function SightingEntry (props){
-return <div className="sightingEntry" key={props.sighting.id}>
-          <h2 className="birdName">{props.sighting.common}</h2>
-          <h3>{props.sighting.scientific}</h3>
+    const millisecDiff = todaysDate - new Date(props.sighting.datetime);
+    // TODO: Display hours/days/weeks/months/years ago
+    const daysAgo = Math.ceil(millisecDiff / (1000 * 60 * 60 * 24));
+
+    console.log(todaysDate, props.sighting.datetime);
+
+    return daysAgo;
+  }
+
+  const daysAgo = dateDifference();
+
+  return (
+    <div className="sightingEntry" key={props.sighting.id}>
+      <div className="name">
+        <h2 className="birdName">{props.sighting.common}</h2>
+        <h3>{props.sighting.scientific}</h3>
+      </div>
+      <h4>Last seen {daysAgo} days ago</h4>
+      {/*  
           <ul>
             <li >
               <p className="label">Place seen: </p>
@@ -28,4 +46,7 @@ return <div className="sightingEntry" key={props.sighting.id}>
               Delete
             </button>
           </div>
-        </div>}
+          */}
+    </div>
+  );
+}

@@ -6,7 +6,7 @@ $contrast-color: rgb(255, 94, 0);
     display: flex;
     border-bottom: solid 2px $secondary-color;
     color: $secondary-color;
-    padding: 20px;
+    padding: 30px 20px;
     align-items: flex-end;
     justify-content: center;
     background-color: rgba(240, 255, 240, 0.5);
@@ -23,4 +23,11 @@ $contrast-color: rgb(255, 94, 0);
     text-shadow: -4px 2px 4px $primary-color;
     font-size: 2.4rem;
     font-style: italic;
+  }
+
+  .userIcon {
+    width: 40px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
   }

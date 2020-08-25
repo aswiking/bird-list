@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase";
 import "./HomePage.scss";
+import "./SightingsEntry.scss";
 import Header from "./Header.js";
 import SightingForm from "./SightingForm";
 import SightingEntry from "./SightingEntry";
 import apiFetch from "./api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage(props) {
   const [sightingsData, setSightings] = useState([]);
@@ -35,6 +38,7 @@ export default function HomePage(props) {
       );
       const sightings = await res.json();
       setSightings(sightings);
+      console.log(sightings);
     }
     fetchSightings();
   }, []);
@@ -43,13 +47,12 @@ export default function HomePage(props) {
     event.preventDefault();
     console.log(event.target);
     const newSighting = {
-
       common: event.target.common.value,
       scientific: event.target.scientific.value,
       datetime: event.target.datetime.value,
-      lat: event.target.lat.value, 
+      lat: event.target.lat.value,
       lng: event.target.lng.value,
-      notes: event.target.notes.value
+      notes: event.target.notes.value,
     };
     event.target.reset();
 
@@ -86,9 +89,9 @@ export default function HomePage(props) {
       common: originalSighting.common,
       scientific: originalSighting.scientific,
       datetime: event.target.datetime.value,
-      lat: event.target.lat.value, 
+      lat: event.target.lat.value,
       lng: event.target.lng.value,
-      notes: event.target.notes.value
+      notes: event.target.notes.value,
     };
     console.log(originalSighting);
 
@@ -181,20 +184,24 @@ export default function HomePage(props) {
   return (
     <div className="homepage">
       <Header loggedin="true" />
-      <h1>Recent sightings</h1>
-      {sightingsList}
-      {error &&
-        (error.status ? (
-          <div className="error">
-            {error.message} because:{" "}
-            {error.messages.map((message) => (
-              <span>{message}</span>
-            ))}
-          </div>
-        ) : (
-          <div className="error">Could not fetch data</div>
-        ))}
-      <SightingForm submitSighting={addSighting} formType="addSighting" />
+      <div className="recentSightingsLog">
+        <div className="recentSightingsHeader">
+          <h1>Recent sightings</h1> <FontAwesomeIcon icon={faPlusCircle} />
+        </div>
+        {sightingsList}
+        {error &&
+          (error.status ? (
+            <div className="error">
+              {error.message} because:{" "}
+              {error.messages.map((message) => (
+                <span>{message}</span>
+              ))}
+            </div>
+          ) : (
+            <div className="error">Could not fetch data</div>
+          ))}
+      </div>
+      {/* <SightingForm submitSighting={addSighting} formType="addSighting" /> */}
       <button onClick={() => firebase.auth().signOut()}>Log out</button>
     </div>
   );
