@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import firebase from "firebase";
 import "./HomePage.scss";
 import "./SightingsEntry.scss";
@@ -186,7 +187,10 @@ export default function HomePage(props) {
       <Header loggedin="true" />
       <div className="recentSightingsLog">
         <div className="recentSightingsHeader">
-          <h1>Recent sightings</h1> <FontAwesomeIcon icon={faPlusCircle} />
+          <h1>Recent sightings</h1>
+          <Link to={"/new-sighting"}>
+            <FontAwesomeIcon icon={faPlusCircle} />
+          </Link>
         </div>
         {sightingsList}
         {error &&
