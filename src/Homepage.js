@@ -183,7 +183,7 @@ export default function HomePage(props) {
 
   return (
     <div className="homepage">
-      <Header loggedin="true" />
+      <Header loggedin="true" currentUser={props.currentUser} />
       <div className="bodyBox recentSightingsLog">
         <div className="bodyBoxHeader recentSightingsHeader">
           <h1>Recent sightings</h1>
