@@ -5,7 +5,7 @@ import HomePage from "./HomePage.js";
 import LoginPage from "./LoginPage.js";
 import SightingForm from "./SightingForm.js";
 import ErrorMessage from "./ErrorMessage.js";
-import "./App.scss";
+import "./styles/App.scss";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
