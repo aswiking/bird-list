@@ -1,4 +1,5 @@
 import React from "react";
+import "./SightingsEntry.scss";
 
 export default function SightingEntry(props) {
   function dateDifference() {

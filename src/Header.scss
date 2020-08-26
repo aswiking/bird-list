@@ -1,6 +1,5 @@
-$primary-color: honeydew;
-$secondary-color: rgb(0, 128, 128);
-$contrast-color: rgb(255, 94, 0);
+@import "./Variables";
+
 
 .header {
     display: flex;

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
-//import "./HomePage.scss";
-//import "./SightingsEntry.scss";
+import "./HomePage.scss";
 import Header from "./Header.js";
 import SightingForm from "./SightingForm";
 import SightingEntry from "./SightingEntry";
@@ -205,7 +204,6 @@ export default function HomePage(props) {
           ))}
       </div>
       {/* <SightingForm submitSighting={addSighting} formType="addSighting" /> */}
-      <button onClick={() => firebase.auth().signOut()}>Log out</button>
     </div>
   );
 }

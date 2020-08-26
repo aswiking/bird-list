@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
-//import "./SightingForm.scss";
+import "./SightingForm.scss";
 
 export default function SightingForm(props) {
   return (

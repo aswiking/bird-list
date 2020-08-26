@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "./images/fledgling-logo.svg";
 import userIcon from "./images/user-icon.svg";
-//import "./Header.scss";
+import "./Header.scss";
 import UserMenu from './UserMenu.js';
 
 export default function Header(props) {

@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "firebase";
 import FirebaseAuth from "react-firebaseui/FirebaseAuth";
 import Header from './Header.js';
-//import "./LoginPage.scss";
+import "./LoginPage.scss";
 
 export default function LoginPage() {
   const uiConfig = {

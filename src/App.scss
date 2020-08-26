@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "./Variables";
+
+html {
+  box-sizing: border-box;
+  background-image: url(./images/cranes-cropped-1.png),
+    url(./images/stilts-cropped-2.png);
+  // Susanne Nilsson 'Cranes flying at sunrise' https://www.flickr.com/photos/infomastern/26751455992/in/photolist-GKWcRS-GKWbiw-b3Unf2-GudmVq-GKWd3U-yjZDzp-k2bedj-pQvhvq-vQhN9s-yHAwNT-2cLP6gg-me4a8k-EZKPiG-MxZhBQ-AUswtk-kjjBSi-GPyD3R-222Yw23-r3EzZn-uptqi-CRH6Hp-rmYPcZ-TvPmrb-24bXW8J-29Y8W9N-24bXVjQ-rYRrxG-DoLnz5-4xThvm-uVA7q9-Gu8Czm-q5Kn35-71zDLE-21jyANM-vzZtYm-ExVrth-5ihKRC-24LB3Mg-oTpsYc-ecBxA2-GKWaL9-2aRa9Fd-jHUPZr-Q7pD98-f88wWq-q6tqjD-24iLacd-q6fHTU-oTDtvY-qKNDvD
+  // simonrumi 'Black Necked Stilts at Dawn' https://www.flickr.com/photos/22896868@N05/46421110841/in/photolist-2dJ5jY2-2jp8N1J-2hTCJst-KGXQGZ-2gWxXJc-24asMXc-2gpNuqj-2jaFt26-qc7HaB-GLWnAR-aqqai6-aqsKvu-FVvryj-fvk3Qe-fvk1Qi-fvk1Jv-fvzj9f-uHeWkR-fvk2Pn-fvk37n-fvziSh-fvk3VB-fvk3o4-fvk2fk-vBM96J-fvziXG-XXvHdd-fvk1m2-7US8Dn-25kYD5d-fvk1Ev-fvk29V-2jpa2tV-LwS91P-24Yvmva-2cbgjTm-xMeM8B-8wW9UE-ooEScs-92BJsc-bUwqw9-2jsQ49H-92ERrs-2iWoj6e-2jsKXC6-2cbgk53-NvQSSW-prqGvX-2g6nGDF-jYYJVF/
+  background-position: right top, center bottom;
+  background-repeat: no-repeat;
+  background-size: 122%, 100%;
+  min-height: 100vh;
+  background-color: $primary-color;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $header-font;
+}
+
+h4,
+p {
+  font-family: $body-font;
+}
+
+ul {
+  list-style: none;
+}
+
+.bodyBox {
+  background-color: rgba(254, 255, 240, 0.9);
+  box-shadow: -1px 1px 10px 1px rgba(0, 56, 56, 0.5);
+  margin: 20px;
+  padding: 10px 20px 20px 20px;
+}
+
+.bodyBox h1 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: $contrast-color;
+}
