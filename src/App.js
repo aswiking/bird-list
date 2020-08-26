@@ -1,39 +1,37 @@
-import React, {useState, useEffect} from "react";
-import { Route, Switch } from "react-router-dom";
-import firebase from 'firebase';
-import HomePage from "./HomePage.js";
+import React, { useState, useEffect } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import firebase from "firebase";
 import LoginPage from "./LoginPage.js";
-import SightingForm from "./SightingForm.js";
-import ErrorMessage from "./ErrorMessage.js";
+import LoggedInPages from "./LoggedInPages.js";
 import "./App.scss";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
-
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-      (user) => {
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
         setCurrentUser(user);
         setLoggedIn(user !== null);
-      }
-    );
+      });
 
     return () => unregisterAuthObserver();
   }, []);
 
-  return (
-    <Switch>
-      <Route path="/" exact>
-        {loggedIn ? <HomePage currentUser={currentUser} /> : <LoginPage />}
-      </Route>
-      <Route path="/new-sighting" exact>
-        <SightingForm currentUser={currentUser} />
-      </Route>
-      <Route path="/*">
-        <ErrorMessage />
-      </Route>
-    </Switch>
-  );
+  if (loggedIn) {
+    return (
+      <LoggedInPages currentUser={currentUser}/>
+    );
+  } else {
+    return (
+      <Switch>
+        <Route path="/*" >
+          <Redirect to="/" />
+          <LoginPage />
+        </Route>
+      </Switch>
+    );
+  }
 }

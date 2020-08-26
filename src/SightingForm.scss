@@ -1,6 +1,4 @@
-$primary-color: honeydew;
-$secondary-color: rgb(0, 128, 128);
-$contrast-color: rgb(255, 128, 128);
+@import "./Variables";
 
 .sightingForm form {
   width: 100%;
