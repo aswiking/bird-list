@@ -4,11 +4,13 @@ import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
+import LocationDropDown from "./LocationDropDown";
+
 
 export default function SightingForm(props) {
+  const accessToken = "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
   const Map = ReactMapboxGl({
-    accessToken:
-      "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng",
+    accessToken
   });
 
   return (
@@ -30,13 +32,16 @@ export default function SightingForm(props) {
                 <BirdDropDown currentUser={props.currentUser} />
               </li>
             )}
+            <div>
+              <LocationDropDown accessToken={accessToken} />
             <Map
               style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
               containerStyle={{
-                height: "200px",
-                width: "200px",
+                height: "800px",
+                width: "800px",
               }}
             ></Map>
+            </div>
             {/* <li>
             <label htmlFor="scientific">Scentific name</label>{" "}
             <input
