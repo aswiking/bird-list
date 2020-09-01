@@ -161,7 +161,7 @@ return (
           <HomePage currentUser={props.currentUser} sightingsData={sightingsData} error={error}/>
         </Route>
         <Route path="/new-sighting" exact>
-          <SightingForm currentUser={props.currentUser} addSighting={addSighting}/>
+          <SightingForm currentUser={props.currentUser} submitSighting={addSighting}/>
         </Route>
         <Route path="/*">
           <ErrorMessage />

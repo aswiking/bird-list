@@ -1,10 +1,16 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 
 export default function SightingForm(props) {
+  const Map = ReactMapboxGl({
+    accessToken:
+      "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng",
+  });
+
   return (
     <div className="sightingForm">
       <Header loggedin="true" />
@@ -19,11 +25,18 @@ export default function SightingForm(props) {
           <ul>
             {useLocation().pathname === "/new-sighting" && (
               <li>
-                <label htmlFor="name">Species</label>{" "}
-                <input type="text" id="name" list="birdnames" placeholder="Start typing to see options"></input>
+                <label htmlFor="species">Species</label>{" "}
+                {/*<input type="text" id="common" list="birdnames" placeholder="Start typing to see options"></input>*/}
                 <BirdDropDown currentUser={props.currentUser} />
               </li>
             )}
+            <Map
+              style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+              containerStyle={{
+                height: "200px",
+                width: "200px",
+              }}
+            ></Map>
             {/* <li>
             <label htmlFor="scientific">Scentific name</label>{" "}
             <input
