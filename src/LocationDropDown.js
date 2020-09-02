@@ -29,7 +29,7 @@ export default function LocationDropDown(props) {
     return locations.features.map((location) => {
       return {
         value: location.id,
-        label: location.text,
+        label: location.place_name,
       };
     });
   }
@@ -42,7 +42,7 @@ export default function LocationDropDown(props) {
         return location.id === option.value;
       });
       console.log(locationDetails)
-      const latLng = {lat: locationDetails.center[0], lng: locationDetails.center[1]}
+      const latLng = {lat: locationDetails.center[1], lng: locationDetails.center[0]}
       props.setMapCenter(latLng)
     }
   }

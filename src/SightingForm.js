@@ -38,7 +38,8 @@ export default function SightingForm(props) {
               <LocationDropDown accessToken={accessToken} setMapCenter={setMapCenter}/>
               <Map
                 style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
-                center={[-1.107409, 52.600047]}
+                center={[mapCenter.lng, mapCenter.lat]}
+                zoom={[15]}
                 containerStyle={{
                   height: "800px",
                   width: "800px",
