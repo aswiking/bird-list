@@ -34,5 +34,5 @@ export default function BirdDropDown(props) {
     });
   }
 
-  return <AsyncSelect className="bird-select" loadOptions={fetchBirds} />;
+  return <AsyncSelect className="bird-select" loadOptions={fetchBirds} placeholder='Start typing to see options'/>;
 }

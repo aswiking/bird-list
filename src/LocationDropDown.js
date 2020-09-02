@@ -34,7 +34,25 @@ export default function LocationDropDown(props) {
     });
   }
 
+  function selectLocation(option, action) {
+    
+
+    if (action.action === "select-option") {
+      const locationDetails = locationData.find((location) => {
+        return location.id === option.value;
+      });
+      console.log(locationDetails)
+      const latLng = {lat: locationDetails.center[0], lng: locationDetails.center[1]}
+      props.setMapCenter(latLng)
+    }
+  }
+
   return (
-    <AsyncSelect className="location-select" loadOptions={fetchLocations} />
+    <AsyncSelect
+      className="location-select"
+      placeholder="Start typing to see options"
+      loadOptions={fetchLocations}
+      onChange={selectLocation}
+    />
   );
 }

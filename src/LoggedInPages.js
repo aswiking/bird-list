@@ -47,7 +47,7 @@ export default function LoggedInPages(props) {
       datetime: event.target.datetime.value,
       lat: event.target.lat.value,
       lng: event.target.lng.value,
-      notes: event.target.notes.value,
+      notes: event.target.notes.value
     };
     event.target.reset();
 

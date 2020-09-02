@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import Header from "./Header";
@@ -6,11 +6,14 @@ import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
 
-
 export default function SightingForm(props) {
-  const accessToken = "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
+  const [mapCenter, setMapCenter] = useState({ lat: 52.602567, lng: -1.122065 });
+
+  const accessToken =
+    "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
   const Map = ReactMapboxGl({
-    accessToken
+    accessToken,
+     
   });
 
   return (
@@ -28,19 +31,19 @@ export default function SightingForm(props) {
             {useLocation().pathname === "/new-sighting" && (
               <li>
                 <label htmlFor="species">Species</label>{" "}
-                {/*<input type="text" id="common" list="birdnames" placeholder="Start typing to see options"></input>*/}
                 <BirdDropDown currentUser={props.currentUser} />
               </li>
             )}
             <div>
-              <LocationDropDown accessToken={accessToken} />
-            <Map
-              style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
-              containerStyle={{
-                height: "800px",
-                width: "800px",
-              }}
-            ></Map>
+              <LocationDropDown accessToken={accessToken} setMapCenter={setMapCenter}/>
+              <Map
+                style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+                center={[-1.107409, 52.600047]}
+                containerStyle={{
+                  height: "800px",
+                  width: "800px",
+                }}
+              ></Map>
             </div>
             {/* <li>
             <label htmlFor="scientific">Scentific name</label>{" "}
