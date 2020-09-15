@@ -8,6 +8,7 @@ import apiFetch from "./api";
 export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
+  const [mapPin, setMapPin] = useState(null);
 
   useEffect(() => {
     async function fetchSightings() {
@@ -45,8 +46,8 @@ export default function LoggedInPages(props) {
       common: event.target.common.value,
       scientific: event.target.scientific.value,
       datetime: event.target.datetime.value,
-      lat: event.target.lat.value,
-      lng: event.target.lng.value,
+      lat: mapPin.lat,
+      lng: mapPin.lng,
       notes: event.target.notes.value
     };
     event.target.reset();
@@ -73,6 +74,11 @@ export default function LoggedInPages(props) {
     const sighting = await res.json();
 
     setSightings([...sightingsData, sighting]);
+  }
+
+  function placeMarker(map, event) {
+    console.log(event.lngLat);
+    setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
 
   /*async function updateSighting(event, originalSighting) {
@@ -161,7 +167,7 @@ return (
           <HomePage currentUser={props.currentUser} sightingsData={sightingsData} error={error}/>
         </Route>
         <Route path="/new-sighting" exact>
-          <SightingForm currentUser={props.currentUser} submitSighting={addSighting}/>
+          <SightingForm currentUser={props.currentUser} submitSighting={addSighting} placeMarker={placeMarker} mapPin={mapPin}/>
         </Route>
         <Route path="/*">
           <ErrorMessage />
