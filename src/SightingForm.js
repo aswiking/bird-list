@@ -14,27 +14,18 @@ const Map = ReactMapboxGl({
   doubleClickZoom: false,
 });
 
+const INITIAL_ZOOM = [15];
+
 export default function SightingForm(props) {
-
-
-  const [mapZoom, setMapZoom] = useState([15])
-
   const [mapCenter, setMapCenter] = useState({
     lat: 52.602567,
     lng: -1.122065,
   });
 
-
-
   function updateCenter(map, event) {
     const newCenter = map.getCenter();
     setMapCenter({lat: newCenter.lat, lng: newCenter.lng})
-    console.log(newCenter)
-  }
-
-  function updateZoom(map, event) {
-    const newZoom = map.getZoom();
-    setMapZoom([newZoom]); //debounce this
+    console.log('Move')
   }
 
   return (
@@ -52,7 +43,7 @@ export default function SightingForm(props) {
             {useLocation().pathname === "/new-sighting" && (
               <li>
                 <label htmlFor="species">Species</label>{" "}
-                <BirdDropDown currentUser={props.currentUser} />
+                <BirdDropDown currentUser={props.currentUser} selectSpecies={props.selectSpecies}/>
               </li>
             )}
             <div>
@@ -63,23 +54,23 @@ export default function SightingForm(props) {
               <Map
                 style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
                 center={[mapCenter.lng, mapCenter.lat]}
-                zoom={mapZoom}
+                zoom={INITIAL_ZOOM}
                 containerStyle={{
                   height: "800px",
                   width: "800px",
                 }}
                 onMoveEnd={(map, event) => updateCenter(map, event)}
-                onZoom={(map, event) => updateZoom(map, event)}
                 onDblClick={props.placeMarker}
               >
                 <Layer
                   type="symbol"
                   id="marker"
-                  layout={{ "icon-image": "tw-provincial-expy-2" }}
+                  layout={{ "icon-image": "tw-provincial-expy-2", "icon-size": 1 }}
                 >
                   {props.mapPin && <Feature coordinates={[props.mapPin.lng, props.mapPin.lat]} />}
                 </Layer>
               </Map>
+              <p>Double click to place a pin on the spot of your sighting</p>
             </div>
             {/* <li>
             <label htmlFor="scientific">Scentific name</label>{" "}
@@ -110,7 +101,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={props.sighting.datetime}
+                defaultValue={props.sighting.date}
               ></input>
             </li>
             <li className="notes">

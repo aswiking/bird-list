@@ -41,7 +41,6 @@ export default function LocationDropDown(props) {
       const locationDetails = locationData.find((location) => {
         return location.id === option.value;
       });
-      console.log(locationDetails)
       const latLng = {lat: locationDetails.center[1], lng: locationDetails.center[0]}
       props.setMapCenter(latLng)
     }

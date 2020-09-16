@@ -9,6 +9,7 @@ export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
   const [mapPin, setMapPin] = useState(null);
+  const [selectedBird, setSelectedBird] = useState();
 
   useEffect(() => {
     async function fetchSightings() {
@@ -39,17 +40,23 @@ export default function LoggedInPages(props) {
     fetchSightings();
   }, []);
 
+  function selectSpecies(option, action) {
+    if(action.action === "select-option") {
+      setSelectedBird(option.value)
+    }
+  }
+
   async function addSighting(event) {
     event.preventDefault();
-    console.log(event.target);
     const newSighting = {
-      common: event.target.common.value,
-      scientific: event.target.scientific.value,
-      datetime: event.target.datetime.value,
+      bird_id: selectedBird,
+      user_id: String(props.currentUser.uid),
+      datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
       notes: event.target.notes.value
     };
+    console.log(props.currentUser)
     event.target.reset();
 
     const url = "/api/sightings";
@@ -80,6 +87,8 @@ export default function LoggedInPages(props) {
     console.log(event.lngLat);
     setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
+
+
 
   /*async function updateSighting(event, originalSighting) {
     event.preventDefault();
@@ -167,7 +176,7 @@ return (
           <HomePage currentUser={props.currentUser} sightingsData={sightingsData} error={error}/>
         </Route>
         <Route path="/new-sighting" exact>
-          <SightingForm currentUser={props.currentUser} submitSighting={addSighting} placeMarker={placeMarker} mapPin={mapPin}/>
+          <SightingForm currentUser={props.currentUser} submitSighting={addSighting} placeMarker={placeMarker} mapPin={mapPin} selectSpecies={selectSpecies}/>
         </Route>
         <Route path="/*">
           <ErrorMessage />
