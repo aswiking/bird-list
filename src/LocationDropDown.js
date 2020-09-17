@@ -35,7 +35,6 @@ export default function LocationDropDown(props) {
   }
 
   function selectLocation(option, action) {
-    
 
     if (action.action === "select-option") {
       const locationDetails = locationData.find((location) => {

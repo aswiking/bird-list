@@ -72,30 +72,6 @@ export default function SightingForm(props) {
               </Map>
               <p>Double click to place a pin on the spot of your sighting</p>
             </div>
-            {/* <li>
-            <label htmlFor="scientific">Scentific name</label>{" "}
-            <input
-              id="scientific"
-              type="text"
-              defaultValue={props.sighting.scientific}
-            ></input>
-          </li> 
-            <li>
-              <label htmlFor="latitude">Latitude</label>{" "}
-              <input
-                id="latitude"
-                type="text"
-                defaultValue={props.sighting.lat}
-              ></input>
-            </li>
-            <li>
-              <label htmlFor="longitude">Longitude</label>{" "}
-              <input
-                id="longitude"
-                type="text"
-                defaultValue={props.sighting.lng}
-              ></input>
-            </li>*/}
             <li>
               <label htmlFor="date">Date seen</label>{" "}
               <input

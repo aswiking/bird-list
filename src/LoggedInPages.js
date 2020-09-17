@@ -41,8 +41,8 @@ export default function LoggedInPages(props) {
   }, []);
 
   function selectSpecies(option, action) {
-    if(action.action === "select-option") {
-      setSelectedBird(option.value)
+    if (action.action === "select-option") {
+      setSelectedBird(option.value);
     }
   }
 
@@ -50,13 +50,13 @@ export default function LoggedInPages(props) {
     event.preventDefault();
     const newSighting = {
       bird_id: selectedBird,
-      user_id: String(props.currentUser.uid),
+      user_id: props.currentUser.uid,
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
-      notes: event.target.notes.value
+      notes: event.target.notes.value,
     };
-    console.log(props.currentUser)
+    console.log(props.currentUser);
     event.target.reset();
 
     const url = "/api/sightings";
@@ -80,6 +80,8 @@ export default function LoggedInPages(props) {
 
     const sighting = await res.json();
 
+    
+
     setSightings([...sightingsData, sighting]);
   }
 
@@ -87,8 +89,6 @@ export default function LoggedInPages(props) {
     console.log(event.lngLat);
     setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
-
-
 
   /*async function updateSighting(event, originalSighting) {
     event.preventDefault();
@@ -149,7 +149,7 @@ export default function LoggedInPages(props) {
     );
   }*/
 
-/*  async function deleteSighting(event, id) {
+  /*  async function deleteSighting(event, id) {
     const url = `/api/sighting/${id}`;
 
     let res;
@@ -170,15 +170,27 @@ export default function LoggedInPages(props) {
     setSightings(sightingsData.filter((sighting) => sighting.id !== id));
   }*/
 
-return (
-<Switch>
-        <Route path="/" exact>
-          <HomePage currentUser={props.currentUser} sightingsData={sightingsData} error={error}/>
-        </Route>
-        <Route path="/new-sighting" exact>
-          <SightingForm currentUser={props.currentUser} submitSighting={addSighting} placeMarker={placeMarker} mapPin={mapPin} selectSpecies={selectSpecies}/>
-        </Route>
-        <Route path="/*">
-          <ErrorMessage />
-        </Route>
-      </Switch>)}
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <HomePage
+          currentUser={props.currentUser}
+          sightingsData={sightingsData}
+          error={error}
+        />
+      </Route>
+      <Route path="/new-sighting" exact>
+        <SightingForm
+          currentUser={props.currentUser}
+          submitSighting={addSighting}
+          placeMarker={placeMarker}
+          mapPin={mapPin}
+          selectSpecies={selectSpecies}
+        />
+      </Route>
+      <Route path="/*">
+        <ErrorMessage />
+      </Route>
+    </Switch>
+  );
+}

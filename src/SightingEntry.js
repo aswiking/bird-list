@@ -8,9 +8,6 @@ export default function SightingEntry(props) {
     const millisecDiff = todaysDate - new Date(props.sighting.datetime);
     // TODO: Display hours/days/weeks/months/years ago
     const daysAgo = Math.ceil(millisecDiff / (1000 * 60 * 60 * 24));
-
-    console.log(todaysDate, props.sighting.datetime);
-
     return daysAgo;
   }
 
