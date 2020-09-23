@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, {
+  Layer,
+  Feature,
+  GeolocateControl,
+} from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
@@ -18,14 +22,24 @@ const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
   const [mapCenter, setMapCenter] = useState({
-    lat: 52.602567,
-    lng: -1.122065,
+    lat: 52.610044,
+    lng: -1.156774,
   });
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      setMapCenter(userLocation);
+    });
+  }, []);
 
   function updateCenter(map, event) {
     const newCenter = map.getCenter();
-    setMapCenter({lat: newCenter.lat, lng: newCenter.lng})
-    console.log('Move')
+    setMapCenter({ lat: newCenter.lat, lng: newCenter.lng });
+    console.log("Move");
   }
 
   return (
@@ -43,7 +57,10 @@ export default function SightingForm(props) {
             {useLocation().pathname === "/new-sighting" && (
               <li>
                 <label htmlFor="species">Species</label>{" "}
-                <BirdDropDown currentUser={props.currentUser} selectSpecies={props.selectSpecies}/>
+                <BirdDropDown
+                  currentUser={props.currentUser}
+                  selectSpecies={props.selectSpecies}
+                />
               </li>
             )}
             <div>
@@ -65,9 +82,16 @@ export default function SightingForm(props) {
                 <Layer
                   type="symbol"
                   id="marker"
-                  layout={{ "icon-image": "tw-provincial-expy-2", "icon-size": 1 }}
+                  layout={{
+                    "icon-image": "tw-provincial-expy-2",
+                    "icon-size": 1,
+                  }}
                 >
-                  {props.mapPin && <Feature coordinates={[props.mapPin.lng, props.mapPin.lat]} />}
+                  {props.mapPin && (
+                    <Feature
+                      coordinates={[props.mapPin.lng, props.mapPin.lat]}
+                    />
+                  )}
                 </Layer>
               </Map>
               <p>Double click to place a pin on the spot of your sighting</p>
