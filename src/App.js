@@ -28,7 +28,6 @@ export default function App() {
     return (
       <Switch>
         <Route path="/*" >
-          <Redirect to="/" />
           <LoginPage />
         </Route>
       </Switch>
