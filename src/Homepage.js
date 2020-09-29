@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import firebase from "firebase";
 import "./HomePage.scss";
 import Header from "./Header.js";
-import SightingForm from "./SightingForm";
 import SightingEntry from "./SightingEntry";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";

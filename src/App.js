@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import firebase from "firebase";
 import LoginPage from "./LoginPage.js";
 import LoggedInPages from "./LoggedInPages.js";

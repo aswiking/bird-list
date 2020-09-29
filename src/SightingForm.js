@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import ReactMapboxGl, {
   Layer,
   Feature,
-  GeolocateControl,
 } from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
@@ -21,6 +20,8 @@ const Map = ReactMapboxGl({
 
 const INITIAL_ZOOM = [15];
 
+
+
 export default function SightingForm(props) {
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -28,6 +29,8 @@ export default function SightingForm(props) {
   });
 
   const [instagramImages, setInstagramImages] = useState([]);
+
+  const instagramToken = props.instagramToken;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -43,7 +46,7 @@ export default function SightingForm(props) {
     async function getImages() {
       let res;
 
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${props.instagramToken}`;
+      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${instagramToken}`;
 
       res = await apiFetch(url, {}, "Could not fetch images");
 
@@ -52,10 +55,10 @@ export default function SightingForm(props) {
       setInstagramImages(imageData.data);
     }
 
-    if (props.instagramToken) {
+    if (instagramToken) {
       getImages();
     }
-  }, []);
+  }, [instagramToken]);
 
   const imageList = instagramImages.map((image) => {
     return <img src={image.media_url} alt={image.caption} width="100px"></img>;

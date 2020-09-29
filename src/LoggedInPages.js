@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
 import ErrorMessage from "./ErrorMessage.js";
@@ -12,10 +12,13 @@ export default function LoggedInPages(props) {
   const [selectedBird, setSelectedBird] = useState();
 
   useEffect(() => {
+
+    const currentUser = props;
+
     async function fetchSightings() {
       let token;
       try {
-        token = await props.currentUser.getIdToken();
+        token = await currentUser.getIdToken();
       } catch (error) {
         console.error(error);
         setError({
@@ -38,7 +41,8 @@ export default function LoggedInPages(props) {
       setSightings(sightings);
     }
     fetchSightings();
-  }, []);
+   
+  }, [props]);
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {

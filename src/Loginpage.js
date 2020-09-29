@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import firebase from "firebase";
@@ -10,6 +10,8 @@ import apiFetch from "./api";
 
 
 export default function LoginPage(props) {
+
+  const [setInstagramToken, setInstragramUid] = [props];
 
   const location = useLocation();
   useEffect(() => {
@@ -34,9 +36,9 @@ export default function LoginPage(props) {
         
         console.log(response.firebaseToken)
         
-        props.setInstagramToken(response.instagramToken);
+        setInstagramToken(response.instagramToken);
 
-        props.setInstragramUid(response.instagramUserID);
+        setInstragramUid(response.instagramUserID);
 
         firebase.auth().signInWithCustomToken(response.firebaseToken)
       }
@@ -46,7 +48,7 @@ export default function LoginPage(props) {
       
 
     }
-  }, []);
+  }, [location.search, setInstagramToken, setInstragramUid]);
 
   const uiConfig = {
     // Popup signin flow rather than redirect flow.

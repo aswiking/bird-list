@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import apiFetch from "./api";
 
 export default function LocationDropDown(props) {
-  const [error, setError] = useState(null);
   const [locationData, setLocations] = useState([]);
 
   async function fetchLocations(inputValue) {
