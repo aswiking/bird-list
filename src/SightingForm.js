@@ -9,6 +9,7 @@ import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
+import apiFetch from "./api";
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -26,6 +27,8 @@ export default function SightingForm(props) {
     lng: -1.156774,
   });
 
+  const [instagramImages, setInstagramImages] = useState([]);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       const userLocation = {
@@ -35,6 +38,28 @@ export default function SightingForm(props) {
       setMapCenter(userLocation);
     });
   }, []);
+
+  useEffect(() => {
+    async function getImages() {
+      let res;
+
+      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${props.instagramToken}`;
+
+      res = await apiFetch(url, {}, "Could not fetch images");
+
+      const imageData = await res.json();
+      console.log(imageData);
+      setInstagramImages(imageData.data);
+    }
+
+    if (props.instagramToken) {
+      getImages();
+    }
+  }, []);
+
+  const imageList = instagramImages.map((image) => {
+    return <img src={image.media_url} alt={image.caption} width="100px"></img>;
+  });
 
   function updateCenter(map, event) {
     const newCenter = map.getCenter();
@@ -63,6 +88,14 @@ export default function SightingForm(props) {
                 />
               </li>
             )}
+            <li>
+              <label htmlFor="date">Date seen</label>{" "}
+              <input
+                id="date"
+                type="date"
+                defaultValue={props.sighting.date}
+              ></input>
+            </li>
             <div>
               <LocationDropDown
                 accessToken={accessToken}
@@ -96,14 +129,7 @@ export default function SightingForm(props) {
               </Map>
               <p>Double click to place a pin on the spot of your sighting</p>
             </div>
-            <li>
-              <label htmlFor="date">Date seen</label>{" "}
-              <input
-                id="date"
-                type="date"
-                defaultValue={props.sighting.date}
-              ></input>
-            </li>
+            <div className="images">{imageList}</div>
             <li className="notes">
               <label htmlFor="notes">Notes</label>{" "}
               <textarea

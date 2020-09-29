@@ -186,6 +186,7 @@ export default function LoggedInPages(props) {
           placeMarker={placeMarker}
           mapPin={mapPin}
           selectSpecies={selectSpecies}
+          instagramUid={props.instagramUid} instagramToken={props.instagramToken}
         />
       </Route>
       <Route path="/*">

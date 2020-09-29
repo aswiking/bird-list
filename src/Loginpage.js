@@ -9,8 +9,7 @@ import apiFetch from "./api";
 
 
 
-export default function LoginPage() {
-  const [firebaseToken, setFirebaseToken] = useState();
+export default function LoginPage(props) {
 
   const location = useLocation();
   useEffect(() => {
@@ -34,6 +33,10 @@ export default function LoginPage() {
         const response = await res.json();
         
         console.log(response.firebaseToken)
+        
+        props.setInstagramToken(response.instagramToken);
+
+        props.setInstragramUid(response.instagramUserID);
 
         firebase.auth().signInWithCustomToken(response.firebaseToken)
       }
@@ -59,15 +62,15 @@ export default function LoginPage() {
     },
   };
 
-  function onSignInButtonClick() {
-    // Open the Auth flow in a popup.
+  // function onSignInButtonClick() {
+  //   // Open the Auth flow in a popup.
 
-    window.open(
-      `https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`,
-      "firebaseAuth",
-      "height=500,width=400"
-    );
-  }
+  //   window.open(
+  //     `https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`,
+  //     "firebaseAuth",
+  //     "height=500,width=400"
+  //   );
+  // }
 
   return (
     <div className="loginpage">

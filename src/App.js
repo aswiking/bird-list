@@ -8,6 +8,8 @@ import "./App.scss";
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [instagramUid, setInstragramUid] = useState(null);
+  const [instagramToken, setInstagramToken] = useState(null);
 
   useEffect(() => {
     const unregisterAuthObserver = firebase
@@ -22,13 +24,13 @@ export default function App() {
 
   if (loggedIn) {
     return (
-      <LoggedInPages currentUser={currentUser}/>
+      <LoggedInPages currentUser={currentUser} instagramUid={instagramUid} instagramToken={instagramToken} />
     );
   } else {
     return (
       <Switch>
         <Route path="/*" >
-          <LoginPage />
+          <LoginPage setInstragramUid={setInstragramUid} setInstagramToken={setInstagramToken}/>
         </Route>
       </Switch>
     );
