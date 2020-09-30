@@ -15,6 +15,9 @@ export default function App() {
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
+        if (user !== null && localStorage.getItem('instagramToken')) {
+          setInstagramToken(localStorage.getItem('instagramToken'));
+        }
         setCurrentUser(user);
         setLoggedIn(user !== null);
       });

@@ -6,14 +6,18 @@ import ErrorMessage from "./ErrorMessage.js";
 import apiFetch from "./api";
 
 export default function LoggedInPages(props) {
+
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
   const [mapPin, setMapPin] = useState(null);
   const [selectedBird, setSelectedBird] = useState();
+  const [selectedImages, setSelectedImages] = useState([]);
+
+
 
   useEffect(() => {
 
-    const currentUser = props;
+    const {currentUser} = props;
 
     async function fetchSightings() {
       let token;
@@ -58,6 +62,7 @@ export default function LoggedInPages(props) {
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
+      imageIDs:selectedImages,
       notes: event.target.notes.value,
     };
     console.log(props.currentUser);
@@ -191,6 +196,7 @@ export default function LoggedInPages(props) {
           mapPin={mapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid} instagramToken={props.instagramToken}
+          selectedImages={selectedImages} setSelectedImages={setSelectedImages}
         />
       </Route>
       <Route path="/*">

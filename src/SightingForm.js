@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ReactMapboxGl, {
-  Layer,
-  Feature,
-} from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
@@ -20,8 +17,6 @@ const Map = ReactMapboxGl({
 
 const INITIAL_ZOOM = [15];
 
-
-
 export default function SightingForm(props) {
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -30,7 +25,20 @@ export default function SightingForm(props) {
 
   const [instagramImages, setInstagramImages] = useState([]);
 
+  function selectImage(imageID) {
+    console.log("imageID", imageID);
+    if (props.selectedImages.includes(imageID)) {
+      props.setSelectedImages(props.selectedImages.filter((value) => {
+        return value === imageID
+      }));
+    } else {
+      props.setSelectedImages([...props.selectedImages, imageID]);
+    }
+  }
+
   const instagramToken = props.instagramToken;
+
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -51,7 +59,6 @@ export default function SightingForm(props) {
       res = await apiFetch(url, {}, "Could not fetch images");
 
       const imageData = await res.json();
-      console.log(imageData);
       setInstagramImages(imageData.data);
     }
 
@@ -59,9 +66,23 @@ export default function SightingForm(props) {
       getImages();
     }
   }, [instagramToken]);
-
+  
   const imageList = instagramImages.map((image) => {
-    return <img src={image.media_url} alt={image.caption} width="100px"></img>;
+    return (
+      <label for={image.id}>
+        <img
+          src={image.media_url}
+          alt={image.caption}
+          width="100px"
+        ></img>
+        <input
+          type="checkbox"
+          value={image.id}
+          onChange={() => selectImage(image.id)}
+          checked={props.selectedImages[image.id]}
+        ></input>
+      </label>
+    );
   });
 
   function updateCenter(map, event) {
@@ -132,7 +153,15 @@ export default function SightingForm(props) {
               </Map>
               <p>Double click to place a pin on the spot of your sighting</p>
             </div>
-            <div className="images">{imageList}</div>
+            {instagramToken ? (
+              <div className="images">{imageList}</div>
+            ) : (
+              <a
+                href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
+              >
+                Link your account to Instagram to select photos
+              </a>
+            )}
             <li className="notes">
               <label htmlFor="notes">Notes</label>{" "}
               <textarea
