@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./SightingsEntry.scss";
 
 export default function SightingEntry(props) {
-  const [imageDetails, setImageDetails] = useState({});
+  const [imageDetails, setImageDetails] = useState(null);
 
   useEffect(() => {
     if (props.sighting.instagram_media_id) {

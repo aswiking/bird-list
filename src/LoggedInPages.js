@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
 import ErrorMessage from "./ErrorMessage.js";
@@ -11,6 +11,8 @@ export default function LoggedInPages(props) {
   const [mapPin, setMapPin] = useState(null);
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     const { currentUser } = props;
@@ -51,6 +53,7 @@ export default function LoggedInPages(props) {
 
   async function addSighting(event) {
     event.preventDefault();
+
     const newSighting = {
       bird_id: selectedBird,
       user_id: props.currentUser.uid,
@@ -61,9 +64,9 @@ export default function LoggedInPages(props) {
       notes: event.target.notes.value,
     };
     event.target.reset();
-
+ 
     const url = "/api/sightings";
-
+ 
     let res;
     try {
       res = await apiFetch(
@@ -81,26 +84,19 @@ export default function LoggedInPages(props) {
       return;
     }
 
+    
+
     const sighting = await res.json();
-
+    console.log('1')
     setSightings([...sightingsData, sighting]);
-
+    console.log('2')
     setSelectedImages([]);
 
-    return <Redirect to="/" />
+console.log('helo')
+history.push('/');
 
   }
 
-  function retrieveImageUrl(photoID) {
-    console.log('photo ID is', photoID);
-
-
-    return {
-      photoID,
-      // imageUrl: {},
-      // imageCaption: {}
-    }
-  }
 
   function placeMarker(map, event) {
     console.log(event.lngLat);
@@ -194,7 +190,6 @@ export default function LoggedInPages(props) {
           currentUser={props.currentUser}
           sightingsData={sightingsData}
           error={error}
-          retrieveImageUrl={retrieveImageUrl}
           instagramToken={props.instagramToken}
         />
       </Route>
