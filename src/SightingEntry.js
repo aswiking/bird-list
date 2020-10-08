@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SightingsEntry.scss";
 
 export default function SightingEntry(props) {
+  const [imageDetails, setImageDetails] = useState({});
+
+  useEffect(() => {
+    if (props.sighting.instagram_media_id) {
+      async function getImageUrl() {
+        let res;
+        res = await fetch(
+          `https://graph.instagram.com/${props.sighting.instagram_media_id}?fields=caption,media_url&access_token=${props.instagramToken}`
+        ); //instagram thinks id doesn't exist
+
+        const variable = await res.json();
+
+        console.log(props.sighting.instagram_media_id);
+
+        setImageDetails(variable);
+      }
+      getImageUrl();
+    }
+  }, []);
+
   function dateDifference() {
     const todaysDate = new Date();
 
@@ -15,11 +35,17 @@ export default function SightingEntry(props) {
 
   return (
     <div className="sightingEntry" key={props.sighting.id}>
-      <div className="name">
-        <h2 className="birdName">{props.sighting.common}</h2>
-        <h3>{props.sighting.scientific}</h3>
+      <div className="entryDetails">
+        <div className="name">
+          <h2 className="birdName">{props.sighting.common}</h2>
+          <h3>{props.sighting.scientific}</h3>
+        </div>
+        <h4>Last seen {daysAgo} days ago</h4>
       </div>
-      <h4>Last seen {daysAgo} days ago</h4>
+      {imageDetails && (
+        <img src={imageDetails.media_url} alt={imageDetails.caption} className="entryPhoto"></img>
+      )}
+
       {/*  
           <ul>
             <li >

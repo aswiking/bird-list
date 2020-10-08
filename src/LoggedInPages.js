@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
 import ErrorMessage from "./ErrorMessage.js";
 import apiFetch from "./api";
 
 export default function LoggedInPages(props) {
-
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
   const [mapPin, setMapPin] = useState(null);
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
 
-
-
   useEffect(() => {
-
-    const {currentUser} = props;
+    const { currentUser } = props;
 
     async function fetchSightings() {
       let token;
@@ -45,7 +41,6 @@ export default function LoggedInPages(props) {
       setSightings(sightings);
     }
     fetchSightings();
-   
   }, [props]);
 
   function selectSpecies(option, action) {
@@ -62,10 +57,9 @@ export default function LoggedInPages(props) {
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
-      imageIDs:selectedImages,
+      images: selectedImages,
       notes: event.target.notes.value,
     };
-    console.log(props.currentUser);
     event.target.reset();
 
     const url = "/api/sightings";
@@ -89,9 +83,23 @@ export default function LoggedInPages(props) {
 
     const sighting = await res.json();
 
-    
-
     setSightings([...sightingsData, sighting]);
+
+    setSelectedImages([]);
+
+    return <Redirect to="/" />
+
+  }
+
+  function retrieveImageUrl(photoID) {
+    console.log('photo ID is', photoID);
+
+
+    return {
+      photoID,
+      // imageUrl: {},
+      // imageCaption: {}
+    }
   }
 
   function placeMarker(map, event) {
@@ -186,6 +194,8 @@ export default function LoggedInPages(props) {
           currentUser={props.currentUser}
           sightingsData={sightingsData}
           error={error}
+          retrieveImageUrl={retrieveImageUrl}
+          instagramToken={props.instagramToken}
         />
       </Route>
       <Route path="/new-sighting" exact>
@@ -195,8 +205,10 @@ export default function LoggedInPages(props) {
           placeMarker={placeMarker}
           mapPin={mapPin}
           selectSpecies={selectSpecies}
-          instagramUid={props.instagramUid} instagramToken={props.instagramToken}
-          selectedImages={selectedImages} setSelectedImages={setSelectedImages}
+          instagramUid={props.instagramUid}
+          instagramToken={props.instagramToken}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
         />
       </Route>
       <Route path="/*">

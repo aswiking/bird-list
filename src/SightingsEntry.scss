@@ -1,8 +1,5 @@
 @import "./Variables";
 
-
-
-
 .recentSightingsHeader {
   color: $contrast-color;
   display: flex;
@@ -11,32 +8,37 @@
 }
 
 .recentSightingsHeader svg {
-    font-size: 1.4rem;
-    padding-bottom: 5px;
+  font-size: 1.4rem;
+  padding-bottom: 5px;
 }
 
 .sightingEntry {
-    background-color: $secondary-color;
-    color: $primary-color;
-    padding: 5px 10px;
-    margin-bottom: 10px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-
 .sightingEntry h2 {
-    margin: 0;
-    font-size: 1.4rem;
-    padding-right: 10px;
-    font-weight: 300;
+  margin: 0;
+  font-size: 1.4rem;
+  padding-right: 10px;
+  font-weight: 300;
 }
 
 .sightingEntry h3 {
-    margin: -7px 0 0 0;
-    font-size: 1rem;
-    font-style: italic;
+  margin: -7px 0 0 0;
+  font-size: 1rem;
+  font-style: italic;
 }
 
 .sightingEntry h4 {
-    margin: 4px 0 0 0;
-    font-weight: 600;
+  margin: 4px 0 0 0;
+  font-weight: 600;
+}
+
+.entryPhoto {
+  width: 100px;
 }

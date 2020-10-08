@@ -8,10 +8,10 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage(props) {
 
-  const sightingsList = props.sightingsData.map((sighting) => {
+  const sightingsList = props.sightingsData.map((sighting, index) => {
     return (
       <SightingEntry
-        sighting={sighting}
+        sighting={sighting} key={index} instagramToken={props.instagramToken}
       />
     )
   });

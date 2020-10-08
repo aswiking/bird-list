@@ -25,14 +25,15 @@ export default function SightingForm(props) {
 
   const [instagramImages, setInstagramImages] = useState([]);
 
-  function selectImage(imageID) {
+  function selectImage(imageID, permalink) {
     console.log("imageID", imageID);
     if (props.selectedImages.includes(imageID)) {
       props.setSelectedImages(props.selectedImages.filter((value) => {
         return value === imageID
+        //not working
       }));
     } else {
-      props.setSelectedImages([...props.selectedImages, imageID]);
+      props.setSelectedImages([...props.selectedImages, {imageID, permalink}]);
     }
   }
 
@@ -54,12 +55,13 @@ export default function SightingForm(props) {
     async function getImages() {
       let res;
 
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${instagramToken}`;
+      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type&access_token=${instagramToken}`;
 
       res = await apiFetch(url, {}, "Could not fetch images");
 
       const imageData = await res.json();
       setInstagramImages(imageData.data);
+      console.log(imageData.data)
     }
 
     if (instagramToken) {
@@ -78,7 +80,7 @@ export default function SightingForm(props) {
         <input
           type="checkbox"
           value={image.id}
-          onChange={() => selectImage(image.id)}
+          onChange={() => selectImage(image.id, image.permalink)}
           checked={props.selectedImages[image.id]}
         ></input>
       </label>
