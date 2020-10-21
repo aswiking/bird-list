@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
+import FullBirdListing from "./FullBirdListing.js";
 import ErrorMessage from "./ErrorMessage.js";
 import apiFetch from "./api";
 
@@ -11,12 +12,12 @@ export default function LoggedInPages(props) {
   const [mapPin, setMapPin] = useState(null);
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [displayingSighting, setDisplayingSighting] = useState(null);
 
   const history = useHistory();
-
+  const { currentUser } = props;
   useEffect(() => {
-    const { currentUser } = props;
-
+    
     async function fetchSightings() {
       let token;
       try {
@@ -34,7 +35,7 @@ export default function LoggedInPages(props) {
         "/api/sightings",
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
           },
         },
         "Could not fetch sightings"
@@ -44,6 +45,8 @@ export default function LoggedInPages(props) {
     }
     fetchSightings();
   }, [props]);
+
+  
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -64,9 +67,20 @@ export default function LoggedInPages(props) {
       notes: event.target.notes.value,
     };
     event.target.reset();
- 
+
     const url = "/api/sightings";
- 
+
+    let token;
+    try {
+      token = await currentUser.getIdToken();
+    } catch (error) {
+      console.error(error);
+      setError({
+        message: "Could not authorise",
+      });
+      return;
+    }
+
     let res;
     try {
       res = await apiFetch(
@@ -84,19 +98,12 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    
-
     const sighting = await res.json();
-    console.log('1')
     setSightings([...sightingsData, sighting]);
-    console.log('2')
     setSelectedImages([]);
 
-console.log('helo')
-history.push('/');
-
+    history.push("/");
   }
-
 
   function placeMarker(map, event) {
     console.log(event.lngLat);
@@ -191,6 +198,7 @@ history.push('/');
           sightingsData={sightingsData}
           error={error}
           instagramToken={props.instagramToken}
+          setDisplayingSighting={setDisplayingSighting}
         />
       </Route>
       <Route path="/new-sighting" exact>
@@ -205,6 +213,10 @@ history.push('/');
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
         />
+      </Route>
+      <Route path='/sightings/:sightingID'>
+        <FullBirdListing currentUser={props.currentUser} setError={setError}/>
+
       </Route>
       <Route path="/*">
         <ErrorMessage />

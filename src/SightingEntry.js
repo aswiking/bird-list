@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./SightingsEntry.scss";
 
 export default function SightingEntry(props) {
@@ -10,11 +11,9 @@ export default function SightingEntry(props) {
         let res;
         res = await fetch(
           `https://graph.instagram.com/${props.sighting.instagram_media_id}?fields=caption,media_url&access_token=${props.instagramToken}`
-        ); //instagram thinks id doesn't exist
+        );
 
         const variable = await res.json();
-
-        console.log(props.sighting.instagram_media_id);
 
         setImageDetails(variable);
       }
@@ -33,8 +32,18 @@ export default function SightingEntry(props) {
 
   const daysAgo = dateDifference();
 
+  function setStateID() {
+    console.log(props.sighting.id)
+    props.setDisplayingSighting(props.sighting.id)
+  }
+
   return (
-    <div className="sightingEntry" key={props.sighting.id}>
+    <Link
+      to={`/sightings/${props.sighting.id}`}
+      onClick={setStateID}
+      className="sightingEntry"
+      key={props.sighting.id}
+    >
       <div className="entryDetails">
         <div className="name">
           <h2 className="birdName">{props.sighting.common}</h2>
@@ -43,25 +52,15 @@ export default function SightingEntry(props) {
         <h4>Last seen {daysAgo} days ago</h4>
       </div>
       {imageDetails && (
-        <img src={imageDetails.media_url} alt={imageDetails.caption} className="entryPhoto"></img>
+        <img
+          src={imageDetails.media_url}
+          alt={imageDetails.caption}
+          className="entryPhoto"
+        ></img>
       )}
 
       {/*  
-          <ul>
-            <li >
-              <p className="label">Place seen: </p>
-              {props.sighting.lat}
-              {props.sighting.lng}
-            </li>
-            <li >
-              <p className="label">Date seen: </p>
-              {new Date(props.sighting.datetime).toLocaleDateString()}
-            </li>
-            <li >
-              <p className="notes">Notes: </p>
-              {props.sighting.notes}
-            </li>
-          </ul>
+
           <div className="buttons">
             <button onClick={(event) => props.setEditing(event, props.sighting.id)}>
               Edit
@@ -71,6 +70,6 @@ export default function SightingEntry(props) {
             </button>
           </div>
           */}
-    </div>
+    </Link>
   );
 }
