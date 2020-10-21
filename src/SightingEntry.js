@@ -6,11 +6,11 @@ export default function SightingEntry(props) {
   const [imageDetails, setImageDetails] = useState(null);
 
   useEffect(() => {
-    if (props.sighting.instagram_media_id) {
+    if (props.sighting.photos) {
       async function getImageUrl() {
         let res;
         res = await fetch(
-          `https://graph.instagram.com/${props.sighting.instagram_media_id}?fields=caption,media_url&access_token=${props.instagramToken}`
+          `https://graph.instagram.com/${props.sighting.photos[0].instagram_media_id}?fields=caption,media_url&access_token=${props.instagramToken}`
         );
 
         const variable = await res.json();
