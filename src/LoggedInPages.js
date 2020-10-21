@@ -12,7 +12,6 @@ export default function LoggedInPages(props) {
   const [mapPin, setMapPin] = useState(null);
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
-  const [displayingSighting, setDisplayingSighting] = useState(null);
 
   const history = useHistory();
   const { currentUser } = props;
@@ -46,7 +45,7 @@ export default function LoggedInPages(props) {
     fetchSightings();
   }, [props]);
 
-  
+
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -198,7 +197,6 @@ export default function LoggedInPages(props) {
           sightingsData={sightingsData}
           error={error}
           instagramToken={props.instagramToken}
-          setDisplayingSighting={setDisplayingSighting}
         />
       </Route>
       <Route path="/new-sighting" exact>
@@ -215,7 +213,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path='/sightings/:sightingID'>
-        <FullBirdListing currentUser={props.currentUser} setError={setError}/>
+        <FullBirdListing currentUser={props.currentUser} setError={setError} instagramToken={props.instagramToken}/>
 
       </Route>
       <Route path="/*">
