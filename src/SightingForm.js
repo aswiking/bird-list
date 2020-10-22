@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
 import apiFetch from "./api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -20,7 +22,7 @@ const INITIAL_ZOOM = [15];
 export default function SightingForm(props) {
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
-    lng: -1.156774
+    lng: -1.156774,
   });
 
   const [instagramImages, setInstagramImages] = useState([]);
@@ -28,18 +30,21 @@ export default function SightingForm(props) {
   function selectImage(imageID, permalink) {
     console.log("imageID", imageID);
     if (props.selectedImages.includes(imageID)) {
-      props.setSelectedImages(props.selectedImages.filter((value) => {
-        return value === imageID
-        //not working
-      }));
+      props.setSelectedImages(
+        props.selectedImages.filter((value) => {
+          return value === imageID;
+          //not working
+        })
+      );
     } else {
-      props.setSelectedImages([...props.selectedImages, {imageID, permalink}]);
+      props.setSelectedImages([
+        ...props.selectedImages,
+        { imageID, permalink },
+      ]);
     }
   }
 
   const instagramToken = props.instagramToken;
-
-
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -61,22 +66,18 @@ export default function SightingForm(props) {
 
       const imageData = await res.json();
       setInstagramImages(imageData.data);
-      console.log(imageData.data)
+      console.log(imageData.data);
     }
 
     if (instagramToken) {
       getImages();
     }
   }, [instagramToken]);
-  
+
   const imageList = instagramImages.map((image) => {
     return (
       <label for={image.id}>
-        <img
-          src={image.media_url}
-          alt={image.caption}
-          width="100px"
-        ></img>
+        <img src={image.media_url} alt={image.caption} width="100px"></img>
         <input
           type="checkbox"
           value={image.id}
@@ -138,20 +139,14 @@ export default function SightingForm(props) {
                 onMoveEnd={(map, event) => updateCenter(map, event)}
                 onDblClick={props.placeMarker}
               >
-                <Layer
-                  type="symbol"
-                  id="marker"
-                  layout={{
-                    "icon-image": "tw-provincial-expy-2",
-                    "icon-size": 1,
-                  }}
-                >
-                  {props.mapPin && (
-                    <Feature
-                      coordinates={[props.mapPin.lng, props.mapPin.lat]}
+                {props.mapPin && (
+                  <Marker coordinates={[props.mapPin.lng, props.mapPin.lat]}>
+                    <FontAwesomeIcon
+                      icon={faMapMarkerAlt}
+                      className="mapMarker"
                     />
-                  )}
-                </Layer>
+                  </Marker>
+                )}
               </Map>
               <p>Double click to place a pin on the spot of your sighting</p>
             </div>

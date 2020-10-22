@@ -91,7 +91,7 @@ export default function FullBirdListing(props) {
                 }}
 
               >
-                <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}><FontAwesomeIcon icon={faMapMarkerAlt} /></Marker>
+                <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}><FontAwesomeIcon icon={faMapMarkerAlt} className="mapMarker"/></Marker>
               </Map>
         <h3>Notes</h3>
         <p>{sightingDetails.notes}</p>
