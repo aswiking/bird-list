@@ -49,3 +49,12 @@ ul {
 .scientific {
   font-style: italic;
 }
+
+.map-marker {
+  color: red;
+
+  svg {
+    width: 2em;
+  }
+}
+

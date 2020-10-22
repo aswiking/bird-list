@@ -143,7 +143,8 @@ export default function SightingForm(props) {
                   <Marker coordinates={[props.mapPin.lng, props.mapPin.lat]}>
                     <FontAwesomeIcon
                       icon={faMapMarkerAlt}
-                      className="mapMarker"
+                      className="map-marker"
+                      size="3x"
                     />
                   </Marker>
                 )}

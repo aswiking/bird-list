@@ -86,12 +86,12 @@ export default function FullBirdListing(props) {
                 center={[sightingDetails.lng, sightingDetails.lat]}
                 zoom={INITIAL_ZOOM}
                 containerStyle={{
-                  height: "800px",
-                  width: "800px",
+                  height: "400px",
+                  width: "400px",
                 }}
 
               >
-                <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}><FontAwesomeIcon icon={faMapMarkerAlt} className="mapMarker"/></Marker>
+                <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}><FontAwesomeIcon icon={faMapMarkerAlt} size="6x" className="map-marker"/></Marker>
               </Map>
         <h3>Notes</h3>
         <p>{sightingDetails.notes}</p>
@@ -114,7 +114,7 @@ export default function FullBirdListing(props) {
         <h2 className="scientific">{sightingDetails.scientific}</h2>
         <h3>Family:</h3>
         <h4>{sightingDetails.group_common}</h4>
-        <h4>{sightingDetails.group_scientific}</h4>
+        <h4 className="scientific">{sightingDetails.group_scientific}</h4>
         <h3>UK status:</h3>
         <h4>{sightingDetails.uk_status}</h4>
       </div>
