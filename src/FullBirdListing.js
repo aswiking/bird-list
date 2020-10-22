@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import apiFetch from "./api";
 import "./FullBirdListing.scss";
 import Photo from "./Photo.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+
+const accessToken =
+  "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
+
+const Map = ReactMapboxGl({
+  accessToken,
+  doubleClickZoom: false,
+});
+
+const INITIAL_ZOOM = [15];
 
 export default function FullBirdListing(props) {
   const { instagramToken } = props;
-  const [sightingDetails, setSightingDetails] = useState({});
+  const [sightingDetails, setSightingDetails] = useState({
+      lat: 52.610044,
+      lng: -1.156774
+  });
   const { sightingID } = useParams();
 
   useEffect(() => {
@@ -39,6 +55,7 @@ export default function FullBirdListing(props) {
       const sightingData = await res.json();
 
       setSightingDetails(sightingData);
+
     }
     fetchSighting();
   }, [props, sightingID]);
@@ -53,16 +70,29 @@ export default function FullBirdListing(props) {
   }
   const daysAgo = dateDifference();
 
+
+
   return (
     <div className="full-bird-listing">
       <div className="sighting-details">
-        <h1>My sightings</h1>
         <h2>{daysAgo} days ago</h2>
         <h3>{sightingDetails.datetime}</h3>
         <h3>Coordinates</h3>{" "}
         <p>
           {sightingDetails.lng}, {sightingDetails.lat}
         </p>
+        <Map
+                style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+                center={[sightingDetails.lng, sightingDetails.lat]}
+                zoom={INITIAL_ZOOM}
+                containerStyle={{
+                  height: "800px",
+                  width: "800px",
+                }}
+
+              >
+                <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}><FontAwesomeIcon icon={faMapMarkerAlt} /></Marker>
+              </Map>
         <h3>Notes</h3>
         <p>{sightingDetails.notes}</p>
         <div className="photos">

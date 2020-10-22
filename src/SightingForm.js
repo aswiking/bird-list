@@ -20,7 +20,7 @@ const INITIAL_ZOOM = [15];
 export default function SightingForm(props) {
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
-    lng: -1.156774,
+    lng: -1.156774
   });
 
   const [instagramImages, setInstagramImages] = useState([]);
