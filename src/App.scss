@@ -19,11 +19,13 @@ h1,
 h2,
 h3 {
   font-family: $header-font;
+  margin: 0;
 }
 
 h4,
 p {
   font-family: $body-font;
+  margin: 0;
 }
 
 ul {
@@ -42,4 +44,8 @@ ul {
   text-transform: uppercase;
   font-weight: 600;
   color: $contrast-color;
+}
+
+.scientific {
+  font-style: italic;
 }

@@ -34,7 +34,7 @@ export default function SightingEntry(props) {
 
   function setStateID() {
     console.log(props.sighting.id)
-    props.setDisplayingSighting(props.sighting.id)
+    
   }
 
   return (
@@ -47,7 +47,7 @@ export default function SightingEntry(props) {
       <div className="entryDetails">
         <div className="name">
           <h2 className="birdName">{props.sighting.common}</h2>
-          <h3>{props.sighting.scientific}</h3>
+          <h3 className="scientific">{props.sighting.scientific}</h3>
         </div>
         <h4>Last seen {daysAgo} days ago</h4>
       </div>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apiFetch from "./api";
+import "./FullBirdListing.scss";
+import Photo from "./Photo.js";
 
 export default function FullBirdListing(props) {
   const { instagramToken } = props;
   const [sightingDetails, setSightingDetails] = useState({});
-  const [photoDetails, setPhotoDetails] = useState([]);
   const { sightingID } = useParams();
 
   useEffect(() => {
@@ -36,28 +37,11 @@ export default function FullBirdListing(props) {
       );
 
       const sightingData = await res.json();
+
       setSightingDetails(sightingData);
     }
     fetchSighting();
   }, [props, sightingID]);
-
-  useEffect(() => {
-    if (sightingDetails.photos) {
-      sightingDetails.photos.forEach((photo) => {
-        async function getImageUrl() {
-          let res;
-          res = await fetch(
-            `https://graph.instagram.com/${photo.instagram_media_id}?fields=caption,media_url&access_token=${instagramToken}`
-          );
-
-          const variable = await res.json();
-
-          setPhotoDetails(photoDetails => [...photoDetails, variable]);
-        }
-        getImageUrl();
-      });
-    }
-  }, [sightingDetails, instagramToken]);
 
   function dateDifference() {
     const todaysDate = new Date();
@@ -69,31 +53,41 @@ export default function FullBirdListing(props) {
   }
   const daysAgo = dateDifference();
 
-  const photos = photoDetails.map((photo) => {
-    return <img src={photo.media_url} alt={photo.caption}></img>;
-  });
-
-  console.log(photoDetails);
-
   return (
     <div className="full-bird-listing">
-      <h1>{sightingDetails.common}</h1>
-      <h2>{sightingDetails.scientific}</h2>
-      <h3>Family:</h3>
-      <h4>{sightingDetails.group_common}</h4>
-      <h4>{sightingDetails.group_scientific}</h4>
-      <h3>UK status:</h3>
-      <h4>{sightingDetails.uk_status}</h4>
-      <h1>My sightings</h1>
-      <h2>{daysAgo} days ago</h2>
-      <h3>{sightingDetails.datetime}</h3>
-      <h3>Coordinates</h3>{" "}
-      <p>
-        {sightingDetails.lng}, {sightingDetails.lat}
-      </p>
-      <h3>Notes</h3>
-      <p>{sightingDetails.notes}</p>
-      <div className="photos">{photos}</div>
+      <div className="sighting-details">
+        <h1>My sightings</h1>
+        <h2>{daysAgo} days ago</h2>
+        <h3>{sightingDetails.datetime}</h3>
+        <h3>Coordinates</h3>{" "}
+        <p>
+          {sightingDetails.lng}, {sightingDetails.lat}
+        </p>
+        <h3>Notes</h3>
+        <p>{sightingDetails.notes}</p>
+        <div className="photos">
+          {sightingDetails.photos &&
+            sightingDetails.photos.map((photo, index) => {
+              return (
+                <Photo
+                  key={index}
+                  photoID={photo.photo_id}
+                  instagramPhotoID={photo.instagram_media_id}
+                  instagramToken={instagramToken}
+                />
+              );
+            })}
+        </div>
+      </div>
+      <div className="bird-details">
+        <h1>{sightingDetails.common}</h1>
+        <h2 className="scientific">{sightingDetails.scientific}</h2>
+        <h3>Family:</h3>
+        <h4>{sightingDetails.group_common}</h4>
+        <h4>{sightingDetails.group_scientific}</h4>
+        <h3>UK status:</h3>
+        <h4>{sightingDetails.uk_status}</h4>
+      </div>
     </div>
   );
 }
