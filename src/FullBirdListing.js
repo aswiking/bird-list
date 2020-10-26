@@ -21,7 +21,8 @@ export default function FullBirdListing(props) {
   const { instagramToken } = props;
   const [sightingDetails, setSightingDetails] = useState({
       lat: 52.610044,
-      lng: -1.156774
+      lng: -1.156774,
+      datetime: "2020-01-01"
   });
   const { sightingID } = useParams();
 
@@ -71,12 +72,19 @@ export default function FullBirdListing(props) {
   const daysAgo = dateDifference();
 
 
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+  const dateTimeFormat = new Intl.DateTimeFormat('en-GB', dateOptions);
+
+console.log(sightingDetails.datetime)
+const sightingDate = dateTimeFormat.format(new Date(sightingDetails.datetime))
+
 
   return (
     <div className="full-bird-listing">
       <div className="sighting-details">
         <h2>{daysAgo} days ago</h2>
-        <h3>{sightingDetails.datetime}</h3>
+        <h3>{sightingDate}</h3>
         <h3>Coordinates</h3>{" "}
         <p>
           {sightingDetails.lng}, {sightingDetails.lat}
