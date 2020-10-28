@@ -27,7 +27,7 @@ export default function SightingForm(props) {
 
   const [instagramImages, setInstagramImages] = useState([]);
 
-  function selectImage(imageID, permalink) {
+  function selectImage(imageID) {
     console.log("imageID", imageID);
     if (props.selectedImages.includes(imageID)) {
       props.setSelectedImages(
@@ -39,7 +39,7 @@ export default function SightingForm(props) {
     } else {
       props.setSelectedImages([
         ...props.selectedImages,
-        { imageID, permalink },
+        { imageID },
       ]);
     }
   }
@@ -57,6 +57,7 @@ export default function SightingForm(props) {
   }, []);
 
   useEffect(() => {
+    console.log("selected images", props.selectedImages)
     async function getImages() {
       let res;
 
@@ -81,8 +82,8 @@ export default function SightingForm(props) {
         <input
           type="checkbox"
           value={image.id}
-          onChange={() => selectImage(image.id, image.permalink)}
-          checked={props.selectedImages[image.id]}
+          onChange={() => selectImage(image.id)}
+          checked={props.selectedImages.findIndex(selectedImage => selectedImage.imageID === image.id) !== -1}
         ></input>
       </label>
     );
@@ -120,7 +121,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={props.sighting.date}
+                defaultValue={props.sighting.datetime.substring(0,10)}
               ></input>
             </li>
             <div>

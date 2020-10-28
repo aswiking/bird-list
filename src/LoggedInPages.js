@@ -210,10 +210,11 @@ export default function LoggedInPages(props) {
           instagramToken={props.instagramToken}
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
+          formType="new"
         />
       </Route>
       <Route path='/sightings/:sightingID'>
-        <FullBirdListing currentUser={props.currentUser} setError={setError} instagramToken={props.instagramToken}/>
+        <FullBirdListing currentUser={props.currentUser} setError={setError} instagramToken={props.instagramToken} selectedImages={selectedImages} setSelectedImages={setSelectedImages}/>
 
       </Route>
       <Route path="/*">
