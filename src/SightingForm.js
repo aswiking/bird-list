@@ -29,14 +29,19 @@ export default function SightingForm(props) {
 
   function selectImage(instagramImageID) {
     console.log("imageID", instagramImageID);
-    if (props.selectedImages.filter((selectedImage) => selectedImage.imageID === instagramImageID).length > 0) {
+    if (
+      props.selectedImages.filter(
+        (selectedImage) => selectedImage.imageID === instagramImageID
+      ).length > 0
+    ) {
       props.setSelectedImages(
-        props.selectedImages.filter(selectedImage => selectedImage.imageID !== instagramImageID
- 
+        props.selectedImages.filter(
+          (selectedImage) => selectedImage.imageID !== instagramImageID
         )
       );
     } else {
-      props.setSelectedImages([...props.selectedImages,
+      props.setSelectedImages([
+        ...props.selectedImages,
         { imageID: instagramImageID },
       ]);
     }
@@ -45,13 +50,20 @@ export default function SightingForm(props) {
   const instagramToken = props.instagramToken;
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const userLocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      setMapCenter(userLocation);
-    });
+    if (props.formType === "new") {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        setMapCenter(userLocation);
+      });
+    } else {
+      setMapCenter({
+        lat: props.sighting.lat,
+        lng: props.sighting.lng
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -80,7 +92,11 @@ export default function SightingForm(props) {
           type="checkbox"
           value={image.id}
           onChange={() => selectImage(image.id)}
-          checked={props.selectedImages.findIndex(selectedImage => selectedImage.imageID === image.id) !== -1}
+          checked={
+            props.selectedImages.findIndex(
+              (selectedImage) => selectedImage.imageID === image.id
+            ) !== -1
+          }
         ></input>
       </label>
     );
@@ -98,13 +114,13 @@ export default function SightingForm(props) {
       <div className="bodyBox">
         <h1>
           {" "}
-          {useLocation().pathname === "/new-sighting"
+          {props.formType === "new"
             ? "New sighting"
             : props.sighting.common}
         </h1>
         <form onSubmit={(event) => props.submitSighting(event, props.sighting)}>
           <ul>
-            {useLocation().pathname === "/new-sighting" && (
+            {props.formType === "new" && (
               <li>
                 <label htmlFor="species">Species</label>{" "}
                 <BirdDropDown
@@ -118,7 +134,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={props.sighting.datetime.substring(0,10)}
+                defaultValue={props.sighting.datetime.substring(0, 10)}
               ></input>
             </li>
             <div>
@@ -131,7 +147,7 @@ export default function SightingForm(props) {
                 center={[mapCenter.lng, mapCenter.lat]}
                 zoom={INITIAL_ZOOM}
                 containerStyle={{
-                  height: "800px",
+                  height: "400px",
                   width: "800px",
                 }}
                 onMoveEnd={(map, event) => updateCenter(map, event)}
@@ -142,7 +158,7 @@ export default function SightingForm(props) {
                     <FontAwesomeIcon
                       icon={faMapMarkerAlt}
                       className="map-marker"
-                      size="3x"
+                      size="6x"
                     />
                   </Marker>
                 )}

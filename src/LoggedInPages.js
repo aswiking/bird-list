@@ -9,14 +9,13 @@ import apiFetch from "./api";
 export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
-  const [mapPin, setMapPin] = useState(null);
+  const [mapPin, setMapPin] = useState({ lat: 52.610044, lng: -1.156774 });
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
 
   const history = useHistory();
   const { currentUser } = props;
   useEffect(() => {
-    
     async function fetchSightings() {
       let token;
       try {
@@ -34,7 +33,7 @@ export default function LoggedInPages(props) {
         "/api/sightings",
         {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
         },
         "Could not fetch sightings"
@@ -44,8 +43,6 @@ export default function LoggedInPages(props) {
     }
     fetchSightings();
   }, [props]);
-
-
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -109,20 +106,20 @@ export default function LoggedInPages(props) {
     setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
 
-  /*async function updateSighting(event, originalSighting) {
+  async function updateSighting(event, originalSighting) {
     event.preventDefault();
-    console.log(event.target);
 
     const updatedSighting = {
       id: originalSighting.id,
-      common: originalSighting.common,
-      scientific: originalSighting.scientific,
-      datetime: event.target.datetime.value,
-      lat: event.target.lat.value,
-      lng: event.target.lng.value,
+      bird_id: originalSighting.bird_id,
+      user_id: originalSighting.user_id,
+      datetime: event.target.date.value,
+      lat: mapPin.lat,
+      lng: mapPin.lng,
+      images: selectedImages,
       notes: event.target.notes.value,
     };
-    console.log(originalSighting);
+    console.log("updated sighting", updatedSighting);
 
     const url = `/api/sightings/${originalSighting.id}`;
 
@@ -154,19 +151,7 @@ export default function LoggedInPages(props) {
         }
       })
     );
-  }*/
-
-  /*function setEditing(event, id) {
-    setSightings(
-      sightingsData.map((sighting) => {
-        if (sighting.id === id) {
-          return { ...sighting, isEditing: true };
-        } else {
-          return sighting;
-        }
-      })
-    );
-  }*/
+  }
 
   /*  async function deleteSighting(event, id) {
     const url = `/api/sighting/${id}`;
@@ -213,9 +198,18 @@ export default function LoggedInPages(props) {
           formType="new"
         />
       </Route>
-      <Route path='/sightings/:sightingID'>
-        <FullBirdListing currentUser={props.currentUser} setError={setError} instagramToken={props.instagramToken} selectedImages={selectedImages} setSelectedImages={setSelectedImages}/>
-
+      <Route path="/sightings/:sightingID">
+        <FullBirdListing
+          currentUser={props.currentUser}
+          setError={setError}
+          placeMarker={placeMarker}
+          mapPin={mapPin}
+          instagramToken={props.instagramToken}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+          submitSighting={updateSighting}
+          setMapPin={setMapPin}
+        />
       </Route>
       <Route path="/*">
         <ErrorMessage />

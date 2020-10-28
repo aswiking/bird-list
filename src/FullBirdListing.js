@@ -19,7 +19,7 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function FullBirdListing(props) {
-  const { instagramToken, setSelectedImages, currentUser, setError } = props;
+  const { instagramToken, setSelectedImages, currentUser, setError, setMapPin } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
     lat: 52.610044,
@@ -66,10 +66,16 @@ export default function FullBirdListing(props) {
           return {imageID: photo.instagram_media_id}
         })
         );
+        console.log(sightingData)
+        setMapPin({ lat: sightingData.lat, lng: sightingData.lng })
+
+        
+        
 
     }
     fetchSighting();
-  }, [setSelectedImages, sightingID, currentUser, setError]);
+    
+  }, [setSelectedImages, sightingID, currentUser, setError, setMapPin]);
 
   function dateDifference() {
     const todaysDate = new Date();
@@ -123,7 +129,7 @@ export default function FullBirdListing(props) {
               width: "400px",
             }}
           >
-            <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}>
+            <Marker coordinates={[props.mapPin.lng, props.mapPin.lat]}>
               <FontAwesomeIcon
                 icon={faMapMarkerAlt}
                 size="6x"
@@ -166,6 +172,9 @@ export default function FullBirdListing(props) {
         instagramToken={instagramToken}
         selectedImages={props.selectedImages}
         setSelectedImages={props.setSelectedImages}
+        submitSighting={props.submitSighting}
+        placeMarker={props.placeMarker}
+        mapPin={props.mapPin}
       />
     );
   }
