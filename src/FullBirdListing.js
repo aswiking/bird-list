@@ -165,6 +165,7 @@ export default function FullBirdListing(props) {
         formType="edit"
         instagramToken={instagramToken}
         selectedImages={props.selectedImages}
+        setSelectedImages={props.setSelectedImages}
       />
     );
   }

@@ -27,19 +27,17 @@ export default function SightingForm(props) {
 
   const [instagramImages, setInstagramImages] = useState([]);
 
-  function selectImage(imageID) {
-    console.log("imageID", imageID);
-    if (props.selectedImages.includes(imageID)) {
+  function selectImage(instagramImageID) {
+    console.log("imageID", instagramImageID);
+    if (props.selectedImages.filter((selectedImage) => selectedImage.imageID === instagramImageID).length > 0) {
       props.setSelectedImages(
-        props.selectedImages.filter((value) => {
-          return value === imageID;
-          //not working
-        })
+        props.selectedImages.filter(selectedImage => selectedImage.imageID !== instagramImageID
+ 
+        )
       );
     } else {
-      props.setSelectedImages([
-        ...props.selectedImages,
-        { imageID },
+      props.setSelectedImages([...props.selectedImages,
+        { imageID: instagramImageID },
       ]);
     }
   }
@@ -57,7 +55,6 @@ export default function SightingForm(props) {
   }, []);
 
   useEffect(() => {
-    console.log("selected images", props.selectedImages)
     async function getImages() {
       let res;
 
