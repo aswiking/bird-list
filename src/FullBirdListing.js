@@ -19,14 +19,15 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function FullBirdListing(props) {
-  const { instagramToken, setSelectedImages, currentUser, setError, setMapPin } = props;
-
-  const [sightingDetails, setSightingDetails] = useState({
-    lat: 52.610044,
-    lng: -1.156774,
-    datetime: "2020-01-01",
-  });
-  const [isEditing, setIsEditing] = useState(false);
+  const {
+    instagramToken,
+    setSelectedImages,
+    currentUser,
+    setError,
+    setMapPin,
+    sightingDetails,
+    setSightingDetails,
+  } = props;
 
   const { sightingID } = useParams();
 
@@ -61,20 +62,15 @@ export default function FullBirdListing(props) {
 
       setSightingDetails(sightingData);
 
-      setSelectedImages( 
+      setSelectedImages(
         sightingData.photos.map((photo) => {
-          return {imageID: photo.instagram_media_id}
+          return { instagram_media_id: photo.instagram_media_id };
         })
-        );
-        console.log(sightingData)
-        setMapPin({ lat: sightingData.lat, lng: sightingData.lng })
-
-        
-        
-
+      );
+      console.log(sightingData);
+      setMapPin({ lat: sightingData.lat, lng: sightingData.lng });
     }
     fetchSighting();
-    
   }, [setSelectedImages, sightingID, currentUser, setError, setMapPin]);
 
   function dateDifference() {
@@ -100,18 +96,14 @@ export default function FullBirdListing(props) {
     new Date(sightingDetails.datetime)
   );
 
-  function toggleEditing() {
-    setIsEditing(!isEditing);
-  }
-
-  if (!isEditing) {
+  if (!props.isEditing) {
     return (
       <div className="full-bird-listing">
         <FontAwesomeIcon
           icon={faEdit}
           size="6x"
           className="edit-icon"
-          onClick={toggleEditing}
+          onClick={() => props.setIsEditing(true)}
         />
         <div className="sighting-details">
           <h2>{daysAgo} days ago</h2>
@@ -148,6 +140,7 @@ export default function FullBirdListing(props) {
                     photoID={photo.photo_id}
                     instagramPhotoID={photo.instagram_media_id}
                     instagramToken={instagramToken}
+                    sightingDetails={setSightingDetails}
                   />
                 );
               })}

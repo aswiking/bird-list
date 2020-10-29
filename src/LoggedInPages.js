@@ -12,6 +12,12 @@ export default function LoggedInPages(props) {
   const [mapPin, setMapPin] = useState({ lat: 52.610044, lng: -1.156774 });
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [sightingDetails, setSightingDetails] = useState({
+    lat: 52.610044,
+    lng: -1.156774,
+    datetime: "2020-01-01",
+  });
 
   const history = useHistory();
   const { currentUser } = props;
@@ -59,7 +65,7 @@ export default function LoggedInPages(props) {
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
-      images: selectedImages,
+      photos: selectedImages,
       notes: event.target.notes.value,
     };
     event.target.reset();
@@ -116,7 +122,7 @@ export default function LoggedInPages(props) {
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
-      images: selectedImages,
+      photos: selectedImages, //doesn't update
       notes: event.target.notes.value,
     };
     console.log("updated sighting", updatedSighting);
@@ -142,15 +148,10 @@ export default function LoggedInPages(props) {
 
     console.log(res);
 
-    setSightings(
-      sightingsData.map((sighting) => {
-        if (sighting.id === updatedSighting.id) {
-          return updatedSighting;
-        } else {
-          return sighting;
-        }
-      })
-    );
+    setSightingDetails(updatedSighting)
+
+    setIsEditing(false)
+    
   }
 
   /*  async function deleteSighting(event, id) {
@@ -209,6 +210,10 @@ export default function LoggedInPages(props) {
           setSelectedImages={setSelectedImages}
           submitSighting={updateSighting}
           setMapPin={setMapPin}
+          setIsEditing={setIsEditing}
+          isEditing={isEditing}
+          sightingDetails={sightingDetails}
+          setSightingDetails={setSightingDetails}
         />
       </Route>
       <Route path="/*">

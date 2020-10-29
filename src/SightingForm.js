@@ -20,34 +20,14 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
+
+  const { sighting, instagramToken } = props;
+
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
     lng: -1.156774,
   });
-
   const [instagramImages, setInstagramImages] = useState([]);
-
-  function selectImage(instagramImageID) {
-    console.log("imageID", instagramImageID);
-    if (
-      props.selectedImages.filter(
-        (selectedImage) => selectedImage.imageID === instagramImageID
-      ).length > 0
-    ) {
-      props.setSelectedImages(
-        props.selectedImages.filter(
-          (selectedImage) => selectedImage.imageID !== instagramImageID
-        )
-      );
-    } else {
-      props.setSelectedImages([
-        ...props.selectedImages,
-        { imageID: instagramImageID },
-      ]);
-    }
-  }
-
-  const instagramToken = props.instagramToken;
 
   useEffect(() => {
     if (props.formType === "new") {
@@ -60,8 +40,8 @@ export default function SightingForm(props) {
       });
     } else {
       setMapCenter({
-        lat: props.sighting.lat,
-        lng: props.sighting.lng
+        lat: sighting.lat,
+        lng: sighting.lng
       });
     }
   }, []);
@@ -70,7 +50,7 @@ export default function SightingForm(props) {
     async function getImages() {
       let res;
 
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type&access_token=${instagramToken}`;
+      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${instagramToken}`;
 
       res = await apiFetch(url, {}, "Could not fetch images");
 
@@ -80,9 +60,30 @@ export default function SightingForm(props) {
     }
 
     if (instagramToken) {
+      console.log("images", instagramImages)
       getImages();
     }
-  }, [instagramToken]);
+  }, [instagramToken, sighting]);
+
+  function selectImage(instagramImageID) {
+    console.log("imageID", instagramImageID);
+    if (
+      props.selectedImages.filter(
+        (selectedImage) => selectedImage.instagram_media_id === instagramImageID
+      ).length > 0
+    ) {
+      props.setSelectedImages(
+        props.selectedImages.filter(
+          (selectedImage) => selectedImage.instagram_media_id !== instagramImageID
+        )
+      );
+    } else {
+      props.setSelectedImages([
+        ...props.selectedImages,
+        { instagram_media_id: instagramImageID },
+      ]);
+    }
+  };
 
   const imageList = instagramImages.map((image) => {
     return (
@@ -94,7 +95,7 @@ export default function SightingForm(props) {
           onChange={() => selectImage(image.id)}
           checked={
             props.selectedImages.findIndex(
-              (selectedImage) => selectedImage.imageID === image.id
+              (selectedImage) => selectedImage.instagram_media_id === image.id
             ) !== -1
           }
         ></input>
@@ -116,9 +117,9 @@ export default function SightingForm(props) {
           {" "}
           {props.formType === "new"
             ? "New sighting"
-            : props.sighting.common}
+            : sighting.common}
         </h1>
-        <form onSubmit={(event) => props.submitSighting(event, props.sighting)}>
+        <form onSubmit={(event) => props.submitSighting(event, sighting)}>
           <ul>
             {props.formType === "new" && (
               <li>
@@ -134,7 +135,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={props.sighting.datetime.substring(0, 10)}
+                defaultValue={sighting.datetime.substring(0, 10)}
               ></input>
             </li>
             <div>
@@ -180,7 +181,7 @@ export default function SightingForm(props) {
                 rows="8"
                 id="notes"
                 type="text"
-                defaultValue={props.sighting.notes}
+                defaultValue={sighting.notes}
               ></textarea>
             </li>
           </ul>
