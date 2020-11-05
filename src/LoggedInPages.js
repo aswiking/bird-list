@@ -148,14 +148,13 @@ export default function LoggedInPages(props) {
 
     console.log(res);
 
-    setSightingDetails(updatedSighting)
+    setSightingDetails(updatedSighting);
 
-    setIsEditing(false)
-    
+    setIsEditing(false);
   }
 
-  /*  async function deleteSighting(event, id) {
-    const url = `/api/sighting/${id}`;
+  async function deleteSighting(event, id) {
+    const url = `/api/sightings/${id}`;
 
     let res;
     try {
@@ -172,8 +171,11 @@ export default function LoggedInPages(props) {
       return;
     }
 
+    console.log('deletes')
+
     setSightings(sightingsData.filter((sighting) => sighting.id !== id));
-  }*/
+    history.push("/");
+  }
 
   return (
     <Switch>
@@ -214,6 +216,7 @@ export default function LoggedInPages(props) {
           isEditing={isEditing}
           sightingDetails={sightingDetails}
           setSightingDetails={setSightingDetails}
+          deleteSighting={deleteSighting}
         />
       </Route>
       <Route path="/*">

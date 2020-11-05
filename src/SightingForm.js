@@ -20,8 +20,7 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
-
-  const { sighting, instagramToken } = props;
+  const { sighting, instagramToken, deleteSighting } = props;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -34,14 +33,14 @@ export default function SightingForm(props) {
       navigator.geolocation.getCurrentPosition(function (position) {
         const userLocation = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         };
         setMapCenter(userLocation);
       });
     } else {
       setMapCenter({
         lat: sighting.lat,
-        lng: sighting.lng
+        lng: sighting.lng,
       });
     }
   }, []);
@@ -60,7 +59,7 @@ export default function SightingForm(props) {
     }
 
     if (instagramToken) {
-      console.log("images", instagramImages)
+      console.log("images", instagramImages);
       getImages();
     }
   }, [instagramToken, sighting]);
@@ -74,7 +73,8 @@ export default function SightingForm(props) {
     ) {
       props.setSelectedImages(
         props.selectedImages.filter(
-          (selectedImage) => selectedImage.instagram_media_id !== instagramImageID
+          (selectedImage) =>
+            selectedImage.instagram_media_id !== instagramImageID
         )
       );
     } else {
@@ -83,7 +83,7 @@ export default function SightingForm(props) {
         { instagram_media_id: instagramImageID },
       ]);
     }
-  };
+  }
 
   const imageList = instagramImages.map((image) => {
     return (
@@ -113,12 +113,7 @@ export default function SightingForm(props) {
     <div className="sightingForm">
       <Header loggedin="true" />
       <div className="bodyBox">
-        <h1>
-          {" "}
-          {props.formType === "new"
-            ? "New sighting"
-            : sighting.common}
-        </h1>
+        <h1> {props.formType === "new" ? "New sighting" : sighting.common}</h1>
         <form onSubmit={(event) => props.submitSighting(event, sighting)}>
           <ul>
             {props.formType === "new" && (
@@ -187,6 +182,9 @@ export default function SightingForm(props) {
           </ul>
           <button>Submit</button>
         </form>
+        <div onClick={(event) => deleteSighting(event, sighting.id)}>
+          <p>Delete sighting</p>
+        </div>
       </div>
     </div>
   );

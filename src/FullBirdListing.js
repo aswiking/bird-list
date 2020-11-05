@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import apiFetch from "./api";
@@ -168,6 +168,7 @@ export default function FullBirdListing(props) {
         submitSighting={props.submitSighting}
         placeMarker={props.placeMarker}
         mapPin={props.mapPin}
+        deleteSighting={props.deleteSighting}
       />
     );
   }
