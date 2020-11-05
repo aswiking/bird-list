@@ -122,7 +122,7 @@ export default function LoggedInPages(props) {
       datetime: event.target.date.value,
       lat: mapPin.lat,
       lng: mapPin.lng,
-      photos: selectedImages, //doesn't update
+      photos: selectedImages,
       notes: event.target.notes.value,
     };
     console.log("updated sighting", updatedSighting);
@@ -150,6 +150,8 @@ export default function LoggedInPages(props) {
 
     setSightingDetails(updatedSighting);
 
+    setSelectedImages([]);
+
     setIsEditing(false);
   }
 
@@ -174,6 +176,7 @@ export default function LoggedInPages(props) {
     console.log('deletes')
 
     setSightings(sightingsData.filter((sighting) => sighting.id !== id));
+    setSelectedImages([]);
     history.push("/");
   }
 
