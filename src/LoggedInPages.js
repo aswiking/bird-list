@@ -4,6 +4,8 @@ import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
 import FullBirdListing from "./FullBirdListing.js";
 import ErrorMessage from "./ErrorMessage.js";
+import AllBirds from "./AllBirds.js";
+import AllSightings from "./AllSightings.js";
 import apiFetch from "./api";
 
 export default function LoggedInPages(props) {
@@ -221,6 +223,12 @@ export default function LoggedInPages(props) {
           setSightingDetails={setSightingDetails}
           deleteSighting={deleteSighting}
         />
+      </Route>
+      <Route path="/all-birds">
+        <AllBirds />
+      </Route>
+      <Route path="/all-sightings">
+        <AllSightings />
       </Route>
       <Route path="/*">
         <ErrorMessage />
