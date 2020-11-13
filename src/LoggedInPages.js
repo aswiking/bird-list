@@ -23,6 +23,7 @@ export default function LoggedInPages(props) {
 
   const history = useHistory();
   const { currentUser } = props;
+  
   useEffect(() => {
     async function fetchSightings() {
       let token;
@@ -225,7 +226,8 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/all-birds">
-        <AllBirds />
+        <AllBirds setError={setError} currentUser={props.currentUser}
+/>
       </Route>
       <Route path="/all-sightings">
         <AllSightings />
