@@ -149,7 +149,6 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    console.log(res);
 
     setSightingDetails(updatedSighting);
 
@@ -176,7 +175,6 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    console.log('deletes')
 
     setSightings(sightingsData.filter((sighting) => sighting.id !== id));
     setSelectedImages([]);

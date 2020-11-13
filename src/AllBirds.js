@@ -52,10 +52,10 @@ export default function AllBirds(props) {
   let categories = {};
 
   birdData.forEach((bird) => {
-    if (!(bird.group_name in categories)) {
-      categories[bird.group_name] = [bird]
+    if (!(bird.group.name in categories)) {
+      categories[bird.group.name] = [bird]
     } else {
-      categories[bird.group_name].push(bird)
+      categories[bird.group.name].push(bird)
     }
   });
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export default function Family(props) {
 
@@ -6,8 +8,10 @@ export default function Family(props) {
 
   const speciesList = props.categoryData[1].map((bird, index) => {
     return <div key={index}>
-      <h3>{bird.common}</h3>
+      {(bird.sighting_ids.length !== 0 ) && <FontAwesomeIcon icon={faCheck} className="tickIcon" alt='You have seen this bird' size="2x"/>}
+      <div className="bird-details"><h3>{bird.common}</h3>
       <h4 className="scientific">{bird.scientific}</h4>
+      </div>
     </div>
   })
 
