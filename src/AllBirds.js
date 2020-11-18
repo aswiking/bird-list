@@ -62,7 +62,15 @@ export default function AllBirds(props) {
 
  const birdList = Object.entries(categories).map((family, index) => {
    return <Family categoryData={family} key={index}/>
- })
+ });
 
-return <ul className="bird-table">{birdList}</ul>;
+ const categoryList = Object.entries(categories).map((family, index) => {
+  return <a href={`#${family[0]}`}><li key={index} >{family[0]}</li></a>
+});
+
+
+return <div className="all-birds">
+  <ul className="category-list" >{categoryList}</ul>
+<ul className="bird-table">{birdList}</ul>
+</div>;
 }

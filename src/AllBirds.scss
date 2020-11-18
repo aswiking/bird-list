@@ -1,0 +1,17 @@
+.all-birds {
+    display: flex;
+}
+
+.category-list {
+background-color: lavender;
+padding-top: 20px;
+padding-right: 20px;
+position: sticky;
+height: max-content;
+
+li {
+    padding-top: 10px;
+    text-transform: capitalize;
+}
+
+}

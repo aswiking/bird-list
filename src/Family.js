@@ -17,7 +17,7 @@ export default function Family(props) {
   })
 
 return <div>
-  <h2 className="family-name">{familyName}</h2>
+  <h2 className="family-name" id={familyName}>{familyName}</h2>
   {speciesList}
 
 </div>
