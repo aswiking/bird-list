@@ -1,5 +1,10 @@
 .family-name {
-    text-transform: capitalize;
+    padding-top: 62px
+}
+
+.family-name::first-letter {
+        text-transform: uppercase;
+    
 }
 
 .bird-entry {
