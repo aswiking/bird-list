@@ -5,7 +5,7 @@ import SightingForm from "./SightingForm.js";
 import FullBirdListing from "./FullBirdListing.js";
 import ErrorMessage from "./ErrorMessage.js";
 import AllBirds from "./AllBirds.js";
-import AllSightings from "./AllSightings.js";
+import Bird from './Bird.js';
 import apiFetch from "./api";
 
 export default function LoggedInPages(props) {
@@ -23,7 +23,7 @@ export default function LoggedInPages(props) {
 
   const history = useHistory();
   const { currentUser } = props;
-  
+
   useEffect(() => {
     async function fetchSightings() {
       let token;
@@ -149,7 +149,6 @@ export default function LoggedInPages(props) {
       return;
     }
 
-
     setSightingDetails(updatedSighting);
 
     setSelectedImages([]);
@@ -174,7 +173,6 @@ export default function LoggedInPages(props) {
       setError(error);
       return;
     }
-
 
     setSightings(sightingsData.filter((sighting) => sighting.id !== id));
     setSelectedImages([]);
@@ -224,11 +222,10 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/all-birds">
-        <AllBirds setError={setError} currentUser={props.currentUser}
-/>
+        <AllBirds setError={setError} currentUser={props.currentUser} />
       </Route>
-      <Route path="/all-sightings">
-        <AllSightings />
+      <Route path="/birds/:birdID">
+        <Bird />
       </Route>
       <Route path="/*">
         <ErrorMessage />
