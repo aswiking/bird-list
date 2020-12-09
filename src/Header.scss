@@ -2,13 +2,17 @@
 
 
 .header {
-    display: flex;
     border-bottom: solid 2px $secondary-color;
     color: $secondary-color;
     padding: 30px 20px;
+
+    background-color: rgba(240, 255, 240, 0.5);
+  }
+
+  .logo-and-name {
+    display: flex;
     align-items: flex-end;
     justify-content: center;
-    background-color: rgba(240, 255, 240, 0.5);
   }
   
   .fledglingLogo {
@@ -22,6 +26,11 @@
     text-shadow: -4px 2px 4px $primary-color;
     font-size: 2.4rem;
     font-style: italic;
+    color: $secondary-color;
+    
+  }
+  .header a {
+    text-decoration: none;
   }
 
   .headerIcons {
@@ -30,4 +39,8 @@
     right: 8px;
     display: flex;
     gap: 10px;
+  }
+
+  .userIcon:hover {
+    cursor: pointer;
   }
