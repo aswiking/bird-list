@@ -87,10 +87,10 @@ export default function SightingForm(props) {
 
   const imageList = instagramImages.map((image) => {
     return (
-      <label for={image.id}>
-        <img src={image.media_url} alt={image.caption} width="100px"></img>
+      <div className="image-div">
         <input
           type="checkbox"
+          id={image.id}
           value={image.id}
           onChange={() => selectImage(image.id)}
           checked={
@@ -99,7 +99,10 @@ export default function SightingForm(props) {
             ) !== -1
           }
         ></input>
-      </label>
+        <label for={image.id}>
+          <img src={image.media_url} alt={image.caption} ></img>
+        </label>
+      </div>
     );
   });
 
@@ -133,7 +136,7 @@ export default function SightingForm(props) {
                 defaultValue={sighting.datetime.substring(0, 10)}
               ></input>
             </li>
-            <div>
+            <div className="location-select-section">
               <LocationDropDown
                 accessToken={accessToken}
                 setMapCenter={setMapCenter}
@@ -144,7 +147,7 @@ export default function SightingForm(props) {
                 zoom={INITIAL_ZOOM}
                 containerStyle={{
                   height: "400px",
-                  width: "800px",
+                  width: "280px",
                 }}
                 onMoveEnd={(map, event) => updateCenter(map, event)}
                 onDblClick={props.placeMarker}
@@ -159,7 +162,9 @@ export default function SightingForm(props) {
                   </Marker>
                 )}
               </Map>
-              <p>Double click to place a pin on the spot of your sighting</p>
+              <p className="pin-instructions">
+                Double click to place a pin on the spot of your sighting
+              </p>
             </div>
             {instagramToken ? (
               <div className="images">{imageList}</div>

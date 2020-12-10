@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import apiFetch from "./api";
 import "./FullBirdListing.scss";
 import Photo from "./Photo.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faEdit, faAngleDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import SightingForm from "./SightingForm";
 
 const accessToken =
@@ -28,6 +28,8 @@ export default function FullBirdListing(props) {
     sightingDetails,
     setSightingDetails,
   } = props;
+
+  const [displayBirdDetails, setDisplayBirdDetails] = useState(false);
 
   const { sightingID } = useParams();
 
@@ -96,6 +98,10 @@ export default function FullBirdListing(props) {
     new Date(sightingDetails.datetime)
   );
 
+  function toggleDisplayBirdDetails() {
+    setDisplayBirdDetails(!displayBirdDetails);
+  }
+
   if (!props.isEditing) {
     return (
       <div className="full-bird-listing">
@@ -147,13 +153,33 @@ export default function FullBirdListing(props) {
           </div>
         </div>
         <div className="bird-details">
+          <div className="bird-details-header" onClick={() => toggleDisplayBirdDetails()}>
           <h1>{sightingDetails.common}</h1>
           <h2 className="scientific">{sightingDetails.scientific}</h2>
+          {!displayBirdDetails ? (
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className="down-arrow"
+                alt="list of birds"
+                size="2x"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="cross"
+                alt="list of birds"
+                size="2x"
+              />
+            )}
+          </div>
+          
+          { displayBirdDetails && (<div className="full-details">
           <h3>Family:</h3>
           <h4>{sightingDetails.group_common}</h4>
           <h4 className="scientific">{sightingDetails.group_scientific}</h4>
           <h3>UK status:</h3>
           <h4>{sightingDetails.uk_status}</h4>
+          </div>)}
         </div>
       </div>
     );

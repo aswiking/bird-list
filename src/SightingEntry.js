@@ -52,11 +52,14 @@ export default function SightingEntry(props) {
         <h4>Last seen {daysAgo} days ago</h4>
       </div>
       {imageDetails && (
+        <div className="entryphoto-div">
+          <div className="colorblock"></div>
         <img
           src={imageDetails.media_url}
           alt={imageDetails.caption}
           className="entryPhoto"
         ></img>
+        </div>
       )}
 
       {/*  

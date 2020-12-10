@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: $secondary-color;
-  //color: $primary-color;
+  color: $primary-color;
 }
 
 .sightingForm input, .sightingForm .bird-select {
@@ -36,6 +36,25 @@
   opacity: 0.7;
 }
 
+.location-select-section {
+  padding: 10px;
+  background-color: $secondary-color;
+}
+
+.location-select {
+  margin-bottom:10px;
+}
+
+.pin-instructions {
+  width: 280px;
+  margin: auto;
+  color: $primary-color;
+}
+
+.mapboxgl-map {
+  margin: auto;
+}
+
 .sightingForm .notes {
   display: block;
 }
@@ -46,6 +65,42 @@
   background-color: $primary-color;
   width: 97%;
   margin-top: 5px;
+}
+
+.images {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  .image-div {
+    padding-bottom: 10px;
+  }
+
+  input {
+    display: none;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  label {
+    width: 90px;
+    height: 90px;
+
+  }
+
+  input:checked ~ label {
+    display: block;
+    border: solid 5px $contrast-color;
+  }
+
+  input:checked ~ label > img {
+    height: 90px;
+    width: 90px;
+  }
 }
 
 .sightingForm button {
