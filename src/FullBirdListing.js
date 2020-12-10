@@ -111,6 +111,35 @@ export default function FullBirdListing(props) {
           className="edit-icon"
           onClick={() => props.setIsEditing(true)}
         />
+                <div className="bird-details">
+          <div className="bird-details-header" onClick={() => toggleDisplayBirdDetails()}>
+          <h1>{sightingDetails.common}</h1>
+          <h2 className="scientific">{sightingDetails.scientific}</h2>
+          {!displayBirdDetails ? (
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className="down-arrow"
+                alt="list of birds"
+                size="2x"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="cross"
+                alt="list of birds"
+                size="2x"
+              />
+            )}
+          </div>
+          
+          { displayBirdDetails && (<div className="full-details">
+          <h3>Family:</h3>
+          <h4>{sightingDetails.group_common}</h4>
+          <h4 className="scientific">{sightingDetails.group_scientific}</h4>
+          <h3>UK status:</h3>
+          <h4>{sightingDetails.uk_status}</h4>
+          </div>)}
+        </div>
         <div className="sighting-details">
           <h2>{daysAgo} days ago</h2>
           <h3>{sightingDate}</h3>
@@ -151,35 +180,6 @@ export default function FullBirdListing(props) {
                 );
               })}
           </div>
-        </div>
-        <div className="bird-details">
-          <div className="bird-details-header" onClick={() => toggleDisplayBirdDetails()}>
-          <h1>{sightingDetails.common}</h1>
-          <h2 className="scientific">{sightingDetails.scientific}</h2>
-          {!displayBirdDetails ? (
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                className="down-arrow"
-                alt="list of birds"
-                size="2x"
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faTimes}
-                className="cross"
-                alt="list of birds"
-                size="2x"
-              />
-            )}
-          </div>
-          
-          { displayBirdDetails && (<div className="full-details">
-          <h3>Family:</h3>
-          <h4>{sightingDetails.group_common}</h4>
-          <h4 className="scientific">{sightingDetails.group_scientific}</h4>
-          <h3>UK status:</h3>
-          <h4>{sightingDetails.uk_status}</h4>
-          </div>)}
         </div>
       </div>
     );
