@@ -91,9 +91,9 @@ export default function AllBirds(props) {
   }
 
   let filteredBirdData = birdData.filter(
-    (bird) =>
-      (displayingBirds.seen && (bird.sighting_ids.length !== 0)) ||
-      (displayingBirds.unseen && (bird.sighting_ids.length === 0))
+    (bird) => 
+      (displayingBirds.seen   && bird.sightings.length !== 0) ||
+      (displayingBirds.unseen && bird.sightings.length === 0)
   );
 
   let categories = {};
@@ -113,14 +113,14 @@ export default function AllBirds(props) {
   const categoryList = Object.entries(categories).map((family, index) => {
     return (
       <a key={index} href={`#${family[0]}`} onClick={() => toggleDisplayMenu()}>
-        <li >{family[0]}</li>
+        <li>{family[0]}</li>
       </a>
     );
   });
 
   return (
     <div className="all-birds">
-      <Header />
+      <Header loggedin="true"/>
       <div className="category-menu">
         <div className="scroller">
           <h3

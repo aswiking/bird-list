@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
-import FullBirdListing from "./FullBirdListing.js";
+import FullSighting from "./FullSighting.js";
 import ErrorMessage from "./ErrorMessage.js";
 import AllBirds from "./AllBirds.js";
 import Bird from './Bird.js';
@@ -105,7 +105,7 @@ export default function LoggedInPages(props) {
 
     const sighting = await res.json();
     setSightings([...sightingsData, sighting]);
-    setSelectedImages([]);
+    setSelectedImages([]); //not working
 
     history.push("/");
   }
@@ -204,7 +204,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/sightings/:sightingID">
-        <FullBirdListing
+        <FullSighting
           currentUser={props.currentUser}
           setError={setError}
           placeMarker={placeMarker}
@@ -225,7 +225,9 @@ export default function LoggedInPages(props) {
         <AllBirds setError={setError} currentUser={props.currentUser} />
       </Route>
       <Route path="/birds/:birdID">
-        <Bird />
+        <Bird           
+          currentUser={props.currentUser}
+          setError={setError} />
       </Route>
       <Route path="/*">
         <ErrorMessage />

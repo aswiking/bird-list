@@ -6,7 +6,7 @@ export default function SightingEntry(props) {
   const [imageDetails, setImageDetails] = useState(null);
 
   useEffect(() => {
-    if (props.sighting.photos) {
+    if (props.sighting.photos[0].instagram_media_id !== null) {
       async function getImageUrl() {
         let res;
         res = await fetch(
