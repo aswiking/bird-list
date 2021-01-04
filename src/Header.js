@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import logo from "./images/fledgling-logo.svg";
 import "./Header.scss";
 import UserMenu from "./UserMenu.js";
@@ -17,11 +17,14 @@ export default function Header(props) {
 
   return (
     <div className="header">
-      <Link to="/" className="logo-and-name"> <img className="fledglingLogo" src={logo} alt="tbc"></img>
-      <h1>Fledgling</h1></Link>
+      <Link to="/" className="logo-and-name">
+        {" "}
+        <img className="fledglingLogo" src={logo} alt="tbc"></img>
+        <h1>Fledgling</h1>
+      </Link>
       {props.loggedin && (
         <div className="headerIcons">
-          <Link to='/all-birds'>
+          <Link to="/all-birds">
             <FontAwesomeIcon
               icon={faClipboardList}
               className="clipboardIcon"
@@ -41,7 +44,9 @@ export default function Header(props) {
         </div>
       )}
       {listDisplay === true && <ListMenu currentUser={props.currentUser} />}
-      {userDisplay === true && <UserMenu currentUser={props.currentUser} />}
+      <div className={`menu ${userDisplay === true ? "active" : "inactive"}`}>
+        <UserMenu currentUser={props.currentUser} />
+      </div>
     </div>
   );
 }

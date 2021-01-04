@@ -1,6 +1,23 @@
 @import "./Variables";
 
 
+
 .userMenu {
     background-color: $secondary-color;
+    color: $primary-color;
+
+
+    ul {
+        padding: 8px;
+        margin: 0;
+    }
+
+    li {
+        padding: 5px 0;
+    }
+
+    a {
+        font-weight: 700;
+        color: inherit;
+    }
 }

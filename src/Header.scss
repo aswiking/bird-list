@@ -45,6 +45,40 @@
     color: inherit;
   }
 
+  .userIcon {
+    z-index: 10;
+  }
+
+  .menu  {
+    position: absolute;
+    right: 8px;
+    top: 38px;
+    max-width: 163px;
+    overflow: hidden;
+  }
+
+  .menu.inactive {
+    box-shadow: none;
+    transition: box-shadow 700ms ease-out; // going out
+  }
+
+  .menu.active {
+    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.5);
+    transition: box-shadow 100ms ease-out 500ms; // going in
+
+  }
+
+  .menu.inactive * {
+    margin-top: -100px;
+    transition: margin-top 1s ease-in-out;
+  }
+
+  .menu.active * {
+    margin-top: 0;
+    transition: margin-top 1s;
+  }
+
+
   .userIcon:hover {
     cursor: pointer;
   }
