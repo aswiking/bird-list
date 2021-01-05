@@ -5,12 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 
 
 .recentSightingsHeader svg {
-  font-size: 1.4rem;
+  font-size: 2rem;
   padding-bottom: 5px;
 }
 
@@ -27,6 +28,11 @@
   justify-content: space-between;
 }
 
+.entryDetails {
+  min-height: 103px;
+  position: relative;
+}
+
 .sightingEntry h2 {
   margin: 0;
   font-size: 1.4rem;
@@ -35,13 +41,16 @@
 }
 
 .sightingEntry h3 {
-  margin: -7px 0 0 0;
+  margin: 0;
   font-size: 1rem;
 }
 
 .sightingEntry h4 {
   margin: 4px 0 0 0;
   font-weight: 600;
+  position: absolute;
+  bottom: 0px;
+  width: max-content;
 }
 
 .colorblock {

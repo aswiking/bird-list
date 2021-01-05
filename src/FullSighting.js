@@ -108,27 +108,23 @@ export default function FullSighting(props) {
             currentUser={currentUser}
             birdID={sightingDetails.bird_id}
           />
+          <div className="sighting-details">
           <FontAwesomeIcon
             icon={faEdit}
             size="2x"
             className="edit-icon"
             onClick={() => props.setIsEditing(true)}
           />
-          <div className="sighting-details">
-            <h2>{daysAgo} days ago</h2>
             <h3>{sightingDate}</h3>
-            <h3>Coordinates</h3>{" "}
-            <p>
-              {sightingDetails.lng}, {sightingDetails.lat}
-            </p>
+            <h4>Location</h4>
+            <div className="map-container">
             <Map
               style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
               center={[sightingDetails.lng, sightingDetails.lat]}
               zoom={INITIAL_ZOOM}
               containerStyle={{
                 height: "400px",
-                width: "400px",
-              }}
+                width: "calc(100vw - 80px)"              }}
             >
               <Marker coordinates={[props.mapPin.lng, props.mapPin.lat]}>
                 <FontAwesomeIcon
@@ -138,8 +134,13 @@ export default function FullSighting(props) {
                 />
               </Marker>
             </Map>
-            <h3>Notes</h3>
+            </div>
+            <p>Coordinates: {sightingDetails.lng}, {sightingDetails.lat}</p>
+            <h4>Notes</h4>
+            <div className="note-box">
             <p>{sightingDetails.notes}</p>
+            </div>
+            <h4>Photos</h4>
             <div className="photos">
               {sightingDetails.photos &&
                 sightingDetails.photos.map((photo, index) => {

@@ -1,0 +1,27 @@
+.full-details {
+
+    h4 {
+        margin: 0;
+    }
+
+    h3 {
+        margin-top: 10px;
+    }
+}
+
+.full-details-container {
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.full-details.inactive {
+    margin-top: -113px;
+    transition: margin-top 1s ease-in-out;
+
+}
+
+.full-details.active{
+    transition: margin-top 1s ease-in-out;
+
+}

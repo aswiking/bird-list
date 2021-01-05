@@ -4,14 +4,16 @@
   padding: 20px;
 
   .sighting-details {
-    background-color: $primary-color;
+    background-color: $secondary-color;
+    color: $primary-color;
     padding: 20px;
     width: max-width;
+    margin-top: 10px;
   }
 
   .bird-details {
     background-color: $secondary-color;
-    padding: 20px;
+    padding: 20px 20px 5px;
     color: $primary-color;
   }
 
@@ -20,25 +22,46 @@
     justify-content: space-between;
 
     .scientific {
-      padding-top: 5px;
+      margin: 0;
     }
+  }
+
+  .map-container {
+    overflow: hidden;
+    margin-top:10px;
+  }
+
+  h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 
   .toggle-details {
     height: auto;
   }
+
 .edit-icon {
   position: absolute;
-  right: 20px;
-  margin-top: 20px;
+  right: 35px;
+  margin-top: 0px;
+
 }
+
+.note-box {
+  background-color: $primary-color;
+  color: $secondary-color;
+  padding: 10px;
+}
+
+
   .photos {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .photos img {
-    width: 200px;
+    width: 150px;
    
   }
 }

@@ -25,7 +25,7 @@ export default function HomePage(props) {
         <div className="bodyBoxHeader recentSightingsHeader">
           <h1>Recent sightings</h1>
           <Link to="/new-sighting">
-            <FontAwesomeIcon icon={faPlusCircle} className="plus-icon" title="add new sighting"/>
+            <FontAwesomeIcon icon={faPlusCircle} className="plus-icon" title="add new sighting" />
           </Link>
         </div>
         {sightingsList}
