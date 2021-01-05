@@ -1,6 +1,10 @@
+@import "./Variables";
+
+
 .all-birds {
   display: block;
 }
+
 
 .scroller {
   overflow: auto;
@@ -8,11 +12,13 @@
 }
 
 .category-menu {
-  background-color: lavender;
-  padding-top: 20px;
+  background-color: $secondary-color;
+  color: $primary-color;
   padding-right: 20px;
   position: sticky;
   top: 0;
+  margin-top: 10px;
+
 
   ::first-letter {
     text-transform: uppercase;
@@ -21,10 +27,77 @@
   li {
     padding-top: 10px;
   }
+
+  .filters {
+    margin: 10px 40px;
+
+    form {
+      display: flex;
+      align-items: center;
+    }
+
+    .regular-checkbox {
+      -webkit-appearance: none;
+      border: 1px solid $primary-color;
+      padding: 9px;
+      border-radius: 3px;
+      z-index: 10;
+    }
+
+    .regular-checkbox ~ .check {
+      display: none;
+    }
+
+    .regular-checkbox:checked ~ .check {
+      display: block;
+    }
+
+
+
+    svg {
+      color: $primary-color;
+      margin-left: -21px;
+      z-index: 0;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-right: 9px;
+      width: 27px;
+    }
+  }
+
+  .category-content-container {
+    overflow: hidden;
+  }
+
+  .category-content.inactive {
+    margin-top: -52vh;
+    height: 50vh;
+    transition: all 500ms ease;
+  }
+
+  .category-content.active {
+    margin-top: 20px;
+    height: 100vh;
+    transition: all 500ms ease;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .category-menu-header {
     padding-left: 40px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 10px;
+    }
 }
 
 .category {

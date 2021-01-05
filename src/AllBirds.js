@@ -3,7 +3,12 @@ import apiFetch from "./api";
 import Family from "./Family.js";
 import Header from "./Header.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleUp,
+  faTimes,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import "./AllBirds.scss";
 
 export default function AllBirds(props) {
@@ -91,8 +96,8 @@ export default function AllBirds(props) {
   }
 
   let filteredBirdData = birdData.filter(
-    (bird) => 
-      (displayingBirds.seen   && bird.sightings.length !== 0) ||
+    (bird) =>
+      (displayingBirds.seen && bird.sightings.length !== 0) ||
       (displayingBirds.unseen && bird.sightings.length === 0)
   );
 
@@ -120,7 +125,7 @@ export default function AllBirds(props) {
 
   return (
     <div className="all-birds">
-      <Header loggedin="true"/>
+      <Header loggedin="true" />
       <div className="category-menu">
         <div className="scroller">
           <h3
@@ -137,36 +142,56 @@ export default function AllBirds(props) {
               />
             ) : (
               <FontAwesomeIcon
-                icon={faTimes}
-                className="cross"
+                icon={faAngleUp}
+                className="up-arrow"
                 alt="list of birds"
                 size="2x"
               />
             )}
           </h3>
-          {displayMenu && (
-            <div>
-              <div className="filters">
-                <form>
-                  <label htmlFor="seen">Birds I've seen</label>
+          <div className="category-content-container">
+          <div className={`category-content ${displayMenu ? 'active' : 'inactive'}`}>
+            <div className="filters">
+              <form>
+                <label htmlFor="seen">Birds I've seen</label>
+                <div className="checkbox-container">
                   <input
                     type="checkbox"
+                    className="regular-checkbox"
                     id="seen"
                     onChange={(event) => toggleDisplayingBirds(event)}
                     checked={displayingBirds.seen}
+                    onMouseDown={(event) => event.preventDefault()}
                   ></input>
-                  <label htmlFor="unseen">Birds I've not seen</label>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className="check"
+                    alt="list of birds"
+                    size="1x"
+                  />
+                </div>
+                <label htmlFor="unseen">Birds I've not seen</label>
+                <div className="checkbox-container">
                   <input
                     type="checkbox"
+                    className="regular-checkbox"
                     id="unseen"
                     onChange={(event) => toggleDisplayingBirds(event)}
                     checked={displayingBirds.unseen}
+                    onMouseDown={(event) => event.preventDefault()}
                   ></input>
-                </form>
-              </div>
-              <ul className="category-list">{categoryList}</ul>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className="check"
+                    alt="list of birds"
+                    size="1x"
+                  />
+                </div>
+              </form>
             </div>
-          )}
+            <ul className="category-list">{categoryList}</ul>
+          </div>
+          </div>
         </div>
       </div>
       <ul className="bird-table">{birdList}</ul>
