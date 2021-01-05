@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import apiFetch from "./api";
-import "./FullSighting.scss";
+import "./FullBird.scss";
 import Photo from "./Photo.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import SightingForm from "./SightingForm";
 import Header from "./Header";
 import Bird from "./Bird.js";
+
+// make sighting component and conditional statement which renders one or all sightings depending on renderType
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -20,7 +22,7 @@ const Map = ReactMapboxGl({
 
 const INITIAL_ZOOM = [15];
 
-export default function FullSighting(props) {
+export default function FullBird(props) {
   const {
     instagramToken,
     setSelectedImages,
@@ -107,6 +109,7 @@ export default function FullSighting(props) {
             setError={setError}
             currentUser={currentUser}
             birdID={sightingDetails.bird_id}
+            renderType="sighting"
           />
           <div className="sighting-details">
           <FontAwesomeIcon

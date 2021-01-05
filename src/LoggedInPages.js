@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
-import FullSighting from "./FullSighting.js";
+import FullBird from "./FullBird.js";
 import ErrorMessage from "./ErrorMessage.js";
 import AllBirds from "./AllBirds.js";
-import Bird from './Bird.js';
 import apiFetch from "./api";
 
 export default function LoggedInPages(props) {
@@ -204,7 +203,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/sightings/:sightingID">
-        <FullSighting
+        <FullBird
           currentUser={props.currentUser}
           setError={setError}
           placeMarker={placeMarker}
@@ -219,15 +218,17 @@ export default function LoggedInPages(props) {
           sightingDetails={sightingDetails}
           setSightingDetails={setSightingDetails}
           deleteSighting={deleteSighting}
+          renderType='sighting'
         />
       </Route>
       <Route path="/all-birds">
         <AllBirds setError={setError} currentUser={props.currentUser} />
       </Route>
       <Route path="/birds/:birdID">
-        <Bird           
+        <FullBird           
           currentUser={props.currentUser}
           setError={setError} />
+          renderType="bird"
       </Route>
       <Route path="/*">
         <ErrorMessage />
