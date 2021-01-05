@@ -10,7 +10,9 @@ export default function Family(props) {
 
   const speciesList = props.categoryData[1].map((bird, index) => {
     return <div key={index} className="bird-entry"> <Link to={`/birds/${bird.id}`}>
-      {(bird.sightings.length !== 0 ) && <FontAwesomeIcon icon={faCheck} className="tickIcon" alt='You have seen this bird' size="2x"/>}
+      <div>
+      {(bird.sightings.length !== 0 ) && <FontAwesomeIcon icon={faCheck} className="tickIcon" alt='You have seen this bird' size="1x"/>}
+      </div>
       <div className="bird-details"><h3>{bird.common}</h3>
       <h4 className="scientific">{bird.scientific}</h4>
       </div>

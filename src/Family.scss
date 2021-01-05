@@ -1,21 +1,45 @@
 .family-name {
-    padding-top: 62px
+  padding-top: 20px;
+  line-height: 1;
 }
 
 .family-name::first-letter {
-        text-transform: uppercase;
-    
+  text-transform: uppercase;
 }
 
 .bird-entry {
+    margin: 20px 0;
+    border-bottom: solid 0.5px;
+    padding-bottom: 3px;
+}
+
+.bird-entry a {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+
+  svg {
+    margin-top: 8px;
+  }
+
+  .bird-details {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-    .bird-details {
-        display: flex;
+
+    h3 {
+        line-height: 1;
+        flex: 1;
     }
 
-    .scientific {
-        padding-top:5px;
-        padding-left: 20px;
+    h4 {
+        line-height: 1;
+        text-align: right;
     }
+  }
+
+  .scientific {
+    padding-top: 5px;
+    padding-left: 20px;
+  }
 }
