@@ -153,6 +153,7 @@ export default function AllBirds(props) {
           <div className={`category-content ${displayMenu ? 'active' : 'inactive'}`}>
             <div className="filters">
               <form>
+                <div className="label-and-checkbox">
                 <label htmlFor="seen">Birds I've seen</label>
                 <div className="checkbox-container">
                   <input
@@ -170,6 +171,8 @@ export default function AllBirds(props) {
                     size="1x"
                   />
                 </div>
+                </div>
+                <div className="label-and-checkbox">
                 <label htmlFor="unseen">Birds I've not seen</label>
                 <div className="checkbox-container">
                   <input
@@ -186,6 +189,7 @@ export default function AllBirds(props) {
                     alt="list of birds"
                     size="1x"
                   />
+                </div>
                 </div>
               </form>
             </div>
