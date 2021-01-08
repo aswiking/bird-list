@@ -65,7 +65,7 @@ export default function Sighting(props) {
       setSightingDetails(sightingData);
     }
     fetchSighting();
-  }, []);
+  }, [sightingID, currentUser, setError]);
 
   function dateDifference() {
     const todaysDate = new Date();

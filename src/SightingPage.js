@@ -4,6 +4,7 @@ import Header from "./Header.js";
 import Bird from "./Bird.js";
 import Sighting from "./Sighting.js";
 import SightingForm from "./SightingForm.js";
+import "./SightingPage.scss";
 
 export default function SightingPage(props) {
   const {
@@ -14,7 +15,7 @@ export default function SightingPage(props) {
     setMapPin,
     isEditing,
     updateSighting,
-    setIsEditing
+    setIsEditing,
   } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
@@ -43,36 +44,37 @@ export default function SightingPage(props) {
         currentUser={currentUser}
         birdDetails={sightingDetails.bird}
       />
-      {!isEditing ? (
-        <Sighting
-          isEditing={props.isEditing}
-          currentUser={currentUser}
-          setError={setError}
-          setSelectedImages={setSelectedImages}
-          sightingID={sightingID}
-          sightingDetails={sightingDetails}
-          setSightingDetails={setSightingDetails}
-          instagramToken={instagramToken}
-          setIsEditing={setIsEditing}
-        />
-      ) : (
-        <SightingForm
-          sightingDetails={sightingDetails}
-          setSightingDetails={setSightingDetails}
-          instagramToken={instagramToken}
-          formType="edit"
-          selectedImages={props.selectedImages}
-          setSelectedImages={props.setSelectedImages}
-          submitSighting={props.submitSighting}
-          placeMarker={props.placeMarker}
-          mapPin={props.mapPin}
-          setMapPin={setMapPin}
-          updateSighting={updateSighting}
-          deleteSighting={props.deleteSighting}
-          setIsEditing={setIsEditing}
-
-        />
-      )}
+      <div className="sighting-container">
+        {!isEditing ? (
+          <Sighting
+            isEditing={props.isEditing}
+            currentUser={currentUser}
+            setError={setError}
+            setSelectedImages={setSelectedImages}
+            sightingID={sightingID}
+            sightingDetails={sightingDetails}
+            setSightingDetails={setSightingDetails}
+            instagramToken={instagramToken}
+            setIsEditing={setIsEditing}
+          />
+        ) : (
+          <SightingForm
+            sightingDetails={sightingDetails}
+            setSightingDetails={setSightingDetails}
+            instagramToken={instagramToken}
+            formType="edit"
+            selectedImages={props.selectedImages}
+            setSelectedImages={props.setSelectedImages}
+            submitSighting={props.submitSighting}
+            placeMarker={props.placeMarker}
+            mapPin={props.mapPin}
+            setMapPin={setMapPin}
+            updateSighting={updateSighting}
+            deleteSighting={props.deleteSighting}
+            setIsEditing={setIsEditing}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -186,11 +186,13 @@ export default function SightingForm(props) {
           </ul>
           <button>Submit</button>
         </form>
+        <div className="option-container">
         <div onClick={(event) => setIsEditing(false)}>
           <p>Discard changes</p>
         </div>
         <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
           <p>Delete sighting</p>
+        </div>
         </div>
     </div>
   );
