@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import "./Photo.scss";
+
 
 export default function Photo(props) {
 

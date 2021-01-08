@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
-import FullBird from "./FullBird.js";
+import SightingPage from "./SightingPage.js";
+import BirdPage from "./BirdPage.js";
 import ErrorMessage from "./ErrorMessage.js";
 import AllBirds from "./AllBirds.js";
 import apiFetch from "./api";
@@ -14,11 +15,7 @@ export default function LoggedInPages(props) {
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [sightingDetails, setSightingDetails] = useState({
-    lat: 52.610044,
-    lng: -1.156774,
-    datetime: "2020-01-01",
-  });
+
 
   const history = useHistory();
   const { currentUser } = props;
@@ -104,7 +101,7 @@ export default function LoggedInPages(props) {
 
     const sighting = await res.json();
     setSightings([...sightingsData, sighting]);
-    setSelectedImages([]); //not working
+    setSelectedImages([]); //not working?
 
     history.push("/");
   }
@@ -148,11 +145,11 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    setSightingDetails(updatedSighting);
-
     setSelectedImages([]);
 
     setIsEditing(false);
+
+    return updatedSighting;
   }
 
   async function deleteSighting(event, id) {
@@ -203,7 +200,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/sightings/:sightingID">
-        <FullBird
+        <SightingPage
           currentUser={props.currentUser}
           setError={setError}
           placeMarker={placeMarker}
@@ -215,20 +212,29 @@ export default function LoggedInPages(props) {
           setMapPin={setMapPin}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
-          sightingDetails={sightingDetails}
-          setSightingDetails={setSightingDetails}
           deleteSighting={deleteSighting}
-          renderType='sighting'
         />
       </Route>
       <Route path="/all-birds">
         <AllBirds setError={setError} currentUser={props.currentUser} />
       </Route>
       <Route path="/birds/:birdID">
-        <FullBird           
+        <BirdPage           
           currentUser={props.currentUser}
-          setError={setError} />
-          renderType="bird"
+          setError={setError}
+          placeMarker={placeMarker}
+          mapPin={mapPin}
+          instagramToken={props.instagramToken}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+          submitSighting={updateSighting}
+          setMapPin={setMapPin}
+          setIsEditing={setIsEditing}
+          isEditing={isEditing}
+          deleteSighting={deleteSighting}
+          selectSpecies={selectSpecies}
+          />
+          
       </Route>
       <Route path="/*">
         <ErrorMessage />

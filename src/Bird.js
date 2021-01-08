@@ -7,25 +7,14 @@ import "./Bird.scss";
 export default function Bird(props) {
   const [displayBirdDetails, setDisplayBirdDetails] = useState(false);
 
-  const { currentUser, setError, birdID } = props;
-
-  const [birdDetails, setBirdDetails] = useState({
-    id: null,
-    common: null,
-    scientific: null,
-    uk_status: null,
-    group: {
-      common: null,
-      scientific: null,
-    },
-    sightings: null,
-  });
+  const { currentUser, setError, birdDetails, setBirdDetails, birdID } = props;
 
   useEffect(() => {
-    if (!birdID) {
+    if (!props.birdID) { 
       return;
     }
     async function fetchBird() {
+
       let token;
       try {
         token = await currentUser.getIdToken();
@@ -39,7 +28,7 @@ export default function Bird(props) {
 
       let res;
 
-      const url = `/api/birds/${birdID}`;
+      const url=`/api/birds/${birdID}`
 
       res = await apiFetch(
         url,
@@ -51,14 +40,15 @@ export default function Bird(props) {
         "Could not fetch bird details"
       );
 
+
       const birdData = await res.json();
 
       setBirdDetails(birdData);
     }
     fetchBird();
-  }, [currentUser, setError, birdID]);
+  }, [currentUser, setError, birdDetails]);
 
-  console.log(birdDetails);
+    console.log('Bird details  are', birdDetails);
 
   function toggleDisplayBirdDetails() {
     setDisplayBirdDetails(!displayBirdDetails);

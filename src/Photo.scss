@@ -1,0 +1,10 @@
+
+  .photos {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .photos img {
+    width: calc((100vw - 40px - 20px) / 2); // 40px is margin/padding on outside; 20px is margin between images
+  }

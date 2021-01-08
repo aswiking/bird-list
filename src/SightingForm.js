@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
-import Header from "./Header";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
@@ -20,7 +19,7 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
-  const { sighting, instagramToken, deleteSighting } = props;
+  const { sighting, instagramToken, deleteSighting, submitSighting } = props;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -114,10 +113,9 @@ export default function SightingForm(props) {
 
   return (
     <div className="sightingForm">
-      <Header loggedin="true" />
       <div className="bodyBox">
         <h1> {props.formType === "new" ? "New sighting" : sighting.common}</h1>
-        <form onSubmit={(event) => props.submitSighting(event, sighting)}>
+        <form onSubmit={(event) => submitSighting(event, sighting)}>
           <ul>
             {props.formType === "new" && (
               <li>
@@ -141,13 +139,14 @@ export default function SightingForm(props) {
                 accessToken={accessToken}
                 setMapCenter={setMapCenter}
               />
+              <div className="map-container">
               <Map
                 style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
                 center={[mapCenter.lng, mapCenter.lat]}
                 zoom={INITIAL_ZOOM}
                 containerStyle={{
                   height: "400px",
-                  width: "280px",
+                  width: "calc(100vw - 80px)"
                 }}
                 onMoveEnd={(map, event) => updateCenter(map, event)}
                 onDblClick={props.placeMarker}
@@ -162,6 +161,7 @@ export default function SightingForm(props) {
                   </Marker>
                 )}
               </Map>
+              </div>
               <p className="pin-instructions">
                 Double click to place a pin on the spot of your sighting
               </p>

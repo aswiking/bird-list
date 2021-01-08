@@ -6,7 +6,7 @@ export default function SightingEntry(props) {
   const [imageDetails, setImageDetails] = useState(null);
 
   useEffect(() => {
-    if (props.sighting.photos[0].instagram_media_id !== null) {
+    if (props.sighting.photos.length !== 0) {
       async function getImageUrl() {
         let res;
         res = await fetch(
@@ -46,8 +46,8 @@ export default function SightingEntry(props) {
     >
       <div className="entryDetails">
         <div className="name">
-          <h2 className="birdName">{props.sighting.common}</h2>
-          <h3 className="scientific">{props.sighting.scientific}</h3>
+          <h2 className="birdName">{props.sighting.bird.common}</h2>
+          <h3 className="scientific">{props.sighting.bird.scientific}</h3>
         </div>
         <h4>Last seen {daysAgo} days ago</h4>
       </div>
