@@ -1,51 +1,51 @@
 @import "./Variables";
 
-.full-bird-listing {
+
+.sighting-details {
+  background-color: $secondary-color;
+  color: $primary-color;
   padding: 20px;
-}
-
-  .sighting-details {
-    background-color: $secondary-color;
-    color: $primary-color;
-    padding: 20px;
-    width: max-width;
-    margin-top: 10px;
-  }
-
-  .bird-details {
-    background-color: $secondary-color;
-    padding: 20px 20px 5px;
-    color: $primary-color;
-  }
-
-  .bird-details-header {
-    display: flex;
-    justify-content: space-between;
-
-    .scientific {
-      margin: 0;
-    }
-  }
-
-  .map-container {
-    overflow: hidden;
-    margin-top:10px;
-  }
+  width: max-width;
+  margin-top: 10px;
 
   h4 {
     margin-top: 10px;
-    margin-bottom: 5px;
   }
+}
 
-  .toggle-details {
-    height: auto;
+.bird-details {
+  background-color: $secondary-color;
+  padding: 20px 20px 5px;
+  color: $primary-color;
+}
+
+.bird-details-header {
+  display: flex;
+  justify-content: space-between;
+
+  .scientific {
+    margin: 0;
   }
+}
+
+.map-container {
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.toggle-details {
+  height: auto;
+}
 
 .edit-icon {
   position: absolute;
   right: 35px;
   margin-top: 0px;
-
 }
 
 .note-box {
@@ -53,7 +53,3 @@
   color: $secondary-color;
   padding: 10px;
 }
-
-
-
-
