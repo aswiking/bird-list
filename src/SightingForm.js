@@ -19,7 +19,7 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
-  const { sighting, instagramToken, deleteSighting, submitSighting } = props;
+  const { instagramToken, deleteSighting, submitSighting, sightingDetails, setIsEditing } = props;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -38,8 +38,8 @@ export default function SightingForm(props) {
       });
     } else {
       setMapCenter({
-        lat: sighting.lat,
-        lng: sighting.lng,
+        lat: sightingDetails.lat,
+        lng: sightingDetails.lng,
       });
     }
   }, []);
@@ -61,7 +61,7 @@ export default function SightingForm(props) {
       console.log("images", instagramImages);
       getImages();
     }
-  }, [instagramToken, sighting]);
+  }, [instagramToken, sightingDetails]);
 
   function selectImage(instagramImageID) {
     console.log("imageID", instagramImageID);
@@ -113,9 +113,8 @@ export default function SightingForm(props) {
 
   return (
     <div className="sightingForm">
-      <div className="bodyBox">
-        <h1> {props.formType === "new" ? "New sighting" : sighting.common}</h1>
-        <form onSubmit={(event) => submitSighting(event, sighting)}>
+        <h1> {props.formType === "new" ? "New sighting" : sightingDetails.common}</h1>
+        <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
           <ul>
             {props.formType === "new" && (
               <li>
@@ -131,7 +130,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={sighting.datetime.substring(0, 10)}
+                defaultValue={sightingDetails.datetime.substring(0, 10)}
               ></input>
             </li>
             <div className="location-select-section">
@@ -146,7 +145,7 @@ export default function SightingForm(props) {
                 zoom={INITIAL_ZOOM}
                 containerStyle={{
                   height: "400px",
-                  width: "calc(100vw - 80px)"
+                  width: "calc(100vw - 40px)"
                 }}
                 onMoveEnd={(map, event) => updateCenter(map, event)}
                 onDblClick={props.placeMarker}
@@ -181,22 +180,25 @@ export default function SightingForm(props) {
                 rows="8"
                 id="notes"
                 type="text"
-                defaultValue={sighting.notes}
+                defaultValue={sightingDetails.notes}
               ></textarea>
             </li>
           </ul>
           <button>Submit</button>
         </form>
-        <div onClick={(event) => deleteSighting(event, sighting.id)}>
+        <div onClick={(event) => setIsEditing(false)}>
+          <p>Discard changes</p>
+        </div>
+        <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
           <p>Delete sighting</p>
         </div>
-      </div>
     </div>
   );
 }
 
+/*
 SightingForm.defaultProps = {
-  sighting: {
+  sightingDetails: {
     id: "",
     common: "",
     scientific: "",
@@ -205,4 +207,4 @@ SightingForm.defaultProps = {
     datetime: "",
     notes: "",
   },
-};
+}; */

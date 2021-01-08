@@ -114,9 +114,13 @@ export default function LoggedInPages(props) {
   async function updateSighting(event, originalSighting) {
     event.preventDefault();
 
+    console.log('Original sighting is', originalSighting)
+
+    console.log('event.target.notes.value is', event.target.notes.value)
+
     const updatedSighting = {
       id: originalSighting.id,
-      bird_id: originalSighting.bird_id,
+      bird_id: originalSighting.bird.id,
       user_id: originalSighting.user_id,
       datetime: event.target.date.value,
       lat: mapPin.lat,
@@ -144,6 +148,8 @@ export default function LoggedInPages(props) {
       setError(error);
       return;
     }
+
+    console.log("does it make it here?")
 
     setSelectedImages([]);
 
@@ -188,7 +194,7 @@ export default function LoggedInPages(props) {
       <Route path="/new-sighting" exact>
         <SightingForm
           currentUser={props.currentUser}
-          submitSighting={addSighting}
+          submitSighting={updateSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
           selectSpecies={selectSpecies}

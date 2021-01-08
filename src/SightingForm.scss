@@ -2,6 +2,8 @@
 
 .sightingForm form {
   width: 100%;
+  margin-top: 20px;
+  background-color: $secondary-color;
 }
 
 .sightingForm ul {
@@ -15,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $secondary-color;
+  
   color: $primary-color;
 }
 

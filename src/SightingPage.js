@@ -14,6 +14,7 @@ export default function SightingPage(props) {
     setMapPin,
     isEditing,
     updateSighting,
+    setIsEditing
   } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
@@ -52,6 +53,7 @@ export default function SightingPage(props) {
           sightingDetails={sightingDetails}
           setSightingDetails={setSightingDetails}
           instagramToken={instagramToken}
+          setIsEditing={setIsEditing}
         />
       ) : (
         <SightingForm
@@ -67,6 +69,8 @@ export default function SightingPage(props) {
           setMapPin={setMapPin}
           updateSighting={updateSighting}
           deleteSighting={props.deleteSighting}
+          setIsEditing={setIsEditing}
+
         />
       )}
     </div>

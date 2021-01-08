@@ -61,7 +61,6 @@ export default function BirdPage(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           setIsEditing={setIsEditing}
-
           formType="edit"
         />
       );
