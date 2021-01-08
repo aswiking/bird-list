@@ -6,7 +6,9 @@ import SightingForm from "./SightingForm";
 import Header from "./Header";
 import Bird from "./Bird.js";
 
-// make sighting component and conditional statement which renders one or all sightings depending on renderType
+// infinite loop? Making lotz of requests
+
+// formatting for sighting list
 
 export default function BirdPage(props) {
   const {
@@ -55,6 +57,7 @@ export default function BirdPage(props) {
           submitSighting={updateSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
+          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}
@@ -78,7 +81,8 @@ export default function BirdPage(props) {
           birdDetails={birdDetails}
           setBirdDetails={setBirdDetails}
         />
-        {sightingsList}
+        {(sightingsList.length > 0) ? ({sightingsList}) : (<div className="no-sightings-message"><p>You have no sightings of {birdDetails.common}</p></div>) }
+        
       </div>
     </div>
   );

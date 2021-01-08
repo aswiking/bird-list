@@ -46,7 +46,7 @@ export default function Bird(props) {
       setBirdDetails(birdData);
     }
     fetchBird();
-  }, [currentUser, setError, birdDetails]);
+  }, [currentUser, setError]);
 
     console.log('Bird details  are', birdDetails);
 

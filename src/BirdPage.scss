@@ -52,3 +52,12 @@ h4 {
   color: $secondary-color;
   padding: 10px;
 }
+
+.no-sightings-message {
+  background-color: $secondary-color;
+  color: $primary-color;
+  width: max-content;
+  padding: 10px 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+}
