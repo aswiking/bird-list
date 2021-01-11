@@ -1,19 +1,6 @@
 @import "./Variables";
 
-.recentSightingsHeader {
-  color: $contrast-color;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
 
-
-
-.recentSightingsHeader svg {
-  font-size: 2rem;
-  padding-bottom: 5px;
-}
 
 .recentSightingsLog a {
   text-decoration: none;

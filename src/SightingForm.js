@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
+import Header from "./Header.js";
 import apiFetch from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +20,15 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
-  const { instagramToken, deleteSighting, submitSighting, sightingDetails, setIsEditing } = props;
+  const {
+    instagramToken,
+    deleteSighting,
+    submitSighting,
+    sightingDetails,
+    setIsEditing,
+    placeMarker,
+    mapPin
+  } = props;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
@@ -84,9 +93,9 @@ export default function SightingForm(props) {
     }
   }
 
-  const imageList = instagramImages.map((image) => {
+  const imageList = instagramImages.map((image, index) => {
     return (
-      <div className="image-div">
+      <div className="image-div" key={index}>
         <input
           type="checkbox"
           id={image.id}
@@ -98,8 +107,8 @@ export default function SightingForm(props) {
             ) !== -1
           }
         ></input>
-        <label for={image.id}>
-          <img src={image.media_url} alt={image.caption} ></img>
+        <label htmlFor={image.id}>
+          <img src={image.media_url} alt={image.caption}></img>
         </label>
       </div>
     );
@@ -112,8 +121,13 @@ export default function SightingForm(props) {
   }
 
   return (
-    <div className="sightingForm">
-        <h1> {props.formType === "new" ? "New sighting" : sightingDetails.common}</h1>
+    <div>
+      {props.formType === "new" && <Header loggedin="true" />}
+      <div className="sightingForm">
+        <h1>
+          {" "}
+          {props.formType === "new" ? "New sighting" : sightingDetails.common}
+        </h1>
         <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
           <ul>
             {props.formType === "new" && (
@@ -139,27 +153,26 @@ export default function SightingForm(props) {
                 setMapCenter={setMapCenter}
               />
               <div className="map-container">
-              <Map
-                style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
-                center={[mapCenter.lng, mapCenter.lat]}
-                zoom={INITIAL_ZOOM}
-                containerStyle={{
-                  height: "400px",
-                  width: "calc(100vw - 40px)"
-                }}
-                onMoveEnd={(map, event) => updateCenter(map, event)}
-                onDblClick={props.placeMarker}
-              >
-                {props.mapPin && (
-                  <Marker coordinates={[props.mapPin.lng, props.mapPin.lat]}>
-                    <FontAwesomeIcon
-                      icon={faMapMarkerAlt}
-                      className="map-marker"
-                      size="6x"
-                    />
-                  </Marker>
-                )}
-              </Map>
+                <Map
+                  style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+                  center={[mapCenter.lng, mapCenter.lat]}
+                  zoom={INITIAL_ZOOM}
+                  containerStyle={{
+                    height: "400px",
+                    width: "calc(100vw - 40px)",
+                  }}
+                  onMoveEnd={(map, event) => updateCenter(map, event)}
+                  onDblClick={placeMarker}
+                  // ^ not working
+                >
+                    <Marker coordinates={[mapPin.lng, mapPin.lat]}>
+                      <FontAwesomeIcon
+                        icon={faMapMarkerAlt}
+                        className="map-marker"
+                        size="6x"
+                      />
+                    </Marker>
+                </Map>
               </div>
               <p className="pin-instructions">
                 Double click to place a pin on the spot of your sighting
@@ -186,19 +199,19 @@ export default function SightingForm(props) {
           </ul>
           <button>Submit</button>
         </form>
-        <div className="option-container">
-        <div onClick={(event) => setIsEditing(false)}>
-          <p>Discard changes</p>
-        </div>
-        <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
-          <p>Delete sighting</p>
-        </div>
-        </div>
+        {props.formType !== "new" && <div className="option-container">
+          <div onClick={(event) => setIsEditing(false)}>
+            <p>Discard changes</p>
+          </div>
+          <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
+            <p>Delete sighting</p>
+          </div>
+        </div>}
+      </div>
     </div>
   );
 }
 
-/*
 SightingForm.defaultProps = {
   sightingDetails: {
     id: "",
@@ -209,4 +222,4 @@ SightingForm.defaultProps = {
     datetime: "",
     notes: "",
   },
-}; */
+};

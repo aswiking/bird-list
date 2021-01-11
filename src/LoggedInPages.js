@@ -197,6 +197,7 @@ export default function LoggedInPages(props) {
           submitSighting={updateSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
+          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}
@@ -209,13 +210,12 @@ export default function LoggedInPages(props) {
         <SightingPage
           currentUser={props.currentUser}
           setError={setError}
-          placeMarker={placeMarker}
           mapPin={mapPin}
           instagramToken={props.instagramToken}
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           submitSighting={updateSighting}
-          setMapPin={setMapPin}
+          setMapPin={placeMarker}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           deleteSighting={deleteSighting}
