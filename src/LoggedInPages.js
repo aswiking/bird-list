@@ -191,7 +191,7 @@ export default function LoggedInPages(props) {
         <div className="error-message">
         <FontAwesomeIcon icon={faExclamationTriangle} className="exclamation-icon" size="2x" />
           <p>{error.message}</p>
-          <Link to="/" className="homepage-link">
+          <Link to="/" className="homepage-link" onClick={()=>setError(null)}>
             <p>Back to homepage</p>
           </Link>
         </div>
