@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Link } from "react-router-dom";
 import HomePage from "./HomePage.js";
 import SightingForm from "./SightingForm.js";
 import SightingPage from "./SightingPage.js";
@@ -7,15 +7,18 @@ import BirdPage from "./BirdPage.js";
 import ErrorMessage from "./ErrorMessage.js";
 import AllBirds from "./AllBirds.js";
 import apiFetch from "./api";
+import Header from "./Header.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import "./LoggedInPages.scss";
 
 export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
   const [error, setError] = useState(null);
-  const [mapPin, setMapPin] = useState({ lat: 52.610044, lng: -1.156774 });
+  const [mapPin, setMapPin] = useState({});
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-
 
   const history = useHistory();
   const { currentUser } = props;
@@ -34,15 +37,20 @@ export default function LoggedInPages(props) {
       }
 
       let res;
-      res = await apiFetch(
-        "/api/sightings",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      try {
+        res = await apiFetch(
+          "/api/sightings",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        },
-        "Could not fetch sightings"
-      );
+          "Could not fetch sightings"
+        );
+      } catch (error) {
+        setError(error);
+        return;
+      }
       const sightings = await res.json();
       setSightings(sightings);
     }
@@ -68,6 +76,8 @@ export default function LoggedInPages(props) {
       notes: event.target.notes.value,
     };
     event.target.reset();
+
+    console.log(newSighting);
 
     const url = "/api/sightings";
 
@@ -114,10 +124,6 @@ export default function LoggedInPages(props) {
   async function updateSighting(event, originalSighting) {
     event.preventDefault();
 
-    console.log('Original sighting is', originalSighting)
-
-    console.log('event.target.notes.value is', event.target.notes.value)
-
     const updatedSighting = {
       id: originalSighting.id,
       bird_id: originalSighting.bird.id,
@@ -128,7 +134,6 @@ export default function LoggedInPages(props) {
       photos: selectedImages,
       notes: event.target.notes.value,
     };
-    console.log("updated sighting", updatedSighting);
 
     const url = `/api/sightings/${originalSighting.id}`;
 
@@ -148,8 +153,6 @@ export default function LoggedInPages(props) {
       setError(error);
       return;
     }
-
-    console.log("does it make it here?")
 
     setSelectedImages([]);
 
@@ -181,6 +184,21 @@ export default function LoggedInPages(props) {
     history.push("/");
   }
 
+  if (error) {
+    return (
+      <div>
+        <Header loggedin="true" currentUser={props.currentUser} />
+        <div className="error-message">
+        <FontAwesomeIcon icon={faExclamationTriangle} className="exclamation-icon" size="2x" />
+          <p>{error.message}</p>
+          <Link to="/" className="homepage-link">
+            <p>Back to homepage</p>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Switch>
       <Route path="/" exact>
@@ -194,10 +212,9 @@ export default function LoggedInPages(props) {
       <Route path="/new-sighting" exact>
         <SightingForm
           currentUser={props.currentUser}
-          submitSighting={updateSighting}
+          submitSighting={addSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
-          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}
@@ -215,7 +232,6 @@ export default function LoggedInPages(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           submitSighting={updateSighting}
-          setMapPin={placeMarker}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           deleteSighting={deleteSighting}
@@ -225,7 +241,7 @@ export default function LoggedInPages(props) {
         <AllBirds setError={setError} currentUser={props.currentUser} />
       </Route>
       <Route path="/birds/:birdID">
-        <BirdPage           
+        <BirdPage
           currentUser={props.currentUser}
           setError={setError}
           placeMarker={placeMarker}
@@ -234,13 +250,11 @@ export default function LoggedInPages(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           submitSighting={updateSighting}
-          setMapPin={setMapPin}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           deleteSighting={deleteSighting}
           selectSpecies={selectSpecies}
-          />
-          
+        />
       </Route>
       <Route path="/*">
         <ErrorMessage />

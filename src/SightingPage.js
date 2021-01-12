@@ -12,7 +12,7 @@ export default function SightingPage(props) {
     setSelectedImages,
     currentUser,
     setError,
-    setMapPin,
+    error,
     isEditing,
     updateSighting,
     setIsEditing,
@@ -35,6 +35,10 @@ export default function SightingPage(props) {
   });
 
   const { sightingID } = useParams();
+
+  if (error){
+    return <div>{error.message}</div>;
+  } else {
 
   return (
     <div className="sighting-page">
@@ -68,7 +72,6 @@ export default function SightingPage(props) {
             submitSighting={props.submitSighting}
             placeMarker={props.placeMarker}
             mapPin={props.mapPin}
-            setMapPin={setMapPin}
             updateSighting={updateSighting}
             deleteSighting={props.deleteSighting}
             setIsEditing={setIsEditing}
@@ -77,4 +80,5 @@ export default function SightingPage(props) {
       </div>
     </div>
   );
+}
 }

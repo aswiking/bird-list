@@ -1,0 +1,22 @@
+@import "./Variables";
+
+.error-message {
+    background-color: $secondary-color;
+    color: $primary-color;
+    text-align: center;
+    padding: 15px 0 15px 0;
+    
+    p {
+        padding-bottom: 10px;
+    }
+}
+
+.exclamation-icon {
+    padding-bottom: 10px;
+}
+
+.homepage-link p {
+    font-weight: 800;
+    cursor: pointer;
+    padding: 0;
+}

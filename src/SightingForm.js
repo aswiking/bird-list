@@ -162,16 +162,17 @@ export default function SightingForm(props) {
                     width: "calc(100vw - 40px)",
                   }}
                   onMoveEnd={(map, event) => updateCenter(map, event)}
-                  onDblClick={placeMarker}
-                  // ^ not working
+                  onDblClick={(map, event) => placeMarker(map, event)}
+                  // ^ working - just not in devtools
                 >
+                  {mapPin.lng &&
                     <Marker coordinates={[mapPin.lng, mapPin.lat]}>
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
                         className="map-marker"
                         size="6x"
                       />
-                    </Marker>
+                    </Marker> }
                 </Map>
               </div>
               <p className="pin-instructions">

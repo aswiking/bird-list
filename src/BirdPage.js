@@ -16,7 +16,6 @@ export default function BirdPage(props) {
     setSelectedImages,
     currentUser,
     setError,
-    setMapPin,
     updateSighting,
     isEditing,
     placeMarker,
@@ -57,7 +56,6 @@ export default function BirdPage(props) {
           submitSighting={updateSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
-          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}

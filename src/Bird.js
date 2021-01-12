@@ -30,6 +30,7 @@ export default function Bird(props) {
 
       const url=`/api/birds/${birdID}`
 
+      try {
       res = await apiFetch(
         url,
         {
@@ -39,7 +40,10 @@ export default function Bird(props) {
         },
         "Could not fetch bird details"
       );
-
+    } catch (error) {
+      setError(error);
+      return;
+    }
 
       const birdData = await res.json();
 
@@ -48,7 +52,6 @@ export default function Bird(props) {
     fetchBird();
   }, [currentUser, setError]);
 
-    console.log('Bird details  are', birdDetails);
 
   function toggleDisplayBirdDetails() {
     setDisplayBirdDetails(!displayBirdDetails);

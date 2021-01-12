@@ -16,7 +16,6 @@ const Map = ReactMapboxGl({
 const INITIAL_ZOOM = [15];
 
 export default function Sighting(props) {
-
   const {
     currentUser,
     sightingDetails,
@@ -28,7 +27,6 @@ export default function Sighting(props) {
   } = props;
 
   useEffect(() => {
-
     if (!sightingID) {
       return;
     }
@@ -48,22 +46,27 @@ export default function Sighting(props) {
 
       let res;
 
-      const url=`/api/sightings/${sightingID}` // seems to be making request to the endpoint for all sightings rather than individual
-
-      res = await apiFetch(
-        url,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      const url = `/api/sightings/${sightingID}`;
+      try {
+        res = await apiFetch(
+          url,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        },
-        "Could not fetch sighting details"
-      );
+          "Could not fetch sighting details"
+        );
+      } catch (error) {
+        setError(error);
+        return;
+      }
 
       const sightingData = await res.json();
 
       setSightingDetails(sightingData);
     }
+
     fetchSighting();
   }, [sightingID, currentUser, setError]);
 
