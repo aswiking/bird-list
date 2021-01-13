@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./BirdPage.scss";
 import Sighting from "./Sighting.js";
 import SightingForm from "./SightingForm";
 import Header from "./Header";
 import Bird from "./Bird.js";
-
-// infinite loop? Making lotz of requests
 
 // formatting for sighting list
 
@@ -22,7 +20,7 @@ export default function BirdPage(props) {
     mapPin,
     selectSpecies,
     selectedImages,
-    setIsEditing
+    setIsEditing,
   } = props;
 
   const [birdDetails, setBirdDetails] = useState({
@@ -39,34 +37,62 @@ export default function BirdPage(props) {
 
   const { birdID } = useParams();
 
-  const sightingsList = birdDetails.sightings.map((sighting) => {
-    if (!isEditing) {
-      return (
-        <Sighting
-          currentUser={currentUser}
-          sightingDetails={sighting}
-          instagramToken={instagramToken}
-          setIsEditing={setIsEditing}
-        />
-      );
-    } else {
-      return (
-        <SightingForm
-          currentUser={currentUser}
-          submitSighting={updateSighting}
-          placeMarker={placeMarker}
-          mapPin={mapPin}
-          selectSpecies={selectSpecies}
-          instagramUid={props.instagramUid}
-          instagramToken={props.instagramToken}
-          selectedImages={selectedImages}
-          setSelectedImages={setSelectedImages}
-          setIsEditing={setIsEditing}
-          formType="edit"
-        />
-      );
+  const sightingsList = birdDetails.sightings.map((sighting, index) => {
+    const number = birdDetails.sightings.length - index;
+
+    let ordinal;
+
+    const keyString = number.toString();
+
+    const keyLength = keyString.length;
+
+    const lastDigit = keyString.substr(keyLength - 1);
+
+    let lastTwoDigits;
+
+    if (keyLength > 1) {
+      lastTwoDigits = keyString.substr(keyLength - 2);
     }
+
+    if (
+      lastTwoDigits === "11" ||
+      lastTwoDigits === "12" ||
+      lastTwoDigits === "13"
+    ) {
+      //exeptions
+      ordinal = `${keyString}th`;
+    } else if (lastDigit === "1") {
+      ordinal = `${keyString}st`;
+    } else if (lastDigit === "2") {
+      ordinal = `${keyString}nd`;
+    } else if (lastDigit === "3") {
+      ordinal = `${keyString}rd`;
+    } else {
+      ordinal = `${keyString}th`;
+    };
+
+    const dateOptions = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    const dateTimeFormat = new Intl.DateTimeFormat("en-GB", dateOptions);
+
+    const sightingDate = dateTimeFormat.format(
+      new Date(sighting.datetime)
+    );
+  
+
+    return <Link to={`/sightings${sighting.id}`} key={index} className="sighting-link">
+      <h3>{ordinal} sighting</h3> <h4>{sightingDate}</h4>
+    </Link>;
   });
+
+
+
+  console.log("sightings list is", sightingsList);
 
   return (
     <div>
@@ -79,8 +105,19 @@ export default function BirdPage(props) {
           birdDetails={birdDetails}
           setBirdDetails={setBirdDetails}
         />
-        {(sightingsList.length > 0) ? ({sightingsList}) : (<div className="no-sightings-message"><p>You have no sightings of {birdDetails.common}</p></div>) }
-        
+        <div className="sightings-list">
+          <h2>Your sightings</h2>
+          {sightingsList.length > 0 ? (
+            sightingsList
+          ) : (
+            <div className="no-sightings-message">
+              <p>You have no sightings of {birdDetails.common}s</p>
+              <Link to="/new-sighting" className="new-sighting-link">
+                <p>Add sighting</p>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

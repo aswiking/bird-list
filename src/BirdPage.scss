@@ -1,16 +1,5 @@
 @import "./Variables";
 
-.sighting-details {
-  background-color: $secondary-color;
-  color: $primary-color;
-  padding: 20px;
-  width: max-width;
-  margin-top: 10px;
-
-  h4 {
-    margin-top: 10px;
-  }
-}
 
 .bird-details {
   background-color: $secondary-color;
@@ -41,17 +30,25 @@ h4 {
   height: auto;
 }
 
-.edit-icon {
-  position: absolute;
-  right: 35px;
-  margin-top: 0px;
+.sightings-list {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: $secondary-color;
+  color: $primary-color;
+
+  h2 {
+    margin-bottom: 20px;
+  }
 }
 
-.note-box {
-  background-color: $primary-color;
-  color: $secondary-color;
-  padding: 10px;
-}
+
+.sighting-link {
+  
+  cursor: pointer;
+  
+  h4 {
+  margin-bottom: 20px;
+}}
 
 .no-sightings-message {
   background-color: $secondary-color;
@@ -60,4 +57,9 @@ h4 {
   padding: 10px 20px;
   margin: 10px auto;
   border-radius: 10px;
+}
+
+.new-sighting-link p{
+  font-weight: 800;
+  margin-top: 10px;
 }

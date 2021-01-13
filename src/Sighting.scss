@@ -1,0 +1,46 @@
+@import "./Variables.scss";
+
+.sighting {
+    background-color: $secondary-color;
+    color: $primary-color;
+    padding: 20px;
+    width: max-width;
+    margin-top: 10px;
+  
+    h4 {
+      margin-top: 10px;
+    }
+  }
+
+  .sighting-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  .sighting-details-container {
+      overflow: hidden;
+  }
+
+
+  .sighting-details {
+      border-top: solid 1px;
+      padding-top: 20px;
+  }
+
+
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .edit-icon {
+    margin-top: 0px;
+  }
+  
+  .note-box {
+    background-color: $primary-color;
+    color: $secondary-color;
+    padding: 10px;
+  }

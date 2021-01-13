@@ -60,6 +60,7 @@ export default function SightingPage(props) {
             setSightingDetails={setSightingDetails}
             instagramToken={instagramToken}
             setIsEditing={setIsEditing}
+            location="sightingPage"
           />
         ) : (
           <SightingForm

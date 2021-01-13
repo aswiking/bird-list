@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import apiFetch from "./api.js";
 import Photo from "./Photo.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMapMarkerAlt,
+  faEdit,
+  faAngleDown,
+  faAngleUp,
+} from "@fortawesome/free-solid-svg-icons";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import "./Sighting.scss";
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -25,6 +31,8 @@ export default function Sighting(props) {
     sightingID,
     setError,
   } = props;
+
+  const [displaySightingDetails, setDisplaySightingDetails] = useState(false);
 
   useEffect(() => {
     if (!sightingID) {
@@ -93,57 +101,63 @@ export default function Sighting(props) {
     new Date(sightingDetails.datetime)
   );
 
+
+  
   return (
     <div className="sighting">
-      <div className="sighting-details">
-        <FontAwesomeIcon
-          icon={faEdit}
-          size="2x"
-          className="edit-icon"
-          onClick={() => setIsEditing(true)}
-        />
-        <h3>{sightingDate}</h3>
-        <h4>Location</h4>
-        <div className="map-container">
-          <Map
-            style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
-            center={[sightingDetails.lng, sightingDetails.lat]}
-            zoom={INITIAL_ZOOM}
-            containerStyle={{
-              height: "400px",
-              width: "calc(100vw - 40px)",
-            }}
-          >
-            <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}>
-              <FontAwesomeIcon
-                icon={faMapMarkerAlt}
-                size="6x"
-                className="map-marker"
-              />
-            </Marker>
-          </Map>
-        </div>
-        <p>
-          Coordinates: {sightingDetails.lng}, {sightingDetails.lat}
-        </p>
-        <h4>Notes</h4>
-        <div className="note-box">
-          <p>{sightingDetails.notes}</p>
-        </div>
-        <h4>Photos</h4>
-        <div className="photos">
-          {sightingDetails.photos &&
-            sightingDetails.photos.map((photo, index) => {
-              return (
-                <Photo
-                  key={index}
-                  photoID={photo.photo_id}
-                  instagramPhotoID={photo.instagram_media_id}
-                  instagramToken={instagramToken}
-                  sightingDetails={sightingDetails}
+      <div className="sighting-details-container">
+        <div className="sighting-details">
+          <div className="details-header">
+            <h3>{sightingDate}</h3>
+            <FontAwesomeIcon
+              icon={faEdit}
+              size="2x"
+              className="edit-icon"
+              onClick={() => setIsEditing(true)}
+            />
+          </div>
+          <h4>Location</h4>
+          <div className="map-container">
+            <Map
+              style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+              center={[sightingDetails.lng, sightingDetails.lat]}
+              zoom={INITIAL_ZOOM}
+              containerStyle={{
+                height: "400px",
+                width: "calc(100vw - 40px)",
+              }}
+            >
+              <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}>
+                <FontAwesomeIcon
+                  icon={faMapMarkerAlt}
+                  size="6x"
+                  className="map-marker"
                 />
-              );
-            })}
+              </Marker>
+            </Map>
+          </div>
+          <p>
+            Coordinates: {sightingDetails.lng}, {sightingDetails.lat}
+          </p>
+          <h4>Notes</h4>
+          <div className="note-box">
+            <p>{sightingDetails.notes}</p>
+          </div>
+          <h4>Photos</h4>
+          <div className="photos">
+            {sightingDetails.photos &&
+              sightingDetails.photos.map((photo, index) => {
+                return (
+                  <Photo
+                    key={index}
+                    photoID={photo.photo_id}
+                    instagramPhotoID={photo.instagram_media_id}
+                    instagramToken={instagramToken}
+                    sightingDetails={sightingDetails}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>
