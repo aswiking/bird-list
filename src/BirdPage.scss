@@ -1,6 +1,5 @@
 @import "./Variables";
 
-
 .bird-details {
   background-color: $secondary-color;
   padding: 20px 20px 5px;
@@ -31,24 +30,25 @@ h4 {
 }
 
 .sightings-list {
-  padding: 20px;
   margin-top: 20px;
-  background-color: $secondary-color;
   color: $primary-color;
 
   h2 {
-    margin-bottom: 20px;
+    background-color: $secondary-color;
+    padding: 20px;
   }
 }
 
+.list-item {
+  .link-container {
+    padding: 20px 30px;
+    background-color: $secondary-color;
+  }
 
-.sighting-link {
-  
-  cursor: pointer;
-  
-  h4 {
-  margin-bottom: 20px;
-}}
+  .sighting-link {
+    cursor: pointer;
+  }
+}
 
 .no-sightings-message {
   background-color: $secondary-color;
@@ -59,7 +59,7 @@ h4 {
   border-radius: 10px;
 }
 
-.new-sighting-link p{
+.new-sighting-link p {
   font-weight: 800;
   margin-top: 10px;
 }

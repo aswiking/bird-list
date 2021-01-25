@@ -9,12 +9,15 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 export default function HomePage(props) {
   const sightingsList = props.sightingsData.map((sighting, index) => {
     return (
-      <SightingEntry
-        sighting={sighting}
-        key={index}
-        instagramToken={props.instagramToken}
-        setDisplayingSighting={props.setDisplayingSighting}
-      />
+      <div>
+        <SightingEntry
+          sighting={sighting}
+          key={index}
+          instagramToken={props.instagramToken}
+          setDisplayingSighting={props.setDisplayingSighting}
+        />
+        <div className="color-block"></div>
+      </div>
     );
   });
 
@@ -23,13 +26,21 @@ export default function HomePage(props) {
       <Header loggedin="true" currentUser={props.currentUser} />
       <div className="recentSightingsLog">
         <div className="recentSightingsHeader">
-        <Link to="/new-sighting" className="plus-icon">
-            <FontAwesomeIcon icon={faPlusCircle} className="plus-icon" title="add new sighting" />
+          <Link to="/new-sighting" className="plus-icon">
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              className="plus-icon"
+              title="add new sighting"
+            />
           </Link>
-          {/* <h1>Recent sightings</h1>  */}
-          {/* Remove Recent Sightings header? */}
+          <h1>Recent sightings</h1>
+          <div className="color-block"></div>
         </div>
-        {(sightingsList.length === 0) && <div className="no-sightings-message"><p>Click the plus icon to add your first sighting</p></div>}
+        {sightingsList.length === 0 && (
+          <div className="no-sightings-message">
+            <p>Click the plus icon to add your first sighting</p>
+          </div>
+        )}
         {sightingsList}
         {props.error &&
           (props.error.status ? (

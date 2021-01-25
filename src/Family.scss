@@ -1,6 +1,12 @@
+@import "./Variables.scss";
+
+.family {
+  margin-bottom: 20px;
+}
 .family-name {
-  padding-top: 20px;
+  padding: 20px 30px;
   line-height: 1;
+  background-color: $secondary-color;
 }
 
 .family-name::first-letter {
@@ -8,9 +14,13 @@
 }
 
 .bird-entry {
-    margin: 20px 0;
-    border-bottom: solid 0.5px;
     padding-bottom: 3px;
+
+    .link-container {
+      background-color: $secondary-color;
+      padding: 15px;
+      margin-bottom: -3px;
+    }
 }
 
 .bird-entry a {
@@ -20,6 +30,8 @@
   svg {
     margin-top: 8px;
   }
+
+
 
   .bird-details {
     display: flex;

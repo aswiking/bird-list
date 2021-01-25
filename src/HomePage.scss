@@ -11,7 +11,6 @@
 
 .recentSightingsHeader {
   color: $primary-color;
-  margin-bottom: 10px;
   width: 100%;
 
   h1 {
@@ -28,5 +27,11 @@
   padding-bottom: 5px;
   color: $contrast-color;
   padding: 10px;
+}
 
+.color-block {
+  background-color: $secondary-color;
+  width: 30px;
+  height: 22px;
+  margin: -1px 0;
 }

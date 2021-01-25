@@ -69,7 +69,7 @@ export default function BirdPage(props) {
       ordinal = `${keyString}rd`;
     } else {
       ordinal = `${keyString}th`;
-    };
+    }
 
     const dateOptions = {
       weekday: "long",
@@ -80,17 +80,23 @@ export default function BirdPage(props) {
 
     const dateTimeFormat = new Intl.DateTimeFormat("en-GB", dateOptions);
 
-    const sightingDate = dateTimeFormat.format(
-      new Date(sighting.datetime)
+    const sightingDate = dateTimeFormat.format(new Date(sighting.datetime));
+
+    return (
+      <div className="list-item">
+        <div className="link-container">
+          <Link
+            to={`/sightings/${sighting.id}`}
+            key={index}
+            className="sighting-link"
+          >
+            <h3>{ordinal} sighting</h3> <h4>{sightingDate}</h4>
+          </Link>
+        </div>
+        <div className="color-block"></div>
+      </div>
     );
-  
-
-    return <Link to={`/sightings${sighting.id}`} key={index} className="sighting-link">
-      <h3>{ordinal} sighting</h3> <h4>{sightingDate}</h4>
-    </Link>;
   });
-
-
 
   console.log("sightings list is", sightingsList);
 
@@ -107,6 +113,7 @@ export default function BirdPage(props) {
         />
         <div className="sightings-list">
           <h2>Your sightings</h2>
+          <div className="color-block"></div>
           {sightingsList.length > 0 ? (
             sightingsList
           ) : (
