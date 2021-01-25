@@ -136,6 +136,7 @@ export default function SightingForm(props) {
                 <BirdDropDown
                   currentUser={props.currentUser}
                   selectSpecies={props.selectSpecies}
+                  required
                 />
               </li>
             )}
@@ -144,7 +145,8 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                defaultValue={sightingDetails.datetime.substring(0, 10)}
+                defaultValue={sightingDetails.datetime && sightingDetails.datetime.substring(0, 10)}
+                required
               ></input>
             </li>
             <div className="location-select-section">

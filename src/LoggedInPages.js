@@ -111,7 +111,8 @@ export default function LoggedInPages(props) {
 
     const sighting = await res.json();
     setSightings([...sightingsData, sighting]);
-    setSelectedImages([]); //not working?
+    setSelectedImages([]);
+    setMapPin({});
 
     history.push("/");
   }

@@ -1,7 +1,5 @@
 @import "./Variables";
 
-
-
 .recentSightingsLog a {
   text-decoration: none;
 }
@@ -9,8 +7,7 @@
 .sightingEntry {
   background-color: $secondary-color;
   color: $primary-color;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 10px 10px 10px 30px;
   display: flex;
   justify-content: space-between;
 }
