@@ -10,13 +10,14 @@ export default function HomePage(props) {
   const sightingsList = props.sightingsData.map((sighting, index) => {
     return (
       <div>
+         <div className="color-block"></div>
         <SightingEntry
           sighting={sighting}
           key={index}
           instagramToken={props.instagramToken}
           setDisplayingSighting={props.setDisplayingSighting}
         />
-        <div className="color-block"></div>
+       
       </div>
     );
   });
@@ -34,7 +35,6 @@ export default function HomePage(props) {
             />
           </Link>
           <h1>Recent sightings</h1>
-          <div className="color-block"></div>
         </div>
         {sightingsList.length === 0 && (
           <div className="no-sightings-message">
