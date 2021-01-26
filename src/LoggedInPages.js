@@ -126,8 +126,26 @@ export default function LoggedInPages(props) {
       return;
     }
 
+
     const sighting = await res.json();
-    setSightings([...sightingsData, sighting]);
+
+    let newSightingsArray = [...sightingsData, sighting];
+
+    newSightingsArray.sort((a,b) => {
+      const dateA = new Date(a.datetime);
+      const dateB = new Date(b.datetime);
+      if (dateA < dateB) {
+        return 1
+      } else if (dateA > dateB) {
+        return -1
+      } else {
+        return 0
+      }
+    });
+
+    newSightingsArray.pop();
+
+    setSightings(newSightingsArray);
     setSelectedImages([]);
     setMapPin({});
 
