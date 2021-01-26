@@ -16,6 +16,7 @@ export default function SightingPage(props) {
     isEditing,
     updateSighting,
     setIsEditing,
+    requiredMessage
   } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
@@ -76,6 +77,7 @@ export default function SightingPage(props) {
             updateSighting={updateSighting}
             deleteSighting={props.deleteSighting}
             setIsEditing={setIsEditing}
+            requiredMessage = {requiredMessage}
           />
         )}
       </div>

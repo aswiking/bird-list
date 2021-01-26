@@ -46,7 +46,7 @@ export default function SightingForm(props) {
         };
         setMapCenter(userLocation);
       });
-    } else {
+    } else if (sightingDetails.lat) {
       setMapCenter({
         lat: sightingDetails.lat,
         lng: sightingDetails.lng,
@@ -125,10 +125,7 @@ export default function SightingForm(props) {
     <div>
       {props.formType === "new" && <Header loggedin="true" />}
       <div className="sightingForm">
-        <h1>
-          {" "}
-          {props.formType === "new" ? "New sighting" : sightingDetails.common}
-        </h1>
+        {props.formType === "new" && <h1>New sighting</h1>}
         <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
           <ul>
             {props.formType === "new" && (

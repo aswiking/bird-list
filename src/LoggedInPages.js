@@ -272,6 +272,7 @@ export default function LoggedInPages(props) {
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           deleteSighting={deleteSighting}
+          requiredMessage = {requiredMessage}
         />
       </Route>
       <Route path="/all-birds">
