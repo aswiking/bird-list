@@ -4,9 +4,7 @@ import Photo from "./Photo.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
-  faEdit,
-  faAngleDown,
-  faAngleUp,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import "./Sighting.scss";
@@ -31,8 +29,6 @@ export default function Sighting(props) {
     sightingID,
     setError,
   } = props;
-
-  const [displaySightingDetails, setDisplaySightingDetails] = useState(false);
 
   useEffect(() => {
     if (!sightingID) {
@@ -72,6 +68,8 @@ export default function Sighting(props) {
 
       const sightingData = await res.json();
 
+      console.log('data is', sightingData)
+
       setSightingDetails(sightingData);
     }
 
@@ -101,8 +99,6 @@ export default function Sighting(props) {
     new Date(sightingDetails.datetime)
   );
 
-
-  
   return (
     <div className="sighting">
       <div className="sighting-details-container">
@@ -117,31 +113,36 @@ export default function Sighting(props) {
             />
           </div>
           <h4>Location</h4>
-          <div className="map-container">
-            <Map
-              style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
-              center={[sightingDetails.lng, sightingDetails.lat]}
-              zoom={INITIAL_ZOOM}
-              containerStyle={{
-                height: "400px",
-                width: "calc(100vw - 40px)",
-              }}
-            >
-              <Marker coordinates={[sightingDetails.lng, sightingDetails.lat]}>
-                <FontAwesomeIcon
-                  icon={faMapMarkerAlt}
-                  size="6x"
-                  className="map-marker"
-                />
-              </Marker>
-            </Map>
-          </div>
-          <p>
-            Coordinates: {sightingDetails.lng}, {sightingDetails.lat}
-          </p>
+          {sightingDetails.lat ? (
+            <div className="map-container">
+              <Map
+                style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
+                center={[sightingDetails.lng, sightingDetails.lat]}
+                zoom={INITIAL_ZOOM}
+                containerStyle={{
+                  height: "400px",
+                  width: "calc(100vw - 40px)",
+                }}
+              >
+                <Marker
+                  coordinates={[sightingDetails.lng, sightingDetails.lat]}
+                >
+                  <FontAwesomeIcon
+                    icon={faMapMarkerAlt}
+                    size="6x"
+                    className="map-marker"
+                  />
+                </Marker>
+              </Map>
+              <p>
+                Coordinates: {sightingDetails.lng}, {sightingDetails.lat}
+              </p>
+            </div>
+          ) : <p>No location recorded</p>}
+
           <h4>Notes</h4>
           <div className="note-box">
-            <p>{sightingDetails.notes}</p>
+            <p>{sightingDetails.notes ? sightingDetails.notes : 'No notes recorded'}</p>
           </div>
           <h4>Photos</h4>
           <div className="photos">
