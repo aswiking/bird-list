@@ -19,6 +19,10 @@ export default function LoggedInPages(props) {
   const [selectedBird, setSelectedBird] = useState();
   const [selectedImages, setSelectedImages] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [requiredMessage, setRequiredMessage] = useState({
+    field: null,
+    message: null
+  });
 
   const history = useHistory();
   const { currentUser } = props;
@@ -65,6 +69,19 @@ export default function LoggedInPages(props) {
 
   async function addSighting(event) {
     event.preventDefault();
+
+   if (!(selectedBird)) {
+     setRequiredMessage({
+       field: 'species',
+       message: 'You must select a species'});
+       return
+   } else if (!(event.target.date.value)) {
+    setRequiredMessage({
+      field: 'date',
+      message: 'You must select a date'});
+      return
+   }
+
 
     const newSighting = {
       bird_id: selectedBird,
@@ -222,6 +239,7 @@ export default function LoggedInPages(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           formType="new"
+          requiredMessage = {requiredMessage}
         />
       </Route>
       <Route path="/sightings/:sightingID">

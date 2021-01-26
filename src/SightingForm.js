@@ -7,7 +7,7 @@ import LocationDropDown from "./LocationDropDown";
 import Header from "./Header.js";
 import apiFetch from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -27,7 +27,8 @@ export default function SightingForm(props) {
     sightingDetails,
     setIsEditing,
     placeMarker,
-    mapPin
+    mapPin,
+    requiredMessage,
   } = props;
 
   const [mapCenter, setMapCenter] = useState({
@@ -131,22 +132,25 @@ export default function SightingForm(props) {
         <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
           <ul>
             {props.formType === "new" && (
-              <li>
-                <label htmlFor="species">Species</label>{" "}
+              <li
+                className={requiredMessage.field === "species" && "highlight"}
+              >
+                <label htmlFor="species">Species *</label>{" "}
                 <BirdDropDown
                   currentUser={props.currentUser}
                   selectSpecies={props.selectSpecies}
-                  required
                 />
               </li>
             )}
-            <li>
-              <label htmlFor="date">Date seen</label>{" "}
+            <li className={requiredMessage.field === "date" && "highlight"}>
+              <label htmlFor="date">Date seen *</label>{" "}
               <input
                 id="date"
                 type="date"
-                defaultValue={sightingDetails.datetime && sightingDetails.datetime.substring(0, 10)}
-                required
+                defaultValue={
+                  sightingDetails.datetime &&
+                  sightingDetails.datetime.substring(0, 10)
+                }
               ></input>
             </li>
             <div className="location-select-section">
@@ -165,16 +169,17 @@ export default function SightingForm(props) {
                   }}
                   onMoveEnd={(map, event) => updateCenter(map, event)}
                   onDblClick={(map, event) => placeMarker(map, event)}
-                  // ^ working - just not in devtools
+                  // ^ working - just not in devtools with toggle device bar
                 >
-                  {mapPin.lng &&
+                  {mapPin.lng && (
                     <Marker coordinates={[mapPin.lng, mapPin.lat]}>
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}
                         className="map-marker"
                         size="6x"
                       />
-                    </Marker> }
+                    </Marker>
+                  )}
                 </Map>
               </div>
               <p className="pin-instructions">
@@ -200,16 +205,28 @@ export default function SightingForm(props) {
               ></textarea>
             </li>
           </ul>
+          {requiredMessage.field && (
+            <div className="required-message">
+              <FontAwesomeIcon
+                icon={faExclamationCircle}
+                className="exclamation-icon"
+                size="2x"
+              ></FontAwesomeIcon>
+              <p>{requiredMessage.message}</p>
+            </div>
+          )}
           <button>Submit</button>
         </form>
-        {props.formType !== "new" && <div className="option-container">
-          <div onClick={(event) => setIsEditing(false)}>
-            <p>Discard changes</p>
+        {props.formType !== "new" && (
+          <div className="option-container">
+            <div onClick={(event) => setIsEditing(false)}>
+              <p>Discard changes</p>
+            </div>
+            <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
+              <p>Delete sighting</p>
+            </div>
           </div>
-          <div onClick={(event) => deleteSighting(event, sightingDetails.id)}>
-            <p>Delete sighting</p>
-          </div>
-        </div>}
+        )}
       </div>
     </div>
   );
