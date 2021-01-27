@@ -139,7 +139,7 @@ export default function SightingForm(props) {
                 />
               </li>
             )}
-            <li className={requiredMessage.field === "date" && "highlight"}>
+            <li className={(requiredMessage.field === "date") ? "highlight" : undefined}>
               <label htmlFor="date">Date seen *</label>{" "}
               <input
                 id="date"

@@ -59,7 +59,7 @@ export default function LoggedInPages(props) {
       setSightings(sightings);
     }
     fetchSightings();
-  }, [props]);
+  }, [currentUser]);
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -81,7 +81,6 @@ export default function LoggedInPages(props) {
       message: 'You must select a date'});
       return
    }
-
 
     const newSighting = {
       bird_id: selectedBird,
@@ -191,9 +190,7 @@ export default function LoggedInPages(props) {
     }
 
     setSelectedImages([]);
-
     setIsEditing(false);
-
     return updatedSighting;
   }
 
@@ -215,9 +212,11 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    setSightings(sightingsData.filter((sighting) => sighting.id !== id));
     setSelectedImages([]);
     history.push("/");
+    window.location.reload();
+    // is this acceptable?
+    setIsEditing(false);
   }
 
   if (error) {

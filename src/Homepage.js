@@ -9,7 +9,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 export default function HomePage(props) {
   const sightingsList = props.sightingsData.map((sighting, index) => {
     return (
-      <div>
+      <div key={index}>
          <div className="color-block"></div>
         <SightingEntry
           sighting={sighting}

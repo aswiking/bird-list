@@ -26,11 +26,32 @@ export default function SightingEntry(props) {
 
     const millisecDiff = todaysDate - new Date(props.sighting.datetime);
     // TODO: Display hours/days/weeks/months/years ago
-    const daysAgo = Math.ceil(millisecDiff / (1000 * 60 * 60 * 24));
-    return daysAgo;
+    const daysAgo = (Math.ceil(millisecDiff / (1000 * 60 * 60 * 24))- 1);
+    let timeAgo;
+
+    if ((daysAgo / 365) > 2 ) {
+      timeAgo = `${(Math.floor(daysAgo / 365))} years ago`;
+    } else if ((daysAgo / 365) > 1) {
+      timeAgo = `${(Math.floor(daysAgo / 365))} year ago`;
+    } else if ((daysAgo / 30) > 2) {
+      timeAgo = `${(Math.floor(daysAgo / 30))} months ago`;
+    } else if ((daysAgo / 30) > 1) {
+      timeAgo = `${(Math.floor(daysAgo / 30))} month ago`;
+    } else if ((daysAgo / 7) > 2) {
+      timeAgo = `${(Math.floor(daysAgo / 7))} weeks ago`;
+    } else if ((daysAgo / 7) > 1) {
+      timeAgo = `${(Math.floor(daysAgo / 7))} week ago`;
+    } else if (daysAgo > 2) {
+      timeAgo = `${(Math.floor(daysAgo))} days ago`;
+    } else if (daysAgo === 1) {
+      timeAgo = `${(Math.floor(daysAgo))} day ago`;
+    } else {
+      timeAgo = `${daysAgo} days ago`;
+    }
+    return timeAgo;
   }
 
-  const daysAgo = dateDifference();
+  const timeAgo = dateDifference();
 
   function setStateID() {
     console.log(props.sighting.id)
@@ -49,7 +70,7 @@ export default function SightingEntry(props) {
           <h2 className="birdName">{props.sighting.bird.common}</h2>
           <h3 className="scientific">{props.sighting.bird.scientific}</h3>
         </div>
-        <h4>Last seen {daysAgo} days ago</h4>
+        <h4>Last seen {timeAgo}</h4>
       </div>
       {imageDetails && (
         <div className="entryphoto-div">
