@@ -1,8 +1,6 @@
 @import "./Variables";
 
-
 .sightingForm {
-
   h1 {
     color: $primary-color;
     padding: 20px;
@@ -15,12 +13,19 @@
   padding-bottom: 20px;
   padding-top: 10px;
   background-color: $secondary-color;
-
+  color: $primary-color;
 }
 
 .sightingForm ul {
   margin: 0;
   padding: 0;
+  width: 100%;
+
+  .instagram-link {
+    color: $primary-color;
+    text-align: center;
+    cursor: pointer;
+  }
 }
 
 .sightingForm li {
@@ -29,11 +34,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   color: $primary-color;
 }
 
-.sightingForm input, .sightingForm .bird-select {
+.sightingForm input,
+.sightingForm .bird-select {
   background-color: $primary-color;
   width: 160px;
   color: $secondary-color;
@@ -99,13 +105,11 @@
   img {
     width: calc((100vw - 40px - 30px) / 3);
     margin-bottom: 20px;
-    
   }
 
   label {
     width: 90px;
     height: 90px;
-
   }
 
   input:checked ~ label {

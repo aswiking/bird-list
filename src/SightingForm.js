@@ -7,7 +7,10 @@ import LocationDropDown from "./LocationDropDown";
 import Header from "./Header.js";
 import apiFetch from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faExclamationCircle,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const accessToken =
   "pk.eyJ1IjoiYXN3aWtpbmciLCJhIjoiY2tlY29pZTFrMGp6bzMzbXRyOGpqYW12eCJ9._TRyss_B8xuU2NnlHhyJng";
@@ -130,17 +133,27 @@ export default function SightingForm(props) {
           <ul>
             {props.formType === "new" && (
               <li
-                className={requiredMessage.field === "species" && "highlight"}
+                className={
+                  requiredMessage.field === "species" ? "highlight" : undefined
+                }
               >
-                <label htmlFor="species">Species *</label>{" "}
+                <h3>
+                  <label htmlFor="species">Species *</label>
+                </h3>
                 <BirdDropDown
                   currentUser={props.currentUser}
                   selectSpecies={props.selectSpecies}
                 />
               </li>
             )}
-            <li className={(requiredMessage.field === "date") ? "highlight" : undefined}>
-              <label htmlFor="date">Date seen *</label>{" "}
+            <li
+              className={
+                requiredMessage.field === "date" ? "highlight" : undefined
+              }
+            >
+              <h3>
+                <label htmlFor="date">Date seen *</label>
+              </h3>
               <input
                 id="date"
                 type="date"
@@ -183,17 +196,24 @@ export default function SightingForm(props) {
                 Double click to place a pin on the spot of your sighting
               </p>
             </div>
-            {instagramToken ? (
-              <div className="images">{imageList}</div>
-            ) : (
-              <a
-                href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
-              >
-                Link your account to Instagram to select photos
-              </a>
-            )}
+            <div className="images">
+              <h3>Photos</h3>
+              {instagramToken ? (
+                <div className="images">{imageList}</div>
+              ) : (
+                <div className="instagram-link">
+                  <a
+                    href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
+                  >
+                    Link your account to Instagram to select photos
+                  </a>
+                </div>
+              )}
+            </div>
             <li className="notes">
-              <label htmlFor="notes">Notes</label>{" "}
+              <h3>
+                <label htmlFor="notes">Notes</label>
+              </h3>
               <textarea
                 rows="8"
                 id="notes"

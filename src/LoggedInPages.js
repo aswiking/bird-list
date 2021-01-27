@@ -142,9 +142,9 @@ export default function LoggedInPages(props) {
       }
     });
 
-    newSightingsArray.pop();
+    const trimmedArray = newSightingsArray.slice(0, 5);
 
-    setSightings(newSightingsArray);
+    setSightings(trimmedArray);
     setSelectedImages([]);
     setMapPin({});
 
