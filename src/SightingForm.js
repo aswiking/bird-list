@@ -196,7 +196,7 @@ export default function SightingForm(props) {
                 Double click to place a pin on the spot of your sighting
               </p>
             </div>
-            <div className="images">
+            <div className="images-container">
               <h3>Photos</h3>
               {instagramToken ? (
                 <div className="images">{imageList}</div>

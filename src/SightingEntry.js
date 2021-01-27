@@ -25,23 +25,22 @@ export default function SightingEntry(props) {
     const todaysDate = new Date();
 
     const millisecDiff = todaysDate - new Date(props.sighting.datetime);
-    // TODO: Display hours/days/weeks/months/years ago
     const daysAgo = (Math.ceil(millisecDiff / (1000 * 60 * 60 * 24))- 1);
     let timeAgo;
 
-    if ((daysAgo / 365) > 2 ) {
+    if ((daysAgo / 365) >= 2 ) {
       timeAgo = `${(Math.floor(daysAgo / 365))} years ago`;
-    } else if ((daysAgo / 365) > 1) {
+    } else if ((daysAgo / 365) >= 1) {
       timeAgo = `${(Math.floor(daysAgo / 365))} year ago`;
-    } else if ((daysAgo / 30) > 2) {
+    } else if ((daysAgo / 30) >= 2) {
       timeAgo = `${(Math.floor(daysAgo / 30))} months ago`;
-    } else if ((daysAgo / 30) > 1) {
+    } else if ((daysAgo / 30) >= 1) {
       timeAgo = `${(Math.floor(daysAgo / 30))} month ago`;
-    } else if ((daysAgo / 7) > 2) {
+    } else if ((daysAgo / 7) >= 2) {
       timeAgo = `${(Math.floor(daysAgo / 7))} weeks ago`;
-    } else if ((daysAgo / 7) > 1) {
+    } else if ((daysAgo / 7) >= 1) {
       timeAgo = `${(Math.floor(daysAgo / 7))} week ago`;
-    } else if (daysAgo > 2) {
+    } else if (daysAgo >= 2) {
       timeAgo = `${(Math.floor(daysAgo))} days ago`;
     } else if (daysAgo === 1) {
       timeAgo = `${(Math.floor(daysAgo))} day ago`;
@@ -53,15 +52,9 @@ export default function SightingEntry(props) {
 
   const timeAgo = dateDifference();
 
-  function setStateID() {
-    console.log(props.sighting.id)
-    
-  }
-
   return (
     <Link
       to={`/sightings/${props.sighting.id}`}
-      onClick={setStateID}
       className="sightingEntry"
       key={props.sighting.id}
     >
