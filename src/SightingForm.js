@@ -111,6 +111,7 @@ export default function SightingForm(props) {
             ) !== -1
           }
         ></input>
+        <div className="color-outline"></div>
         <label htmlFor={image.id}>
           <img src={image.media_url} alt={image.caption}></img>
         </label>

@@ -84,6 +84,7 @@ export default function BirdPage(props) {
 
     return (
       <div className="list-item">
+        <div className="color-block"></div>
         <div className="link-container">
           <Link
             to={`/sightings/${sighting.id}`}
@@ -93,7 +94,6 @@ export default function BirdPage(props) {
             <h3>{ordinal} sighting</h3> <h4>{sightingDate}</h4>
           </Link>
         </div>
-        <div className="color-block"></div>
       </div>
     );
   });
@@ -113,7 +113,6 @@ export default function BirdPage(props) {
         />
         <div className="sightings-list">
           <h2>Your sightings</h2>
-          <div className="color-block"></div>
           {sightingsList.length > 0 ? (
             sightingsList
           ) : (

@@ -101,31 +101,42 @@
 
   .image-div {
     padding-bottom: 10px;
+    width: calc((100vw - 40px - 30px) / 3);
   }
 
   input {
     display: none;
   }
 
+  label {
+    position: relative;
+    z-index: 10;
+  }
+
   img {
     width: calc((100vw - 40px - 30px) / 3);
     margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
   }
 
-  label {
-    width: 90px;
-    height: 90px;
+  .color-outline {
+    z-index: 0;
+    position: absolute;
+    border: solid 6px $contrast-color;
+    width: calc(((100vw - 40px - 30px) / 3) - 12px);
+    height: calc(((100vw - 40px - 30px) / 3) - 12px);
   }
 
-  input:checked ~ label {
-    display: block;
-    border: solid 5px $contrast-color;
+
+
+  input:checked ~ label img {
+    margin: 6px;
+    width: calc(((100vw - 40px - 30px) / 3) - 12px);
+    height: calc(((100vw - 40px - 30px) / 3) - 12px);
   }
 
-  input:checked ~ label > img {
-    height: 90px;
-    width: 90px;
-  }
+
 }
 
 .sightingForm button {
