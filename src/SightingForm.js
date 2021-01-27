@@ -40,6 +40,7 @@ export default function SightingForm(props) {
   });
   const [instagramImages, setInstagramImages] = useState([]);
 
+
   useEffect(() => {
     if (props.formType === "new") {
       navigator.geolocation.getCurrentPosition(function (position) {

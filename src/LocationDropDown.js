@@ -5,7 +5,43 @@ import apiFetch from "./api";
 export default function LocationDropDown(props) {
   const [locationData, setLocations] = useState([]);
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: 'rgb(244, 250, 244)'
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)'
+    }),
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)'
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)'
+    }),
+    noOptionsMessage: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)',
+      backgroundColor: 'rgb(244, 250, 244)'
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)',
+      backgroundColor: 'rgb(244, 250, 244)'
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: 'rgb(0, 128, 128)',
+      backgroundColor: 'rgb(244, 250, 244)'
+    })
+  }
+
   async function fetchLocations(inputValue) {
+
+
     let res;
 
     const geocodingUrl = "https://api.mapbox.com/geocoding/v5";
@@ -50,6 +86,7 @@ export default function LocationDropDown(props) {
       placeholder="Start typing to see options"
       loadOptions={fetchLocations}
       onChange={selectLocation}
+      styles={customStyles}
     />
   );
 }

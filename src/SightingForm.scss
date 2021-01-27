@@ -64,6 +64,7 @@
 
 .location-select {
   margin-bottom: 10px;
+  background-color: $contrast-color;
 }
 
 .pin-instructions {
@@ -174,3 +175,12 @@
     font-size: 1.2rem;
   }
 }
+
+
+ //tablets
+ @media (min-width: 481px){
+  .sightingForm input,
+  .sightingForm .bird-select {
+    width: 300px;
+  }
+ }
