@@ -7,7 +7,6 @@
 .sightingEntry {
   background-color: $secondary-color;
   color: $primary-color;
-  padding: 10px 10px 10px 30px;
   display: flex;
   justify-content: space-between;
 }
@@ -15,6 +14,7 @@
 .entryDetails {
   min-height: 103px;
   position: relative;
+  padding: 10px 10px 10px 30px;
 }
 
 .sightingEntry h2 {
@@ -39,17 +39,17 @@
 
 .colorblock {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background-image:
-  linear-gradient(
-    to right, 
-    $secondary-color, rgba(100, 100, 100, 0)
+  width: 123px;
+  height: 123px;
+  margin-bottom: -3px;
+  background-image: linear-gradient(
+    to right,
+    $secondary-color,
+    rgba(100, 100, 100, 0)
   );
 }
 
 .entryPhoto {
-  width: 100px;
+  width: 123px;
+  margin-bottom: -3px;
 }
-
-
