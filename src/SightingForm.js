@@ -52,10 +52,6 @@ export default function SightingForm(props) {
     new Date()
   );
 
-  const formattedToday = today.replaceAll("/", "-");
-
-  console.log('formatted', today, formattedToday)
-
 
   useEffect(() => {
     if (props.formType === "new") {
@@ -175,7 +171,7 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
-                max={formattedToday}
+                max={today}
                 min='1899-01-01'
                 defaultValue={
                   sightingDetails.datetime &&

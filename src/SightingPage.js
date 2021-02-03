@@ -23,6 +23,7 @@ export default function SightingPage(props) {
     lat: 52.610044,
     lng: -1.156774,
     datetime: "2020-01-01",
+    photos: [],
     bird: {
       id: null,
       common: null,

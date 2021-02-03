@@ -146,8 +146,8 @@ export default function Sighting(props) {
           </div>
           <h4>Photos</h4>
           <div className="photos">
-            {sightingDetails.photos &&
-              sightingDetails.photos.map((photo, index) => {
+            {(sightingDetails.photos.length > 0) ?
+              (sightingDetails.photos.map((photo, index) => {
                 return (
                   <Photo
                     key={index}
@@ -157,7 +157,7 @@ export default function Sighting(props) {
                     sightingDetails={sightingDetails}
                   />
                 );
-              })}
+              })) : <p>No photos</p> }
           </div>
         </div>
       </div>
