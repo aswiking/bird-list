@@ -27,18 +27,16 @@ export default function Header(props) {
           <Link to="/all-birds">
             <FontAwesomeIcon
               icon={faClipboardList}
-              className="clipboardIcon"
+              className="clipboardIcon headerIcon"
               alt="clipboard icon"
               title="full list of birds"
-              size="2x"
             />
           </Link>
           <FontAwesomeIcon
             icon={faUser}
-            className="userIcon"
+            className="userIcon headerIcon"
             alt="user settings"
             onClick={displayUserMenu}
-            size="2x"
             title="user options"
           />
         </div>

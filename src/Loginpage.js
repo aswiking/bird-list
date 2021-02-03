@@ -77,25 +77,26 @@ export default function LoginPage(props) {
   return (
     <div className="loginpage">
       <Header />
-      <div className="login-options">
-        <a
-          href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
-        >
-          <div className="button-container">
-            <button className="instagram-button">
-              <FontAwesomeIcon
-                icon={faInstagram}
-                className="instagramIcon"
-                alt="instagram icon"
-                title="instagram"
-                size="2x"
-              />
-              <p>
-              Sign in with Instagram</p>
-            </button>
-          </div>
-        </a>
-        <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <div className="body">
+        <div className="login-options">
+          <a
+            href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
+          >
+            <div className="button-container">
+              <button className="instagram-button">
+                <FontAwesomeIcon
+                  icon={faInstagram}
+                  className="instagramIcon"
+                  alt="instagram icon"
+                  title="instagram"
+                  size="2x"
+                />
+                <p>Sign in with Instagram</p>
+              </button>
+            </div>
+          </a>
+          <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </div>
       </div>
     </div>
   );

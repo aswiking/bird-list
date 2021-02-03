@@ -40,6 +40,22 @@ export default function SightingForm(props) {
   });
   const [instagramImages, setInstagramImages] = useState([]);
 
+  const dateOptions = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
+
+  const dateTimeFormat = new Intl.DateTimeFormat("en-CA", dateOptions);
+
+  const today = dateTimeFormat.format(
+    new Date()
+  );
+
+  const formattedToday = today.replaceAll("/", "-");
+
+  console.log('formatted', today, formattedToday)
+
 
   useEffect(() => {
     if (props.formType === "new") {
@@ -159,6 +175,8 @@ export default function SightingForm(props) {
               <input
                 id="date"
                 type="date"
+                max={formattedToday}
+                min='1899-01-01'
                 defaultValue={
                   sightingDetails.datetime &&
                   sightingDetails.datetime.substring(0, 10)

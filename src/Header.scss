@@ -42,6 +42,10 @@
     right: 8px;
     display: flex;
     gap: 10px;
+    
+    svg {
+      font-size: 2rem;
+        }
   }
 
 
@@ -82,4 +86,27 @@
 
   .userIcon:hover {
     cursor: pointer;
+  }
+
+  @media (min-width: 600px) {
+    
+    .fledglingLogo {
+      width: 15%;
+  }
+    .header h1 {
+      font-size: 3rem;
+    }
+
+    .menu {
+      max-width: 190px;
+      top: 46px;
+    }
+
+    .userMenu li {
+      font-size: 1.2rem;
+    }
+
+    .headerIcons svg {
+      font-size: 2.5rem;
+        }
   }
