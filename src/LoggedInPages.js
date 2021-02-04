@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory, Link } from "react-router-dom";
 import HomePage from "./HomePage.js";
-import SightingForm from "./SightingForm.js";
+import SightingFormPage from "./SightingFormPage.js";
 import SightingPage from "./SightingPage.js";
 import BirdPage from "./BirdPage.js";
 import ErrorMessage from "./ErrorMessage.js";
@@ -245,7 +245,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/new-sighting" exact>
-        <SightingForm
+        <SightingFormPage
           currentUser={props.currentUser}
           submitSighting={addSighting}
           placeMarker={placeMarker}

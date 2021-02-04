@@ -140,10 +140,10 @@ export default function SightingForm(props) {
 
   return (
     <div>
-      {props.formType === "new" && <Header loggedin="true" />}
       <div className="sightingForm">
         {props.formType === "new" && <h1>New sighting</h1>}
         <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
+        {props.formType === "edit" && <h2>Editing sighting</h2>}
           <ul>
             {props.formType === "new" && (
               <li

@@ -203,6 +203,11 @@
 
   .sightingForm {
     margin: 0 50px;
+
+    form {
+      padding: 30px 0 20px;
+      width: auto;
+    }
   }
   .images {
     .image-div {
@@ -230,8 +235,14 @@
     margin: 0;
   }
 
+  li.date {
+    height: 58px;
+  }
+
   .sightingForm li {
-    padding: 0;
+    padding: 10px 0;
+    margin: 0;
+
   }
 
   .location-select-section {
@@ -242,9 +253,5 @@
     margin: 0;
 }
 
-.sightingForm li {
-  padding: 0;
-  margin: 0;
-}
 
 }
