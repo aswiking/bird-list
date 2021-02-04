@@ -1,10 +1,20 @@
 
   .photos {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 
   .photos img {
     width: calc((100vw - 40px - 20px) / 2); // 40px is margin/padding on outside; 20px is margin between images
+  }
+
+  @media (min-width: 900px) {
+    .photos {
+    
+    img {
+      width: calc(((100vw - 200px - 30px) / 4)); //200px is margin plus padding on outside; 3opx is margin between images
+      margin-bottom: 20px;
+      margin-right:10px;
+    }}
   }

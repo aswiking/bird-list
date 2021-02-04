@@ -2,7 +2,7 @@
 
 .bird-details {
   background-color: $secondary-color;
-  padding: 20px 50px 0px;
+  padding: 25px 50px 0px;
   color: $primary-color;
 }
 
@@ -32,17 +32,22 @@ h4 {
 .sightings-list {
   margin-top: 20px;
   color: $primary-color;
+  background-color: $secondary-color;
 
   h2 {
     background-color: $secondary-color;
     padding: 20px 30px;
+  }
+
+  .list-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 .list-item {
   .link-container {
     padding: 20px 30px;
-    background-color: $secondary-color;
   }
 
   .sighting-link {

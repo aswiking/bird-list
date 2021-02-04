@@ -176,8 +176,8 @@ export default function SightingForm(props) {
                 }
               ></input>
             </li>
-            <h3>Location</h3>
             <div className="location-select-section">
+            <h3>Location</h3>
               <LocationDropDown
                 accessToken={accessToken}
                 setMapCenter={setMapCenter}

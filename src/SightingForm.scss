@@ -202,31 +202,35 @@
 @media (min-width: 900px) {
 
   .sightingForm {
-    margin: 0 50px;
+    margin: 0;
 
     form {
-      padding: 30px 0 20px;
+      padding: 30px 50px 20px;
       width: auto;
+    }
+
+    h1 {
+      padding: 20px 50px;
     }
   }
   .images {
     .image-div {
-      width: calc(((100vw - 100px - 40px - 30px) / 4));
+      width: calc(((100vw - 200px - 40px - 30px) / 4));
     }
 
     img {
-      width: calc(((100vw - 100px - 40px - 30px) / 4));
-      margin-bottom: 10px;
+      width: calc(((100vw - 200px - 40px - 30px) / 4));
+      margin-bottom: 20px;
     }
 
     .color-outline {
-      width: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
-      height: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+      width: calc(((100vw - 200px - 40px - 30px) / 4) - 12px);
+      height: calc(((100vw - 200px - 40px - 30px) / 4) - 12px);
     }
 
     input:checked ~ label img {
-      width: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
-      height: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+      width: calc(((100vw - 200px - 40px - 30px) / 4) - 12px);
+      height: calc(((100vw - 200px - 40px - 30px) / 4) - 12px);
     }
   }
 

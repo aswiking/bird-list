@@ -114,7 +114,7 @@ export default function BirdPage(props) {
         <div className="sightings-list">
           <h2>Your sightings</h2>
           {sightingsList.length > 0 ? (
-            sightingsList
+            <div className="list-items">{sightingsList}</div>
           ) : (
             <div className="no-sightings-message">
               <p>You have no sightings of {birdDetails.common}s</p>

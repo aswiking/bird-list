@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header.js";
 import SightingForm from "./SightingForm.js";
+import './SightingFormPage.scss';
 
 export default function SightingFormPage(props) {
   const {
@@ -14,8 +15,9 @@ export default function SightingFormPage(props) {
   } = props;
 
   return (
-    <div>
+    <div className="sighting-form-page">
       <Header loggedin="true" />
+      <div className="sightingform-container">
       <SightingForm
         currentUser={props.currentUser}
         submitSighting={addSighting}
@@ -29,6 +31,6 @@ export default function SightingFormPage(props) {
         formType="new"
         requiredMessage={requiredMessage}
       />
-    </div>
+    </div></div>
   );
 }

@@ -104,7 +104,7 @@ export default function Sighting(props) {
       <div className="sighting-details-container">
         <div className="sighting-details">
           <div className="details-header">
-            <h3>{sightingDate}</h3>
+            <h2>{sightingDate}</h2>
             <FontAwesomeIcon
               icon={faEdit}
               size="2x"
@@ -112,7 +112,7 @@ export default function Sighting(props) {
               onClick={() => setIsEditing(true)}
             />
           </div>
-          <h4>Location</h4>
+          <h3>Location</h3>
           {sightingDetails.lat ? (
             <div className="map-container">
               <Map
@@ -140,11 +140,11 @@ export default function Sighting(props) {
             </div>
           ) : <p>No location recorded</p>}
 
-          <h4>Notes</h4>
+          <h3>Notes</h3>
           <div className="note-box">
             <p>{sightingDetails.notes ? sightingDetails.notes : 'No notes recorded'}</p>
           </div>
-          <h4>Photos</h4>
+          <h3>Photos</h3>
           <div className="photos">
             {(sightingDetails.photos.length > 0) ?
               (sightingDetails.photos.map((photo, index) => {

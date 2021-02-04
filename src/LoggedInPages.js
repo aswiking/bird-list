@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory, Link } from "react-router-dom";
-import HomePage from "./HomePage.js";
+import HomePage from "./Homepage.js";
 import SightingFormPage from "./SightingFormPage.js";
 import SightingPage from "./SightingPage.js";
 import BirdPage from "./BirdPage.js";
