@@ -10,17 +10,18 @@
 }
 
 .recentSightingsHeader {
+  position: relative;
   color: $primary-color;
   width: 100%;
 
   h1 {
     background-color: $secondary-color;
     padding: 10px 30px;
-    }
+  }
 }
 .plus-icon {
-    margin: 0px auto 15px;
-    display: block;
+  margin: 0px auto 15px;
+  display: block;
 }
 .recentSightingsHeader svg {
   font-size: 2.5rem;
@@ -34,4 +35,43 @@
   width: 30px;
   height: 22px;
   margin: -1px 0;
+}
+
+//tablet portrait up
+@media (min-width: 600px) {
+  .recentSightingsHeader svg {
+    font-size: 4rem;
+  }
+}
+
+//tablet landscape up
+@media (min-width: 900px) {
+  .homepage-sightings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  .recentSightingsHeader h1 {
+    margin: 30px 0;
+  }
+
+  .plus-icon {
+    position: absolute;
+    right: -5px;
+    top: -15px;
+
+    svg {
+      font-size: 6rem;
+    }
+  }
+
+  .recentSightingsLog {
+    margin: 20px 30px;
+  }
+
+  .color-block {
+    height: 0;
+    width: 0;
+  }
 }

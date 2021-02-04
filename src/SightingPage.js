@@ -16,7 +16,7 @@ export default function SightingPage(props) {
     isEditing,
     updateSighting,
     setIsEditing,
-    requiredMessage
+    requiredMessage,
   } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
@@ -38,51 +38,52 @@ export default function SightingPage(props) {
 
   const { sightingID } = useParams();
 
-  if (error){
+  if (error) {
     return <div>{error.message}</div>;
   } else {
-
-  return (
-    <div className="sighting-page">
-      <Header loggedin="true" />
-      <Bird
-        setError={setError}
-        currentUser={currentUser}
-        birdDetails={sightingDetails.bird}
-      />
-      <div className="sighting-container">
-        {!isEditing ? (
-          <Sighting
-            isEditing={props.isEditing}
-            currentUser={currentUser}
+    return (
+      <div>
+        <Header loggedin="true" />
+        <div className="sighting-page">
+          <Bird
             setError={setError}
-            setSelectedImages={setSelectedImages}
-            sightingID={sightingID}
-            sightingDetails={sightingDetails}
-            setSightingDetails={setSightingDetails}
-            instagramToken={instagramToken}
-            setIsEditing={setIsEditing}
-            location="sightingPage"
+            currentUser={currentUser}
+            birdDetails={sightingDetails.bird}
           />
-        ) : (
-          <SightingForm
-            sightingDetails={sightingDetails}
-            setSightingDetails={setSightingDetails}
-            instagramToken={instagramToken}
-            formType="edit"
-            selectedImages={props.selectedImages}
-            setSelectedImages={props.setSelectedImages}
-            submitSighting={props.submitSighting}
-            placeMarker={props.placeMarker}
-            mapPin={props.mapPin}
-            updateSighting={updateSighting}
-            deleteSighting={props.deleteSighting}
-            setIsEditing={setIsEditing}
-            requiredMessage = {requiredMessage}
-          />
-        )}
+          <div className="sighting-container">
+            {!isEditing ? (
+              <Sighting
+                isEditing={props.isEditing}
+                currentUser={currentUser}
+                setError={setError}
+                setSelectedImages={setSelectedImages}
+                sightingID={sightingID}
+                sightingDetails={sightingDetails}
+                setSightingDetails={setSightingDetails}
+                instagramToken={instagramToken}
+                setIsEditing={setIsEditing}
+                location="sightingPage"
+              />
+            ) : (
+              <SightingForm
+                sightingDetails={sightingDetails}
+                setSightingDetails={setSightingDetails}
+                instagramToken={instagramToken}
+                formType="edit"
+                selectedImages={props.selectedImages}
+                setSelectedImages={props.setSelectedImages}
+                submitSighting={props.submitSighting}
+                placeMarker={props.placeMarker}
+                mapPin={props.mapPin}
+                updateSighting={updateSighting}
+                deleteSighting={props.deleteSighting}
+                setIsEditing={setIsEditing}
+                requiredMessage={requiredMessage}
+              />
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }

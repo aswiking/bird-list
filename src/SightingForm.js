@@ -147,8 +147,7 @@ export default function SightingForm(props) {
           <ul>
             {props.formType === "new" && (
               <li
-                className={
-                  requiredMessage.field === "species" ? "highlight" : undefined
+                className={`species ${requiredMessage.field === "species" ? "highlight" : ""}`
                 }
               >
                 <h3>
@@ -161,9 +160,7 @@ export default function SightingForm(props) {
               </li>
             )}
             <li
-              className={
-                requiredMessage.field === "date" ? "highlight" : undefined
-              }
+              className={`date ${requiredMessage.field === "date" ? "highlight" : ""}`}
             >
               <h3>
                 <label htmlFor="date">Date seen *</label>
@@ -179,12 +176,14 @@ export default function SightingForm(props) {
                 }
               ></input>
             </li>
+            <h3>Location</h3>
             <div className="location-select-section">
               <LocationDropDown
                 accessToken={accessToken}
                 setMapCenter={setMapCenter}
               />
               <div className="map-container">
+              
                 <Map
                   style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
                   center={[mapCenter.lng, mapCenter.lat]}

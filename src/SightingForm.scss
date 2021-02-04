@@ -6,6 +6,10 @@
     padding: 20px;
     background-color: $secondary-color;
   }
+
+  h3 {
+    margin-bottom: 5px;
+  }
 }
 .sightingForm form {
   width: 100%;
@@ -128,15 +132,11 @@
     height: calc(((100vw - 40px - 30px) / 3) - 12px);
   }
 
-
-
   input:checked ~ label img {
     margin: 6px;
     width: calc(((100vw - 40px - 30px) / 3) - 12px);
     height: calc(((100vw - 40px - 30px) / 3) - 12px);
   }
-
-
 }
 
 .sightingForm button {
@@ -175,9 +175,8 @@
   }
 }
 
-
- //tablets
- @media (min-width: 481px){
+//phones landscape
+@media (min-width: 481px) {
   .sightingForm input,
   .sightingForm .bird-select {
     width: 300px;
@@ -188,5 +187,64 @@
     text-align: center;
     margin-top: 5px;
   }
- }
+}
 
+//tablets portrait
+@media (min-width: 600px) {
+  li.species,
+  li.date {
+    margin: 10px auto;
+    width: 450px;
+  }
+}
+
+//tablets landscape up
+@media (min-width: 900px) {
+
+  .sightingForm {
+    margin: 0 50px;
+  }
+  .images {
+    .image-div {
+      width: calc(((100vw - 100px - 40px - 30px) / 4));
+    }
+
+    img {
+      width: calc(((100vw - 100px - 40px - 30px) / 4));
+      margin-bottom: 10px;
+    }
+
+    .color-outline {
+      width: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+      height: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+    }
+
+    input:checked ~ label img {
+      width: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+      height: calc(((100vw - 100px - 40px - 30px) / 4) - 12px);
+    }
+  }
+
+  li.species,
+  li.date {
+    margin: 0;
+  }
+
+  .sightingForm li {
+    padding: 0;
+  }
+
+  .location-select-section {
+    padding: 0;
+  }
+
+  .images-container {
+    margin: 0;
+}
+
+.sightingForm li {
+  padding: 0;
+  margin: 0;
+}
+
+}

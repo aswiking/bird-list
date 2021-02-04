@@ -38,7 +38,7 @@ export default function Family(props) {
       <h2 className="family-name" id={familyName}>
         {familyName}
       </h2>
-      {speciesList}
+      <div className="species-list">{speciesList}</div>
     </div>
   );
 }

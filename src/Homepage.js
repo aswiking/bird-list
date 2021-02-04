@@ -41,7 +41,7 @@ export default function HomePage(props) {
             <p>Click the plus icon to add your first sighting</p>
           </div>
         )}
-        {sightingsList}
+        <div className="homepage-sightings" >{sightingsList}</div>
         {props.error &&
           (props.error.status ? (
             <div className="error">

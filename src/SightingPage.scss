@@ -1,6 +1,12 @@
 @import "./Variables";
 
 .sighting-container {
-    background-color: $secondary-color;
-    color: $primary-color;
+  background-color: $secondary-color;
+  color: $primary-color;
+}
+
+@media (min-width: 900px) {
+  .sighting-page {
+      margin: 0 50px 20px;
+  }
 }
