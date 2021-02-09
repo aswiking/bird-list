@@ -28,6 +28,7 @@ export default function Sighting(props) {
     setIsEditing,
     sightingID,
     setError,
+    setSelectedImages
   } = props;
 
   useEffect(() => {
@@ -70,7 +71,10 @@ export default function Sighting(props) {
 
       console.log('data is', sightingData)
 
+   
+
       setSightingDetails(sightingData);
+      setSelectedImages(sightingData.photos)
     }
 
     fetchSighting();
@@ -80,7 +84,6 @@ export default function Sighting(props) {
     const todaysDate = new Date();
 
     const millisecDiff = todaysDate - new Date(sightingDetails.datetime);
-    // TODO: Display hours/days/weeks/months/years ago
     const daysAgo = Math.ceil(millisecDiff / (1000 * 60 * 60 * 24));
     return daysAgo;
   }

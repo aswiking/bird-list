@@ -32,12 +32,14 @@ export default function SightingForm(props) {
     placeMarker,
     mapPin,
     requiredMessage,
+    selectedImages
   } = props;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 52.610044,
     lng: -1.156774,
   });
+
   const [instagramImages, setInstagramImages] = useState([]);
 
   const dateOptions = {
@@ -51,7 +53,6 @@ export default function SightingForm(props) {
   const today = dateTimeFormat.format(
     new Date()
   );
-
 
   useEffect(() => {
     if (props.formType === "new") {
@@ -89,23 +90,24 @@ export default function SightingForm(props) {
     }
   }, [instagramToken, sightingDetails]);
 
-  function selectImage(instagramImageID) {
-    console.log("imageID", instagramImageID);
-    if (
+  function selectImage(imageId) {
+    console.log("imageID", typeof imageId, typeof props.selectedImages[0]); 
+
+    if (//if there is an item in the selectedImages array that matches the ID
       props.selectedImages.filter(
-        (selectedImage) => selectedImage.instagram_media_id === instagramImageID
+        (selectedImage) => selectedImage === imageId
       ).length > 0
     ) {
-      props.setSelectedImages(
+      props.setSelectedImages( //then remove that item from the array
         props.selectedImages.filter(
           (selectedImage) =>
-            selectedImage.instagram_media_id !== instagramImageID
+            selectedImage !== imageId
         )
       );
-    } else {
+    } else { //otherwise add the item to the array
       props.setSelectedImages([
         ...props.selectedImages,
-        { instagram_media_id: instagramImageID },
+        imageId,
       ]);
     }
   }
@@ -120,7 +122,7 @@ export default function SightingForm(props) {
           onChange={() => selectImage(image.id)}
           checked={
             props.selectedImages.findIndex(
-              (selectedImage) => selectedImage.instagram_media_id === image.id
+              (selectedImage) => selectedImage === image.id
             ) !== -1
           }
         ></input>
@@ -138,11 +140,12 @@ export default function SightingForm(props) {
     console.log("Move");
   }
 
+
   return (
     <div>
       <div className="sightingForm">
         {props.formType === "new" && <h1>New sighting</h1>}
-        <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
+        <form onSubmit={(event) => submitSighting(event)}>
         {props.formType === "edit" && <h2>Editing sighting</h2>}
           <ul>
             {props.formType === "new" && (

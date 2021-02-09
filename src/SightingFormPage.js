@@ -5,7 +5,7 @@ import './SightingFormPage.scss';
 
 export default function SightingFormPage(props) {
   const {
-    addSighting,
+    submitSighting,
     placeMarker,
     mapPin,
     selectSpecies,
@@ -20,7 +20,7 @@ export default function SightingFormPage(props) {
       <div className="sightingform-container">
       <SightingForm
         currentUser={props.currentUser}
-        submitSighting={addSighting}
+        submitSighting={submitSighting}
         placeMarker={placeMarker}
         mapPin={mapPin}
         selectSpecies={selectSpecies}

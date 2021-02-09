@@ -93,7 +93,7 @@ export default function LoggedInPages(props) {
     };
     event.target.reset();
 
-    console.log(newSighting);
+    console.log("newSighting:", newSighting);
 
     const url = "/api/sightings";
 
@@ -145,7 +145,7 @@ export default function LoggedInPages(props) {
     const trimmedArray = newSightingsArray.slice(0, 6);
 
     setSightings(trimmedArray);
-    setSelectedImages([]);
+    setSelectedImages([]); //not working
     setMapPin({});
 
     history.push("/");
@@ -156,8 +156,10 @@ export default function LoggedInPages(props) {
     setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
 
-  async function updateSighting(event, originalSighting) {
+  async function updateSighting(event, originalSighting, selectedImages) {
     event.preventDefault();
+
+    console.log('selected images', selectedImages)
 
     const updatedSighting = {
       id: originalSighting.id,
@@ -264,6 +266,7 @@ export default function LoggedInPages(props) {
           currentUser={props.currentUser}
           setError={setError}
           mapPin={mapPin}
+          placeMarker={placeMarker}
           instagramToken={props.instagramToken}
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}

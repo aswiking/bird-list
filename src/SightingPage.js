@@ -9,6 +9,7 @@ import "./SightingPage.scss";
 export default function SightingPage(props) {
   const {
     instagramToken,
+    selectedImages,
     setSelectedImages,
     currentUser,
     setError,
@@ -51,11 +52,12 @@ export default function SightingPage(props) {
             birdDetails={sightingDetails.bird}
           />
           <div className="sighting-container">
-            {!isEditing ? (
+            {!isEditing ? ( //re-setting to not editing when leaving page
               <Sighting
                 isEditing={props.isEditing}
                 currentUser={currentUser}
                 setError={setError}
+                selectedImages={selectedImages}
                 setSelectedImages={setSelectedImages}
                 sightingID={sightingID}
                 sightingDetails={sightingDetails}
