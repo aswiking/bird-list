@@ -71,10 +71,13 @@ export default function Sighting(props) {
 
       console.log('data is', sightingData)
 
-   
-
       setSightingDetails(sightingData);
-      setSelectedImages(sightingData.photos)
+
+      const photoIds = sightingData.photos.map((photo) => {
+        return photo.instagram_media_id
+      })
+
+      setSelectedImages(photoIds)
     }
 
     fetchSighting();

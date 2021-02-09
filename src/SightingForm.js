@@ -145,7 +145,7 @@ export default function SightingForm(props) {
     <div>
       <div className="sightingForm">
         {props.formType === "new" && <h1>New sighting</h1>}
-        <form onSubmit={(event) => submitSighting(event)}>
+        <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
         {props.formType === "edit" && <h2>Editing sighting</h2>}
           <ul>
             {props.formType === "new" && (

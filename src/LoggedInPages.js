@@ -156,7 +156,7 @@ export default function LoggedInPages(props) {
     setMapPin({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }
 
-  async function updateSighting(event, originalSighting, selectedImages) {
+  async function updateSighting(event, originalSighting) {
     event.preventDefault();
 
     console.log('selected images', selectedImages)
@@ -171,6 +171,8 @@ export default function LoggedInPages(props) {
       photos: selectedImages,
       notes: event.target.notes.value,
     };
+
+    console.log("updatedSighting", updatedSighting)
 
     const url = `/api/sightings/${originalSighting.id}`;
 
