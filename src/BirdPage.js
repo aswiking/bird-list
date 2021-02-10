@@ -56,7 +56,7 @@ export default function BirdPage(props) {
           setBirdDetails={setBirdDetails}
         />
         <div className="sightings-list">
-          <h2>Your sightings</h2>
+          <h1>Your sightings</h1>
           {sightingsList.length > 0 ? (
             <div className="list-with-photos">{sightingsList}</div>
           ) : (

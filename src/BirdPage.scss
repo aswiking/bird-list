@@ -2,7 +2,7 @@
 
 .bird-details {
   background-color: $secondary-color;
-  padding: 25px 50px 0px;
+  padding: 25px 30px 0px;
   color: $primary-color;
 }
 
@@ -29,22 +29,11 @@ h4 {
   height: auto;
 }
 
-// .sightings-list {
-//   margin-top: 20px;
-//   color: $primary-color;
-//   background-color: $secondary-color;
-
-//   h2 {
-//     background-color: $secondary-color;
-//     padding: 20px 30px;
-//   }
-
-//   .cards {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr;
-//   }
-// }
-
+.sightings-list h1 {
+  color: $primary-color;
+  background-color: $secondary-color;
+  padding: 10px 30px;
+}
 
 
 .no-sightings-message {
@@ -59,4 +48,22 @@ h4 {
 .new-sighting-link p {
   font-weight: 800;
   margin-top: 10px;
+}
+
+
+// landscape tablet up
+@media (min-width: 900px) {
+
+  .full-bird-listing {
+    margin: 0 50px;
+  }
+
+.sightings-list h1 {
+  margin-bottom: 20px;
+  padding: 10px 50px;
+}
+
+.bird-details {
+  padding: 25px 50px 0px;
+}
 }

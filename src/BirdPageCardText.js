@@ -59,13 +59,7 @@ export default function BirdPageCardText(props) {
 
   return (
     <div className="entrydetails">
-    <Link
-      to={`/sightings/${sighting.id}`}
-      key={index}
-      className="sighting-link"
-    >
-      <h3>{ordinal} sighting</h3> <h4>{sightingDate}</h4>
-    </Link>
+      <h2>{ordinal} sighting</h2> <h4>{sightingDate}</h4>
   </div>
   )
 }

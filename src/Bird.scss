@@ -17,7 +17,7 @@
 }
 
 .full-details.inactive {
-    margin-top: -113px;
+    margin-top: -175px;
     transition: margin-top 1s ease-in-out;
 
 }
@@ -26,3 +26,10 @@
     transition: margin-top 1s ease-in-out;
 
 }
+
+
+// landscape tablet up
+@media (min-width: 900px) {
+.full-details-container {
+    margin-bottom: 30px;
+}}

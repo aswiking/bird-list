@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HomePage.scss";
 import Header from "./Header.js";
-import SightingEntry from "./SightingEntry";
 import Card from "./Card.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";

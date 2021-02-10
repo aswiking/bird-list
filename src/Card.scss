@@ -13,4 +13,80 @@
   .sighting-link {
     cursor: pointer;
   }
+
+  .entrydetails {
+    padding: 10px 30px;
+    position: relative;
+    min-height: 50px;
+  }
+  .recentSightingsLog {
+    margin-bottom: 20px;
+  }
+
+  .recentSightingsLog a {
+    text-decoration: none;
+  }
+
+  .sighting-entry {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .entryDetails {
+    min-height: 103px;
+    position: relative;
+    padding: 10px 10px 10px 30px;
+  }
+
+  .sighting-entry h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    padding-right: 10px;
+    font-weight: 300;
+  }
+
+  .sighting-entry h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .sighting-entry h4 {
+    margin: 4px 0 0 0;
+    font-weight: 600;
+    position: absolute;
+    bottom: 3px;
+    width: max-content;
+    z-index: 10;
+  }
+
+  .colorblock {
+    position: absolute;
+    width: 123px;
+    height: 123px;
+    margin-bottom: -3px;
+    background-image: linear-gradient(
+      to right,
+      $secondary-color,
+      rgba(100, 100, 100, 0)
+    );
+  }
+
+  .entryPhoto {
+    width: 123px;
+    margin-bottom: -3px;
+  }
+}
+
+// landscape tablet up
+@media (min-width: 900px) {
+  .card {
+    .entrydetails {
+      min-height: 93px;
+      padding: 15px 50px;
+    }
+
+    .sighting-entry h4 {
+      bottom: 10px;
+    }
+  }
 }
