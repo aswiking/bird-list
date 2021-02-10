@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import "./HomePage.scss";
 import Header from "./Header.js";
 import SightingEntry from "./SightingEntry";
+import Card from "./Card.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage(props) {
   const sightingsList = props.sightingsData.map((sighting, index) => {
     return (
-      <div key={index}>
-         <div className="color-block"></div>
-        <SightingEntry
-          sighting={sighting}
-          key={index}
+      <div>
+        <div className="color-block"></div>
+        <Card
           instagramToken={props.instagramToken}
-          setDisplayingSighting={props.setDisplayingSighting}
+          sighting={sighting}
+          birdDetails={sighting.bird}
+          page="homepage"
         />
-       
       </div>
     );
   });
@@ -41,7 +41,7 @@ export default function HomePage(props) {
             <p>Click the plus icon to add your first sighting</p>
           </div>
         )}
-        <div className="homepage-sightings" >{sightingsList}</div>
+        <div className="list-with-photos">{sightingsList}</div>
         {props.error &&
           (props.error.status ? (
             <div className="error">

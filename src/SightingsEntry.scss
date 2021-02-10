@@ -8,9 +8,7 @@
   text-decoration: none;
 }
 
-.sightingEntry {
-  background-color: $secondary-color;
-  color: $primary-color;
+.sighting-entry {
   display: flex;
   justify-content: space-between;
 }
@@ -21,19 +19,19 @@
   padding: 10px 10px 10px 30px;
 }
 
-.sightingEntry h2 {
+.sighting-entry h2 {
   margin: 0;
   font-size: 1.4rem;
   padding-right: 10px;
   font-weight: 300;
 }
 
-.sightingEntry h3 {
+.sighting-entry h3 {
   margin: 0;
   font-size: 1rem;
 }
 
-.sightingEntry h4 {
+.sighting-entry h4 {
   margin: 4px 0 0 0;
   font-weight: 600;
   position: absolute;

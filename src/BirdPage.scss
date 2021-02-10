@@ -29,31 +29,23 @@ h4 {
   height: auto;
 }
 
-.sightings-list {
-  margin-top: 20px;
-  color: $primary-color;
-  background-color: $secondary-color;
+// .sightings-list {
+//   margin-top: 20px;
+//   color: $primary-color;
+//   background-color: $secondary-color;
 
-  h2 {
-    background-color: $secondary-color;
-    padding: 20px 30px;
-  }
+//   h2 {
+//     background-color: $secondary-color;
+//     padding: 20px 30px;
+//   }
 
-  .list-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-}
+//   .cards {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//   }
+// }
 
-.list-item {
-  .link-container {
-    padding: 20px 30px;
-  }
 
-  .sighting-link {
-    cursor: pointer;
-  }
-}
 
 .no-sightings-message {
   background-color: $contrast-color;
