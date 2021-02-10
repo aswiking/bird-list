@@ -28,7 +28,8 @@ export default function Sighting(props) {
     setIsEditing,
     sightingID,
     setError,
-    setSelectedImages
+    setSelectedImages,
+    setMapPin
   } = props;
 
   useEffect(() => {
@@ -78,6 +79,7 @@ export default function Sighting(props) {
       })
 
       setSelectedImages(photoIds)
+      setMapPin({lat: sightingDetails.lat, lng: sightingDetails.lng})
     }
 
     fetchSighting();

@@ -269,6 +269,7 @@ export default function LoggedInPages(props) {
           setError={setError}
           mapPin={mapPin}
           placeMarker={placeMarker}
+          setMapPin={setMapPin}
           instagramToken={props.instagramToken}
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}

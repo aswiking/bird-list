@@ -18,6 +18,7 @@ export default function SightingPage(props) {
     updateSighting,
     setIsEditing,
     requiredMessage,
+    setMapPin
   } = props;
 
   const [sightingDetails, setSightingDetails] = useState({
@@ -62,6 +63,7 @@ export default function SightingPage(props) {
                 sightingID={sightingID}
                 sightingDetails={sightingDetails}
                 setSightingDetails={setSightingDetails}
+                setMapPin={setMapPin}
                 instagramToken={instagramToken}
                 setIsEditing={setIsEditing}
                 location="sightingPage"
