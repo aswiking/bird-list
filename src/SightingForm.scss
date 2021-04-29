@@ -122,14 +122,20 @@
     margin-bottom: 20px;
     position: relative;
     z-index: 10;
+    overflow: hidden;
+    display: block;
   }
 
   .color-outline {
     z-index: 0;
     position: absolute;
-    border: solid 6px $contrast-color;
+    border: solid 6px rgba(0, 0, 0, 0);
     width: calc(((100vw - 40px - 30px) / 3) - 12px);
     height: calc(((100vw - 40px - 30px) / 3) - 12px);
+  }
+
+  input:checked ~ .color-outline {
+    border: solid 6px $contrast-color;
   }
 
   input:checked ~ label img {
