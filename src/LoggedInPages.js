@@ -14,7 +14,7 @@ import "./LoggedInPages.scss";
 
 export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userName, setUserName] = useState("");
   const [error, setError] = useState(null);
   const [mapPin, setMapPin] = useState({});
   const [selectedBird, setSelectedBird] = useState();
@@ -66,17 +66,19 @@ export default function LoggedInPages(props) {
     async function getUserDetails() {
       let res;
 
-      const url = `https://graph.instagram.com/me?fields=id,username&access_token=${props.instagramToken}`;
+      const url = `https://graph.instagram.com/me?fields=username&access_token=${props.instagramToken}`;
 
       res = await apiFetch(url, {}, "Could not fetch username");
 
       const userDetails = await res.json();
-      setUserData(userDetails)
+      setUserName(userDetails.username)
       
     }
 
     if (props.instagramToken) {
       getUserDetails();
+    } else {
+      setUserName(currentUser.displayName)
     }
   }, [props.instagramToken]);
 
@@ -246,7 +248,7 @@ export default function LoggedInPages(props) {
   if (error) {
     return (
       <div>
-        <Header loggedin="true" currentUser={props.currentUser} userName={userData.username} />
+        <Header loggedin="true" currentUser={props.currentUser} userName={userName} setInstagramToken={props.setInstagramToken}/>
         <div className="error-message">
         <FontAwesomeIcon icon={faExclamationTriangle} className="exclamation-icon" size="2x" />
           <p>{error.message}</p>
@@ -266,7 +268,8 @@ export default function LoggedInPages(props) {
           sightingsData={sightingsData}
           error={error}
           instagramToken={props.instagramToken}
-          userName={userData.username}
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
         />
       </Route>
       <Route path="/new-sighting" exact>
@@ -282,7 +285,8 @@ export default function LoggedInPages(props) {
           setSelectedImages={setSelectedImages}
           formType="new"
           requiredMessage = {requiredMessage}
-          userName={userData.username}
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
         />
       </Route>
       <Route path="/sightings/:sightingID">
@@ -300,11 +304,12 @@ export default function LoggedInPages(props) {
           isEditing={isEditing}
           deleteSighting={deleteSighting}
           requiredMessage = {requiredMessage}
-          userName={userData.username}
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
         />
       </Route>
       <Route path="/all-birds">
-        <AllBirds setError={setError} currentUser={props.currentUser} userName={userData.username} />
+        <AllBirds setError={setError} currentUser={props.currentUser} userName={userName} setInstagramToken={props.setInstagramToken}/>
       </Route>
       <Route path="/birds/:birdID">
         <BirdPage
@@ -320,7 +325,8 @@ export default function LoggedInPages(props) {
           isEditing={isEditing}
           deleteSighting={deleteSighting}
           selectSpecies={selectSpecies}
-          userName={userData.username}
+          // userName={userName}
+          setInstagramToken={props.setInstagramToken}
         />
       </Route>
       <Route path="/*">

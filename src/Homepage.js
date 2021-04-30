@@ -23,7 +23,7 @@ export default function HomePage(props) {
 
   return (
     <div className="homepage">
-      <Header loggedin="true" currentUser={props.currentUser} userName={props.userName} />
+      <Header loggedin="true" currentUser={props.currentUser} userName={props.userName} setInstagramToken={props.setInstagramToken}/>
       <div className="recentSightingsLog">
         <div className="recentSightingsHeader">
           <Link to="/new-sighting" className="plus-icon">

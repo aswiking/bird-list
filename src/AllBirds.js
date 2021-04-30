@@ -125,7 +125,7 @@ export default function AllBirds(props) {
 
   return (
     <div className="all-birds">
-      <Header loggedin="true" userName={props.userName}/>
+      <Header loggedin="true" userName={props.userName} setInstagramToken={props.setInstagramToken}/>
       <div className="category-menu">
         <div className="scroller">
           <h3

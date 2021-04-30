@@ -45,7 +45,7 @@ export default function SightingPage(props) {
   } else {
     return (
       <div>
-        <Header loggedin="true" userName={props.userName} />
+        <Header loggedin="true" userName={props.userName} setInstagramToken={props.setInstagramToken}/>
         <div className="sighting-page">
           <Bird
             setError={setError}

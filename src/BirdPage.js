@@ -46,7 +46,7 @@ export default function BirdPage(props) {
 
   return (
     <div>
-      <Header loggedin="true" userName={props.userName}/>
+      <Header loggedin="true" userName={props.userName} setInstagramToken={props.setInstagramToken}/>
       <div className="full-bird-listing">
         <Bird
           setError={setError}

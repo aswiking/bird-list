@@ -27,7 +27,7 @@ export default function App() {
 
   if (loggedIn) {
     return (
-      <LoggedInPages currentUser={currentUser} instagramUid={instagramUid} instagramToken={instagramToken} />
+      <LoggedInPages currentUser={currentUser} instagramUid={instagramUid} instagramToken={instagramToken} setInstagramToken={setInstagramToken} />
     );
   } else {
     return (

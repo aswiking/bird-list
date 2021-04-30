@@ -43,7 +43,7 @@ export default function Header(props) {
       )}
       {listDisplay === true && <ListMenu currentUser={props.currentUser} />}
       <div className={`menu ${userDisplay === true ? "active" : "inactive"}`}>
-        <UserMenu currentUser={props.currentUser} userName={props.userName} />
+        <UserMenu currentUser={props.currentUser} userName={props.userName} setInstagramToken={props.setInstagramToken}/>
       </div>
     </div>
   );

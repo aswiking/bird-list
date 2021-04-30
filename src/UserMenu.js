@@ -6,6 +6,7 @@ import './UserMenu.scss';
 export default function UserMenu(props) {
   function logOut() {
     firebase.auth().signOut();
+    props.setInstagramToken(null);
     localStorage.removeItem('instagramToken');
   }
 

@@ -16,7 +16,7 @@ export default function SightingFormPage(props) {
 
   return (
     <div className="sighting-form-page">
-      <Header loggedin="true" userName={props.userName}/>
+      <Header loggedin="true" userName={props.userName} setInstagramToken={props.setInstagramToken}/>
       <div className="sightingform-container">
       <SightingForm
         currentUser={props.currentUser}
