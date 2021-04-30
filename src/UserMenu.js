@@ -13,7 +13,7 @@ export default function UserMenu(props) {
   
   return <div className='userMenu'>
     <ul>
-      <li>You are logged in as <br></br>Sofia Wiking</li>
+      <li>You are logged in as <br></br>{props.userName}</li>
       <li onClick={logOut}><Link to="/">Log out</Link></li>
     </ul>
 

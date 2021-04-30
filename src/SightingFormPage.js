@@ -16,7 +16,7 @@ export default function SightingFormPage(props) {
 
   return (
     <div className="sighting-form-page">
-      <Header loggedin="true" />
+      <Header loggedin="true" userName={props.userName}/>
       <div className="sightingform-container">
       <SightingForm
         currentUser={props.currentUser}

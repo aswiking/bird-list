@@ -125,7 +125,7 @@ export default function AllBirds(props) {
 
   return (
     <div className="all-birds">
-      <Header loggedin="true" />
+      <Header loggedin="true" userName={props.userName}/>
       <div className="category-menu">
         <div className="scroller">
           <h3

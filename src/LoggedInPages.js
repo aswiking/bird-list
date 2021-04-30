@@ -14,6 +14,7 @@ import "./LoggedInPages.scss";
 
 export default function LoggedInPages(props) {
   const [sightingsData, setSightings] = useState([]);
+  const [userData, setUserData] = useState({});
   const [error, setError] = useState(null);
   const [mapPin, setMapPin] = useState({});
   const [selectedBird, setSelectedBird] = useState();
@@ -60,6 +61,25 @@ export default function LoggedInPages(props) {
     }
     fetchSightings();
   }, [currentUser]);
+
+  useEffect(() => {
+    async function getUserDetails() {
+      let res;
+
+      const url = `https://graph.instagram.com/me?fields=id,username&access_token=${props.instagramToken}`;
+
+      res = await apiFetch(url, {}, "Could not fetch username");
+
+      const userDetails = await res.json();
+      setUserData(userDetails)
+      
+    }
+
+    if (props.instagramToken) {
+      getUserDetails();
+    }
+  }, [props.instagramToken]);
+
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -226,7 +246,7 @@ export default function LoggedInPages(props) {
   if (error) {
     return (
       <div>
-        <Header loggedin="true" currentUser={props.currentUser} />
+        <Header loggedin="true" currentUser={props.currentUser} userName={userData.username} />
         <div className="error-message">
         <FontAwesomeIcon icon={faExclamationTriangle} className="exclamation-icon" size="2x" />
           <p>{error.message}</p>
@@ -246,6 +266,7 @@ export default function LoggedInPages(props) {
           sightingsData={sightingsData}
           error={error}
           instagramToken={props.instagramToken}
+          userName={userData.username}
         />
       </Route>
       <Route path="/new-sighting" exact>
@@ -261,6 +282,7 @@ export default function LoggedInPages(props) {
           setSelectedImages={setSelectedImages}
           formType="new"
           requiredMessage = {requiredMessage}
+          userName={userData.username}
         />
       </Route>
       <Route path="/sightings/:sightingID">
@@ -278,10 +300,11 @@ export default function LoggedInPages(props) {
           isEditing={isEditing}
           deleteSighting={deleteSighting}
           requiredMessage = {requiredMessage}
+          userName={userData.username}
         />
       </Route>
       <Route path="/all-birds">
-        <AllBirds setError={setError} currentUser={props.currentUser} />
+        <AllBirds setError={setError} currentUser={props.currentUser} userName={userData.username} />
       </Route>
       <Route path="/birds/:birdID">
         <BirdPage
@@ -297,6 +320,7 @@ export default function LoggedInPages(props) {
           isEditing={isEditing}
           deleteSighting={deleteSighting}
           selectSpecies={selectSpecies}
+          userName={userData.username}
         />
       </Route>
       <Route path="/*">

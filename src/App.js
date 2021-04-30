@@ -8,7 +8,7 @@ import "./App.scss";
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [instagramUid, setInstragramUid] = useState(null);
+  const [instagramUid, setInstagramUid] = useState(null);
   const [instagramToken, setInstagramToken] = useState(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function App() {
     return (
       <Switch>
         <Route path="/*" >
-          <LoginPage setInstragramUid={setInstragramUid} setInstagramToken={setInstagramToken}/>
+          <LoginPage setInstagramUid={setInstagramUid} setInstagramToken={setInstagramToken}/>
         </Route>
       </Switch>
     );

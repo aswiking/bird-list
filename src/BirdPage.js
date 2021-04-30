@@ -46,7 +46,7 @@ export default function BirdPage(props) {
 
   return (
     <div>
-      <Header loggedin="true" />
+      <Header loggedin="true" userName={props.userName}/>
       <div className="full-bird-listing">
         <Bird
           setError={setError}

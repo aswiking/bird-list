@@ -45,7 +45,7 @@ export default function SightingPage(props) {
   } else {
     return (
       <div>
-        <Header loggedin="true" />
+        <Header loggedin="true" userName={props.userName} />
         <div className="sighting-page">
           <Bird
             setError={setError}

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function LoginPage(props) {
-  const { setInstagramToken, setInstragramUid } = props;
+  const { setInstagramToken, setInstagramUid } = props;
   const history = useHistory();
 
   const location = useLocation();
@@ -35,12 +35,10 @@ export default function LoginPage(props) {
         );
         const response = await res.json();
 
-        console.log(response.firebaseToken);
-
         setInstagramToken(response.instagramToken);
         localStorage.setItem("instagramToken", response.instagramToken);
 
-        setInstragramUid(response.instagramUserID);
+        setInstagramUid(response.instagramUserID);
 
         firebase.auth().signInWithCustomToken(response.firebaseToken);
       }
@@ -48,7 +46,7 @@ export default function LoginPage(props) {
 
       //log in to firebase
     }
-  }, [location.search, setInstagramToken, setInstragramUid, history]);
+  }, [location.search, setInstagramToken, setInstagramUid, history]);
 
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
