@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import Header from "./Header.js";
 import SightingForm from "./SightingForm.js";
 import './SightingFormPage.scss';
@@ -13,6 +14,8 @@ export default function SightingFormPage(props) {
     setSelectedImages,
     requiredMessage,
   } = props;
+
+  const { birdID, commonName } = useParams();
 
   return (
     <div className="sighting-form-page">
@@ -30,6 +33,8 @@ export default function SightingFormPage(props) {
         setSelectedImages={setSelectedImages}
         formType="new"
         requiredMessage={requiredMessage}
+        providedSpecies={birdID}
+        commonName={commonName}
       />
     </div></div>
   );

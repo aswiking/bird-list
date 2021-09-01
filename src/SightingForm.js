@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
 import LocationDropDown from "./LocationDropDown";
-import Header from "./Header.js";
 import apiFetch from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -31,8 +29,7 @@ export default function SightingForm(props) {
     setIsEditing,
     placeMarker,
     mapPin,
-    requiredMessage,
-    selectedImages
+    requiredMessage
   } = props;
 
   const [mapCenter, setMapCenter] = useState({
@@ -69,7 +66,7 @@ export default function SightingForm(props) {
         lng: sightingDetails.lng,
       });
     }
-  }, []);
+  }, [props.formType, sightingDetails.lat, sightingDetails.lng]);
 
   useEffect(() => {
     async function getImages() {
@@ -88,7 +85,8 @@ export default function SightingForm(props) {
       console.log("images", instagramImages);
       getImages();
     }
-  }, [instagramToken, sightingDetails]);
+  }, [instagramToken, sightingDetails, instagramImages]);
+  
 
   function selectImage(imageId) {
     console.log("imageID", typeof imageId, typeof props.selectedImages[0]); 
@@ -159,6 +157,8 @@ export default function SightingForm(props) {
                 <BirdDropDown
                   currentUser={props.currentUser}
                   selectSpecies={props.selectSpecies}
+                  defaultValue={props.providedSpecies}
+                  defaultLabel={props.commonName}
                 />
               </li>
             )}
@@ -199,7 +199,7 @@ export default function SightingForm(props) {
                   onDblClick={(map, event) => placeMarker(map, event)}
                   // ^ working - just not in devtools with toggle device bar
                 >
-                  {mapPin.lng && (
+                  {(mapPin.lng) && (
                     <Marker coordinates={[mapPin.lng, mapPin.lat]}>
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}

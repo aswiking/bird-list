@@ -80,7 +80,7 @@ export default function LoggedInPages(props) {
     } else {
       setUserName(currentUser.displayName)
     }
-  }, [props.instagramToken]);
+  }, [props.instagramToken, currentUser.displayName]);
 
 
   function selectSpecies(option, action) {
@@ -287,6 +287,7 @@ export default function LoggedInPages(props) {
           requiredMessage = {requiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
+          providedSpecies={props.providedSpecies}
         />
       </Route>
       <Route path="/sightings/:sightingID">
@@ -326,6 +327,23 @@ export default function LoggedInPages(props) {
           deleteSighting={deleteSighting}
           selectSpecies={selectSpecies}
           // userName={userName}
+          setInstagramToken={props.setInstagramToken}
+        />
+      </Route>
+      <Route path="/new-sighting/:birdID/:commonName">
+      <SightingFormPage
+          currentUser={props.currentUser}
+          submitSighting={addSighting}
+          placeMarker={placeMarker}
+          mapPin={mapPin}
+          selectSpecies={selectSpecies}
+          instagramUid={props.instagramUid}
+          instagramToken={props.instagramToken}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+          formType="new"
+          requiredMessage = {requiredMessage}
+          userName={userName}
           setInstagramToken={props.setInstagramToken}
         />
       </Route>

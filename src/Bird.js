@@ -50,7 +50,7 @@ export default function Bird(props) {
       setBirdDetails(birdData);
     }
     fetchBird();
-  }, [currentUser, setError]);
+  }, [currentUser, setError, birdID, props.birdID, setBirdDetails]);
 
 
   function toggleDisplayBirdDetails() {

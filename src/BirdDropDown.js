@@ -75,6 +75,8 @@ export default function BirdDropDown(props) {
       placeholder="Start typing to see options"
       onChange={props.selectSpecies}
       styles={customStyles}
+      defaultValue={props.defaultValue}
+      defaultInputValue={props.defaultLabel}
     />
   );
 }

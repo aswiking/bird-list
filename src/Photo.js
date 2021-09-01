@@ -22,6 +22,6 @@ export default function Photo(props) {
     }
     console.log("sighting details",sightingDetails)
     getImageUrl();
-  }, [sightingDetails]);
+  }, [sightingDetails, props]);
   return <img src={photoDetails.media_url} alt={photoDetails.caption}></img>;
 }

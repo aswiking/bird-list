@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
   faAngleUp,
-  faTimes,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import "./AllBirds.scss";
@@ -60,7 +59,7 @@ export default function AllBirds(props) {
       console.log(birds);
     }
     fetchBirds();
-  }, []);
+  }, [currentUser, setError]);
 
   function toggleDisplayMenu() {
     setDisplayMenu(!displayMenu);

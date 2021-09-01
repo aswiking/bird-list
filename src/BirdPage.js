@@ -62,7 +62,7 @@ export default function BirdPage(props) {
           ) : (
             <div className="no-sightings-message">
               <p>You have no sightings of {birdDetails.common}s</p>
-              <Link to="/new-sighting" className="new-sighting-link">
+              <Link to={`/new-sighting/${birdDetails.id}/${birdDetails.common}/`} className="new-sighting-link">
                 <p>Add sighting</p>
               </Link>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import apiFetch from "./api.js";
 import Photo from "./Photo.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -83,16 +83,16 @@ export default function Sighting(props) {
     }
 
     fetchSighting();
-  }, [sightingID, currentUser, setError]);
+  }, [sightingID, currentUser, setError, setMapPin, setSelectedImages, setSightingDetails, sightingDetails.lat, sightingDetails.lng]);
 
-  function dateDifference() {
+  /* function dateDifference() {
     const todaysDate = new Date();
 
     const millisecDiff = todaysDate - new Date(sightingDetails.datetime);
     const daysAgo = Math.ceil(millisecDiff / (1000 * 60 * 60 * 24));
     return daysAgo;
   }
-  const daysAgo = dateDifference();
+  const daysAgo = dateDifference(); */
 
   const dateOptions = {
     weekday: "long",

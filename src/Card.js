@@ -23,7 +23,7 @@ export default function Card(props) {
       }
       getImageUrl();
     }
-  }, []);
+  }, [instagramToken, props.sighting.photos.length, sighting.photos]);
 
   return (
     <div className="card">
