@@ -60,7 +60,7 @@ export default function LoggedInPages(props) {
       setSightings(sightings);
     }
     fetchSightings();
-  }, [currentUser]);
+  }, [currentUser, sightingsData]); //added sightingsData as dependency so it'll update when you update a sighting. Is okay?
 
   useEffect(() => {
     async function getUserDetails() {
