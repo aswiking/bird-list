@@ -28,37 +28,38 @@ export default function LoggedInPages(props) {
   const history = useHistory();
   const { currentUser } = props;
 
-  useEffect(() => {
-    async function fetchSightings() {
-      let token;
-      try {
-        token = await currentUser.getIdToken();
-      } catch (error) {
-        console.error(error);
-        setError({
-          message: "Could not authorise",
-        });
-        return;
-      }
-
-      let res;
-      try {
-        res = await apiFetch(
-          "/api/sightings",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-          "Could not fetch sightings"
-        );
-      } catch (error) {
-        setError(error);
-        return;
-      }
-      const sightings = await res.json();
-      setSightings(sightings);
+  async function fetchSightings() { //moved this to outside the useEffect so I can call it from elsewhere. is allowed?
+    let token;
+    try {
+      token = await currentUser.getIdToken();
+    } catch (error) {
+      console.error(error);
+      setError({
+        message: "Could not authorise",
+      });
+      return;
     }
+
+    let res;
+    try {
+      res = await apiFetch(
+        "/api/sightings",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        "Could not fetch sightings"
+      );
+    } catch (error) {
+      setError(error);
+      return;
+    }
+    const sightings = await res.json();
+    setSightings(sightings);
+  }
+
+  useEffect(() => {
     fetchSightings();
   }, [currentUser]);
 
@@ -217,6 +218,7 @@ export default function LoggedInPages(props) {
 
     setSelectedImages([]);
     setIsEditing(false);
+    fetchSightings();
     return updatedSighting;
   }
 
@@ -307,6 +309,7 @@ export default function LoggedInPages(props) {
           requiredMessage = {requiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
+          fetchSightings={fetchSightings}
         />
       </Route>
       <Route path="/all-birds">
