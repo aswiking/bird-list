@@ -36,6 +36,7 @@ export default function LoginPage(props) {
         const response = await res.json();
 
         setInstagramToken(response.instagramToken);
+
         localStorage.setItem("instagramToken", response.instagramToken);
 
         setInstagramUid(response.instagramUserID);

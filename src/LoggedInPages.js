@@ -218,7 +218,7 @@ export default function LoggedInPages(props) {
 
     setSelectedImages([]);
     setIsEditing(false);
-    fetchSightings();
+    fetchSightings(); //s this a sensible way to do it
     return updatedSighting;
   }
 

@@ -22,7 +22,7 @@ const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
   const {
-    instagramToken,
+    //instagramToken,
     deleteSighting,
     submitSighting,
     sightingDetails,
@@ -38,6 +38,9 @@ export default function SightingForm(props) {
   });
 
   const [instagramImages, setInstagramImages] = useState([]);
+  const [instagramError, setInstagramError] = useState(null);
+
+  const instagramToken = 'wrong-bad-token'; //to throw me an error
 
   const dateOptions = {
     year: "numeric",
@@ -72,20 +75,28 @@ export default function SightingForm(props) {
     async function getImages() {
       let res;
 
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${instagramToken}`;
+      try {
+        const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type&access_token=${instagramToken}`;
 
-      res = await apiFetch(url, {}, "Could not fetch images");
+        res = await apiFetch(
+          url,
+          { },
+          "Failed to load Instagram feed. Try logging out and in again."
+        );
+      } catch (instagramError) {
+        setInstagramError(instagramError);
+        return;
+      }
 
       const imageData = await res.json();
       setInstagramImages(imageData.data);
-      console.log(imageData.data);
     }
 
     if (instagramToken) {
       console.log("images", instagramImages);
       getImages();
     }
-  }, [instagramToken, sightingDetails, instagramImages]);
+  }, [instagramToken]);
   
 
   function selectImage(imageId) {
@@ -137,6 +148,24 @@ export default function SightingForm(props) {
     setMapCenter({ lat: newCenter.lat, lng: newCenter.lng });
     console.log("Move");
   }
+
+  let photosContent;
+
+  if (!instagramToken) { 
+    photosContent = (<div className="instagram-link">
+  <a
+    href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
+  >
+    Link your account to Instagram to select photos
+  </a>
+</div>)
+} else if (instagramToken && instagramError) {
+    photosContent = (<div className="error-message"><p>{instagramError.message}</p></div>)
+  } else {
+    photosContent = (<div className="images">{imageList}</div>)
+  } 
+
+
 
 
   return (
@@ -216,17 +245,7 @@ export default function SightingForm(props) {
             </div>
             <div className="images-container">
               <h3>Photos</h3>
-              {instagramToken ? (
-                <div className="images">{imageList}</div>
-              ) : (
-                <div className="instagram-link">
-                  <a
-                    href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
-                  >
-                    Link your account to Instagram to select photos
-                  </a>
-                </div>
-              )}
+              <div>{photosContent}</div>
             </div>
             <li className="notes">
               <h3>
