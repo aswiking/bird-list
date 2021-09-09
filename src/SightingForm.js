@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import BirdDropDown from "./BirdDropDown";
 import "./SightingForm.scss";
@@ -22,14 +23,15 @@ const INITIAL_ZOOM = [15];
 
 export default function SightingForm(props) {
   const {
-    //instagramToken,
+    instagramToken,
     deleteSighting,
     submitSighting,
     sightingDetails,
+    setSelectedBird,
     setIsEditing,
     placeMarker,
     mapPin,
-    requiredMessage
+    requiredMessage,
   } = props;
 
   const [mapCenter, setMapCenter] = useState({
@@ -40,8 +42,6 @@ export default function SightingForm(props) {
   const [instagramImages, setInstagramImages] = useState([]);
   const [instagramError, setInstagramError] = useState(null);
 
-  const instagramToken = 'wrong-bad-token'; //to throw me an error
-
   const dateOptions = {
     year: "numeric",
     month: "numeric",
@@ -50,9 +50,7 @@ export default function SightingForm(props) {
 
   const dateTimeFormat = new Intl.DateTimeFormat("en-CA", dateOptions);
 
-  const today = dateTimeFormat.format(
-    new Date()
-  );
+  const today = dateTimeFormat.format(new Date());
 
   useEffect(() => {
     if (props.formType === "new") {
@@ -80,7 +78,7 @@ export default function SightingForm(props) {
 
         res = await apiFetch(
           url,
-          { },
+          {},
           "Failed to load Instagram feed. Try logging out and in again."
         );
       } catch (instagramError) {
@@ -97,27 +95,30 @@ export default function SightingForm(props) {
       getImages();
     }
   }, [instagramToken]);
-  
+
+  const { id, common } = useParams();
+  console.log("id and common are", id, common);
+  if (id) {
+    setSelectedBird(id);
+  }
 
   function selectImage(imageId) {
-    console.log("imageID", typeof imageId, typeof props.selectedImages[0]); 
+    console.log("imageID", typeof imageId, typeof props.selectedImages[0]);
 
-    if (//if there is an item in the selectedImages array that matches the ID
-      props.selectedImages.filter(
-        (selectedImage) => selectedImage === imageId
-      ).length > 0
+    if (
+      //if there is an item in the selectedImages array that matches the ID
+      props.selectedImages.filter((selectedImage) => selectedImage === imageId)
+        .length > 0
     ) {
-      props.setSelectedImages( //then remove that item from the array
+      props.setSelectedImages(
+        //then remove that item from the array
         props.selectedImages.filter(
-          (selectedImage) =>
-            selectedImage !== imageId
+          (selectedImage) => selectedImage !== imageId
         )
       );
-    } else { //otherwise add the item to the array
-      props.setSelectedImages([
-        ...props.selectedImages,
-        imageId,
-      ]);
+    } else {
+      //otherwise add the item to the array
+      props.setSelectedImages([...props.selectedImages, imageId]);
     }
   }
 
@@ -151,34 +152,38 @@ export default function SightingForm(props) {
 
   let photosContent;
 
-  if (!instagramToken) { 
-    photosContent = (<div className="instagram-link">
-  <a
-    href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
-  >
-    Link your account to Instagram to select photos
-  </a>
-</div>)
-} else if (instagramToken && instagramError) {
-    photosContent = (<div className="error-message"><p>{instagramError.message}</p></div>)
+  if (!instagramToken) {
+    photosContent = (
+      <div className="instagram-link">
+        <a
+          href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
+        >
+          Link your account to Instagram to select photos
+        </a>
+      </div>
+    );
+  } else if (instagramToken && instagramError) {
+    photosContent = (
+      <div className="error-message">
+        <p>{instagramError.message}</p>
+      </div>
+    );
   } else {
-    photosContent = (<div className="images">{imageList}</div>)
-  } 
-
-
-
+    photosContent = <div className="images">{imageList}</div>;
+  }
 
   return (
     <div>
       <div className="sightingForm">
         {props.formType === "new" && <h1>New sighting</h1>}
         <form onSubmit={(event) => submitSighting(event, sightingDetails)}>
-        {props.formType === "edit" && <h2>Editing sighting</h2>}
+          {props.formType === "edit" && <h2>Editing sighting</h2>}
           <ul>
             {props.formType === "new" && (
               <li
-                className={`species ${requiredMessage.field === "species" ? "highlight" : ""}`
-                }
+                className={`species ${
+                  requiredMessage.field === "species" ? "highlight" : ""
+                }`}
               >
                 <h3>
                   <label htmlFor="species">Species *</label>
@@ -186,13 +191,15 @@ export default function SightingForm(props) {
                 <BirdDropDown
                   currentUser={props.currentUser}
                   selectSpecies={props.selectSpecies}
-                  defaultValue={props.providedSpecies}
-                  defaultLabel={props.commonName}
+                  defaultValue={id}
+                  defaultLabel={common}
                 />
               </li>
             )}
             <li
-              className={`date ${requiredMessage.field === "date" ? "highlight" : ""}`}
+              className={`date ${
+                requiredMessage.field === "date" ? "highlight" : ""
+              }`}
             >
               <h3>
                 <label htmlFor="date">Date seen *</label>
@@ -201,7 +208,7 @@ export default function SightingForm(props) {
                 id="date"
                 type="date"
                 max={today}
-                min='1899-01-01'
+                min="1899-01-01"
                 defaultValue={
                   sightingDetails.datetime &&
                   sightingDetails.datetime.substring(0, 10)
@@ -209,13 +216,12 @@ export default function SightingForm(props) {
               ></input>
             </li>
             <div className="location-select-section">
-            <h3>Location</h3>
+              <h3>Location</h3>
               <LocationDropDown
                 accessToken={accessToken}
                 setMapCenter={setMapCenter}
               />
               <div className="map-container">
-              
                 <Map
                   style="mapbox://styles/aswiking/ckeejcxsq0yr919ntrc8ll42l"
                   center={[mapCenter.lng, mapCenter.lat]}
@@ -228,7 +234,7 @@ export default function SightingForm(props) {
                   onDblClick={(map, event) => placeMarker(map, event)}
                   // ^ working - just not in devtools with toggle device bar
                 >
-                  {(mapPin.lng) && (
+                  {mapPin.lng && (
                     <Marker coordinates={[mapPin.lng, mapPin.lat]}>
                       <FontAwesomeIcon
                         icon={faMapMarkerAlt}

@@ -273,14 +273,16 @@ export default function LoggedInPages(props) {
           userName={userName}
           setInstagramToken={props.setInstagramToken}
         />
-      </Route>
-      <Route path="/new-sighting" exact>
+      </Route> 
+      <Route path="/new-sighting/:id?/:common?"> 
+      {/* removed 'exact' */}
         <SightingFormPage
           currentUser={props.currentUser}
           submitSighting={addSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
           selectSpecies={selectSpecies}
+          setSelectedBird={setSelectedBird}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}
           selectedImages={selectedImages}

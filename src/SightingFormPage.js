@@ -10,6 +10,7 @@ export default function SightingFormPage(props) {
     placeMarker,
     mapPin,
     selectSpecies,
+    setSelectedBird,
     selectedImages,
     setSelectedImages,
     requiredMessage,
@@ -27,6 +28,7 @@ export default function SightingFormPage(props) {
         placeMarker={placeMarker}
         mapPin={mapPin}
         selectSpecies={selectSpecies}
+        setSelectedBird={setSelectedBird}
         instagramUid={props.instagramUid}
         instagramToken={props.instagramToken}
         selectedImages={selectedImages}
