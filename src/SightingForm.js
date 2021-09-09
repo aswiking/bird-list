@@ -31,6 +31,7 @@ export default function SightingForm(props) {
     setIsEditing,
     placeMarker,
     mapPin,
+    setMapPin,
     requiredMessage,
   } = props;
 
@@ -42,6 +43,8 @@ export default function SightingForm(props) {
   const [instagramImages, setInstagramImages] = useState([]);
   const [instagramError, setInstagramError] = useState(null);
 
+  
+
   const dateOptions = {
     year: "numeric",
     month: "numeric",
@@ -52,8 +55,10 @@ export default function SightingForm(props) {
 
   const today = dateTimeFormat.format(new Date());
 
+
   useEffect(() => {
     if (props.formType === "new") {
+      setMapPin({});
       navigator.geolocation.getCurrentPosition(function (position) {
         const userLocation = {
           lat: position.coords.latitude,

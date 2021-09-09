@@ -281,6 +281,7 @@ export default function LoggedInPages(props) {
           submitSighting={addSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
+          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           setSelectedBird={setSelectedBird}
           instagramUid={props.instagramUid}
@@ -341,6 +342,7 @@ export default function LoggedInPages(props) {
           submitSighting={addSighting}
           placeMarker={placeMarker}
           mapPin={mapPin}
+          setMapPin={setMapPin}
           selectSpecies={selectSpecies}
           instagramUid={props.instagramUid}
           instagramToken={props.instagramToken}

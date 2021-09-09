@@ -79,6 +79,7 @@ export default function SightingPage(props) {
                 submitSighting={props.submitSighting}
                 placeMarker={props.placeMarker}
                 mapPin={props.mapPin}
+                setMapPin={setMapPin}
                 updateSighting={updateSighting}
                 deleteSighting={props.deleteSighting}
                 setIsEditing={setIsEditing}
