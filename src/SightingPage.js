@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header.js";
 import Bird from "./Bird.js";
@@ -21,6 +21,8 @@ export default function SightingPage(props) {
     setMapPin
   } = props;
 
+
+
   const [sightingDetails, setSightingDetails] = useState({
     lat: 52.610044,
     lng: -1.156774,
@@ -37,6 +39,10 @@ export default function SightingPage(props) {
       },
     },
   });
+
+  useEffect(() => {
+    setIsEditing(false) //so that it always starts out not as a form
+  }, [])
 
   const { sightingID } = useParams();
 

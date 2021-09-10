@@ -215,8 +215,12 @@ export default function SightingForm(props) {
                 max={today}
                 min="1899-01-01"
                 defaultValue={
-                  sightingDetails.datetime &&
-                  sightingDetails.datetime.substring(0, 10)
+                  
+                  sightingDetails.datetime ?
+                  (sightingDetails.datetime.substring(0, 10)) :
+                  today
+
+
                 }
               ></input>
             </li>
