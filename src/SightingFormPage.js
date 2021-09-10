@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header.js";
 import SightingForm from "./SightingForm.js";
@@ -15,9 +15,16 @@ export default function SightingFormPage(props) {
     selectedImages,
     setSelectedImages,
     requiredMessage,
+    setRequiredMessage
   } = props;
 
   const { birdID, commonName } = useParams();
+
+  useEffect(() => {
+    setRequiredMessage({
+      field: null,
+      message: null});
+  }, [])
 
   return (
     <div className="sighting-form-page">

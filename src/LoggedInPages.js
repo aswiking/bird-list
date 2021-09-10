@@ -290,6 +290,7 @@ export default function LoggedInPages(props) {
           setSelectedImages={setSelectedImages}
           formType="new"
           requiredMessage = {requiredMessage}
+          setRequiredMessage = {setRequiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
           providedSpecies={props.providedSpecies}
