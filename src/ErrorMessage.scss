@@ -1,0 +1,22 @@
+@import "./Variables";
+
+
+.error-message {
+    margin: auto;
+    width: 300px;
+
+    .content {
+        margin: 10px;
+    }
+
+    p {
+        padding: 0;
+    }
+}
+.dodo {
+    background: $primary-color;
+    width: 200px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+}

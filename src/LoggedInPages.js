@@ -22,13 +22,14 @@ export default function LoggedInPages(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [requiredMessage, setRequiredMessage] = useState({
     field: null,
-    message: null
+    message: null,
   });
 
   const history = useHistory();
   const { currentUser } = props;
 
-  async function fetchSightings() { //moved this to outside the useEffect so I can call it from elsewhere. is allowed?
+  async function fetchSightings() {
+    //moved this to outside the useEffect so I can call it from elsewhere. is allowed?
     let token;
     try {
       token = await currentUser.getIdToken();
@@ -72,17 +73,15 @@ export default function LoggedInPages(props) {
       res = await apiFetch(url, {}, "Could not fetch username");
 
       const userDetails = await res.json();
-      setUserName(userDetails.username)
-      
+      setUserName(userDetails.username);
     }
 
     if (props.instagramToken) {
       getUserDetails();
     } else {
-      setUserName(currentUser.displayName)
+      setUserName(currentUser.displayName);
     }
   }, [props.instagramToken, currentUser.displayName]);
-
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -93,17 +92,19 @@ export default function LoggedInPages(props) {
   async function addSighting(event) {
     event.preventDefault();
 
-   if (!(selectedBird)) {
-     setRequiredMessage({
-       field: 'species',
-       message: 'You must select a species'});
-       return
-   } else if (!(event.target.date.value)) {
-    setRequiredMessage({
-      field: 'date',
-      message: 'You must select a date'});
-      return
-   }
+    if (!selectedBird) {
+      setRequiredMessage({
+        field: "species",
+        message: "You must select a species",
+      });
+      return;
+    } else if (!event.target.date.value) {
+      setRequiredMessage({
+        field: "date",
+        message: "You must select a date",
+      });
+      return;
+    }
 
     const newSighting = {
       bird_id: selectedBird,
@@ -148,20 +149,19 @@ export default function LoggedInPages(props) {
       return;
     }
 
-
     const sighting = await res.json();
 
     let newSightingsArray = [...sightingsData, sighting];
 
-    newSightingsArray.sort((a,b) => {
+    newSightingsArray.sort((a, b) => {
       const dateA = new Date(a.datetime);
       const dateB = new Date(b.datetime);
       if (dateA < dateB) {
-        return 1
+        return 1;
       } else if (dateA > dateB) {
-        return -1
+        return -1;
       } else {
-        return 0
+        return 0;
       }
     });
 
@@ -182,7 +182,7 @@ export default function LoggedInPages(props) {
   async function updateSighting(event, originalSighting) {
     event.preventDefault();
 
-    console.log('selected images', selectedImages)
+    console.log("selected images", selectedImages);
 
     const updatedSighting = {
       id: originalSighting.id,
@@ -195,7 +195,7 @@ export default function LoggedInPages(props) {
       notes: event.target.notes.value,
     };
 
-    console.log("updatedSighting", updatedSighting)
+    console.log("updatedSighting", updatedSighting);
 
     const url = `/api/sightings/${originalSighting.id}`;
 
@@ -250,11 +250,20 @@ export default function LoggedInPages(props) {
   if (error) {
     return (
       <div>
-        <Header loggedin="true" currentUser={props.currentUser} userName={userName} setInstagramToken={props.setInstagramToken}/>
+        <Header
+          loggedin="true"
+          currentUser={props.currentUser}
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
+        />
         <div className="error-message">
-        <FontAwesomeIcon icon={faExclamationTriangle} className="exclamation-icon" size="2x" />
+          <FontAwesomeIcon
+            icon={faExclamationTriangle}
+            className="exclamation-icon"
+            size="2x"
+          />
           <p>{error.message}</p>
-          <Link to="/" className="homepage-link" onClick={()=>setError(null)}>
+          <Link to="/" className="homepage-link" onClick={() => setError(null)}>
             <p>Back to homepage</p>
           </Link>
         </div>
@@ -273,9 +282,9 @@ export default function LoggedInPages(props) {
           userName={userName}
           setInstagramToken={props.setInstagramToken}
         />
-      </Route> 
-      <Route path="/new-sighting/:id?/:common?"> 
-      {/* removed 'exact' */}
+      </Route>
+      <Route path="/new-sighting/:id?/:common?">
+        {/* removed 'exact' */}
         <SightingFormPage
           currentUser={props.currentUser}
           submitSighting={addSighting}
@@ -289,8 +298,8 @@ export default function LoggedInPages(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           formType="new"
-          requiredMessage = {requiredMessage}
-          setRequiredMessage = {setRequiredMessage}
+          requiredMessage={requiredMessage}
+          setRequiredMessage={setRequiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
           providedSpecies={props.providedSpecies}
@@ -310,14 +319,19 @@ export default function LoggedInPages(props) {
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           deleteSighting={deleteSighting}
-          requiredMessage = {requiredMessage}
+          requiredMessage={requiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
           fetchSightings={fetchSightings}
         />
       </Route>
       <Route path="/all-birds">
-        <AllBirds setError={setError} currentUser={props.currentUser} userName={userName} setInstagramToken={props.setInstagramToken}/>
+        <AllBirds
+          setError={setError}
+          currentUser={props.currentUser}
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
+        />
       </Route>
       <Route path="/birds/:birdID">
         <BirdPage
@@ -338,7 +352,7 @@ export default function LoggedInPages(props) {
         />
       </Route>
       <Route path="/new-sighting/:birdID/:commonName">
-      <SightingFormPage
+        <SightingFormPage
           currentUser={props.currentUser}
           submitSighting={addSighting}
           placeMarker={placeMarker}
@@ -350,13 +364,16 @@ export default function LoggedInPages(props) {
           selectedImages={selectedImages}
           setSelectedImages={setSelectedImages}
           formType="new"
-          requiredMessage = {requiredMessage}
+          requiredMessage={requiredMessage}
           userName={userName}
           setInstagramToken={props.setInstagramToken}
         />
       </Route>
       <Route path="/*">
-        <ErrorMessage />
+        <ErrorMessage
+          userName={userName}
+          setInstagramToken={props.setInstagramToken}
+        />
       </Route>
     </Switch>
   );
