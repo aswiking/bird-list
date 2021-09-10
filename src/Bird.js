@@ -71,14 +71,14 @@ export default function Bird(props) {
           {!displayBirdDetails ? (
             <FontAwesomeIcon
               icon={faAngleDown}
-              className="toggle-details down-arrow"
+              className="toggle-details down-arrow hover-pointer"
               alt="down arrow"
               size="2x"
             />
           ) : (
             <FontAwesomeIcon
               icon={faAngleUp}
-              className="toggle-details cross"
+              className="toggle-details cross hover-pointer"
               alt="up-arrow"
               size="2x"
             />

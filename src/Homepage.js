@@ -29,7 +29,7 @@ export default function HomePage(props) {
           <Link to="/new-sighting" className="plus-icon">
             <FontAwesomeIcon
               icon={faPlusCircle}
-              className="plus-icon"
+              className="plus-icon hover-pointer"
               title="add new sighting"
             />
           </Link>

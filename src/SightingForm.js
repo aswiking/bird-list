@@ -289,7 +289,7 @@ export default function SightingForm(props) {
               <p>{requiredMessage.message}</p>
             </div>
           )}
-          <button>Submit</button>
+          <button className="hover-pointer">Submit</button>
         </form>
         {props.formType !== "new" && (
           <div className="option-container">

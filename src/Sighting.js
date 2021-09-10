@@ -116,7 +116,7 @@ export default function Sighting(props) {
             <FontAwesomeIcon
               icon={faEdit}
               size="2x"
-              className="edit-icon"
+              className="edit-icon hover-pointer"
               onClick={() => setIsEditing(true)}
             />
           </div>

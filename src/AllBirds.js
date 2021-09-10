@@ -135,14 +135,14 @@ export default function AllBirds(props) {
             {!displayMenu ? (
               <FontAwesomeIcon
                 icon={faAngleDown}
-                className="down-arrow"
+                className="down-arrow hover-pointer"
                 alt="list of birds"
                 size="2x"
               />
             ) : (
               <FontAwesomeIcon
                 icon={faAngleUp}
-                className="up-arrow"
+                className="up-arrow hover-pointer"
                 alt="list of birds"
                 size="2x"
               />
@@ -165,7 +165,7 @@ export default function AllBirds(props) {
                   ></input>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className="check"
+                    className="check hover-pointer"
                     alt="list of birds"
                     size="1x"
                   />
@@ -184,7 +184,7 @@ export default function AllBirds(props) {
                   ></input>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className="check"
+                    className="check hover-pointer"
                     alt="list of birds"
                     size="1x"
                   />

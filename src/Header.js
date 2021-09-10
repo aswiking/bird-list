@@ -27,14 +27,14 @@ export default function Header(props) {
           <Link to="/all-birds">
             <FontAwesomeIcon
               icon={faClipboardList}
-              className="clipboardIcon headerIcon"
+              className="clipboardIcon headerIcon hover-pointer"
               alt="clipboard icon"
               title="full list of birds"
             />
           </Link>
           <FontAwesomeIcon
             icon={faUser}
-            className="userIcon headerIcon"
+            className="userIcon headerIcon hover-pointer"
             alt="user settings"
             onClick={displayUserMenu}
             title="user options"

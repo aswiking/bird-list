@@ -120,6 +120,10 @@
     width: calc((100vw - 40px - 30px) / 3);
   }
 
+  .image-div img:hover {
+    cursor: pointer;
+  }
+
   input {
     display: none;
   }
