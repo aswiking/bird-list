@@ -92,7 +92,12 @@ export default function SightingForm(props) {
       }
 
       const imageData = await res.json();
-      setInstagramImages(imageData.data);
+
+      console.log('imageData', imageData)
+
+      const filteredImageData = imageData.data.filter((image) => image.media_type !== 'VIDEO')
+
+      setInstagramImages(filteredImageData);
     }
 
     if (instagramToken) {
