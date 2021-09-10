@@ -18,14 +18,14 @@ export default function App() {
         if (user !== null && localStorage.getItem('instagramToken')) {
           setInstagramToken(localStorage.getItem('instagramToken'));
         }
-        setCurrentUser(user);
         setLoggedIn(user !== null);
+        setCurrentUser(user);
       });
 
     return () => unregisterAuthObserver();
   }, []);
 
-  if (loggedIn) {
+  if (loggedIn && currentUser) {
     return (
       <LoggedInPages currentUser={currentUser} instagramUid={instagramUid} instagramToken={instagramToken} setInstagramToken={setInstagramToken} />
     );
