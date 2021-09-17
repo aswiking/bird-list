@@ -9,6 +9,7 @@ import "./LoginPage.scss";
 import apiFetch from "./api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {  faMapMarkerAlt, faCalendar, faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function LoginPage(props) {
   const { setInstagramToken, setInstagramUid } = props;
@@ -77,6 +78,38 @@ export default function LoginPage(props) {
     <div className="loginpage">
       <Header />
       <div className="body">
+        <div className="description">
+          <p>Keep track of your bird sightings:</p>
+          <div className="bold what-where-when-container">
+            <div className="what-where-when what">
+              <FontAwesomeIcon
+                icon={faFeatherAlt}
+                className="tickIcon"
+                alt="feather"
+                size="1x"
+              />
+              <p>what</p>
+            </div>
+            <div className="what-where-when where">
+              <FontAwesomeIcon
+                icon={faMapMarkerAlt}
+                className="tickIcon"
+                alt="clipboard"
+                size="1x"
+              />
+              <p>where</p>
+            </div>{" "}
+            <div className="what-where-when when">
+              <FontAwesomeIcon
+                icon={faCalendar}
+                className="tickIcon"
+                alt="calendar"
+                size="1x"
+              />
+              <p>when</p>
+            </div>
+          </div>
+        </div>
         <div className="login-options">
           <a
             href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}

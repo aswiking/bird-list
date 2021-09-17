@@ -8,6 +8,34 @@
   width: 100%;
 }
 
+.description {
+  color: $secondary-color;
+  width: max-content;
+  margin: 26vw auto;
+
+  p {
+    width: max-content;
+  }
+  .bold {
+    font-weight: 800;
+    margin: auto;
+  }
+
+  .what-where-when-container {
+    width: max-content;
+    margin: auto;
+  }
+
+  .what-where-when {
+    display: flex;
+    align-items: center;
+
+    svg {
+      padding-right: 10px;
+    }
+  }
+}
+
 .login-options {
   width: max-content;
   position: absolute;
@@ -44,19 +72,19 @@
 }
 //tablet portrait up
 @media (min-width: 600px) {
-  .loginpage {
-    box-sizing: border-box;
-    background-image: url(./images/farne-islands.jpg);
-    // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: 122%, 100%;
-    min-height: 100vh;
-    background-color: $primary-color;
-  }
-
   .body {
     position: relative;
+  }
+
+  .description {
+    padding: 20px 15px;
+    width: 400px;
+    border-radius: 10px;
+    margin: 9vw auto;
+
+    p {
+      font-size: 1.6em;
+    }
   }
 
   .login-options {
@@ -65,5 +93,34 @@
     left: 0;
     transform: none;
     margin: auto;
+  }
+}
+
+//tablet landscape up
+@media (min-width: 900px) {
+  .loginpage {
+    box-sizing: border-box;
+    background-image: url(./images/farne-islands.jpg);
+    // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 202%, 100%;
+    min-height: 100vh;
+    background-color: $primary-color;
+  }
+
+  .login-options {
+    margin-right: 30px;
+    margin-left: auto;
+    background: #f4faf4;
+    padding: 50px 10px;
+    height: 40px;
+  }
+}
+
+//desktop  up
+@media (min-width: 1200px) {
+  .loginpage {
+    background-size: 122%, 100%;
   }
 }
