@@ -11,7 +11,7 @@
 .description {
   color: $secondary-color;
   width: max-content;
-  margin: 26vw auto 30px auto;
+  margin: 11vh auto 30px auto;
 
   p {
     width: max-content;
@@ -68,7 +68,7 @@
   }
 }
 //tablet portrait up
-@media (min-width: 600px) {
+@media (min-width: 600px) and (orientation: portrait) {
   .body {
     position: relative;
   }
@@ -104,13 +104,16 @@
     svg {
       font-size: 4.6em;
     }
-    p {font-size: 2.6em;
+    p {
+      font-size: 2.2em;
     }
   }
 }
 
+
 //tablet landscape up
-@media (min-width: 900px) {
+@media (min-width: 600px) and (orientation: landscape) {
+
   .loginpage {
     box-sizing: border-box;
     background-image: url(./images/farne-islands.jpg);
@@ -121,9 +124,42 @@
     min-height: 100vh;
     background-color: $primary-color;
   }
+  
+  .description {
+    margin: 19vh auto 30px auto;
+    color: $primary-color;
+
+    p {
+      font-size: 1.6em;
+    }
+}
+}
+//large tablet landscape up
+@media (min-width: 900px) and (orientation: landscape) {
+  .body {
+    display: flex;
+    width: 90%;
+    margin: auto;
+  }
+
+
+
+  .description {
+    margin: 15vh auto;
+
+    p {
+      font-size: 2em;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    svg {
+      font-size: 2em;
+      color: $primary-color;
+    }
+  }
 
   .login-options {
-    margin-right: 30px;
     margin-left: auto;
     background: #f4faf4;
     padding: 50px 10px;
@@ -131,13 +167,34 @@
   }
 }
 
+//tablet landscape up
+/* @media (min-width: 900px)  {
+  .loginpage {
+    box-sizing: border-box;
+    //background-image: url(./images/farne-islands.jpg);
+    // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 202%, 100%;
+    min-height: 100vh;
+    //background-color: $primary-color;
+  }
+
+  .login-options {
+    margin-left: auto;
+    background: #f4faf4;
+    padding: 50px 10px;
+    height: 40px;
+  }
+}
+*/
+
 //desktop  up
 @media (min-width: 1200px) {
   .loginpage {
     background-size: 122%, 100%;
   }
 }
-
 
 // position: absolute;
 // top: 50%;
