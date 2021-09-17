@@ -13,7 +13,6 @@
   .logo-and-name {
     display: flex;
     align-items: flex-end;
-    justify-content: center;
   }
   
   .fledglingLogo {
@@ -87,6 +86,10 @@
 
   @media (min-width: 600px) {
     
+    .logo-and-name {
+      justify-content: center;
+    }
+
     .fledglingLogo {
       width: 15%;
   }
