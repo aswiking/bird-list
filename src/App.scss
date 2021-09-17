@@ -14,6 +14,17 @@ html {
   font-size: 16px;
 }
 
+//background image for landscape screens
+@media (orientation: landscape) {
+
+  html {
+    background-image: url(./images/farne-islands.jpg);
+    // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
+    background-size: 150%, 100%;
+  }
+}
+
+
 h1,
 h2,
 h3 {
@@ -53,9 +64,3 @@ a {
   }
 }
 
-// landscape tablet up
-@media (min-width: 900px) {
-
-
-
-}
