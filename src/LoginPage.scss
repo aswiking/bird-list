@@ -11,7 +11,7 @@
 .description {
   color: $secondary-color;
   width: max-content;
-  margin: 26vw auto;
+  margin: 26vw auto 30px auto;
 
   p {
     width: max-content;
@@ -38,10 +38,7 @@
 
 .login-options {
   width: max-content;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
 }
 
 .button-container {
@@ -78,12 +75,17 @@
 
   .description {
     padding: 20px 15px;
-    width: 400px;
-    border-radius: 10px;
-    margin: 9vw auto;
+    width: 550px;
+    margin: 11vw auto;
 
     p {
-      font-size: 1.6em;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    .what-where-when svg {
+      font-size: 2.2em;
+      padding-right: 20px;
     }
   }
 
@@ -93,6 +95,17 @@
     left: 0;
     transform: none;
     margin: auto;
+  }
+
+  .instagram-button {
+    height: 80px;
+    padding: 20px;
+
+    svg {
+      font-size: 4.6em;
+    }
+    p {font-size: 2.6em;
+    }
   }
 }
 
@@ -124,3 +137,9 @@
     background-size: 122%, 100%;
   }
 }
+
+
+// position: absolute;
+// top: 50%;
+// left: 50%;
+// transform: translate(-50%, -50%);
