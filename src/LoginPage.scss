@@ -4,7 +4,6 @@
   margin: 0;
 
   .logo-and-name {
-
     justify-content: center;
   }
 }
@@ -20,6 +19,7 @@
 
   p {
     width: max-content;
+    font-size: 1.2em;
   }
   .bold {
     font-weight: 800;
@@ -44,10 +44,20 @@
 .login-options {
   width: max-content;
   margin: auto;
+  border: 1px solid $secondary-color;
+  border-radius: 10px;
+
+  .login-options-title {
+    color: $secondary-color;
+    text-align: center;
+    margin: 7px 0 10px;
+    font-weight: 700;
+  }
 }
 
 .button-container {
   padding: 0 24px;
+  width: 140px;
 
   .instagramIcon {
     margin-right: 10px;
@@ -64,7 +74,7 @@
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border: none;
-  background-color: $secondary-color;
+  background-color: $contrast-color;
 
   p {
     font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -100,6 +110,14 @@
     left: 0;
     transform: none;
     margin: auto;
+
+   .login-options-title {
+      font-size: 1.6em;
+  }
+  }
+
+  .button-container {
+    width: 300px;
   }
 
   .instagram-button {
@@ -118,8 +136,6 @@
 //landscape - to justify for different background image
 
 @media (orientation: landscape) {
-
-
   .description {
     color: $primary-color;
   }
@@ -127,16 +143,21 @@
 
 //tablet landscape up
 @media (min-width: 600px) and (orientation: landscape) {
-
-
   .description {
     margin: 19vh auto 30px auto;
     color: $primary-color;
+    background-color: rgba(0, 128, 128, 0.5);
+    padding: 15px;
+    border-radius: 10px;
 
     p {
       font-size: 1.6em;
     }
-}
+  }
+
+  .login-options {
+    background-color: rgba(244, 250, 244, 0.5);
+  }
 }
 //large tablet landscape up
 @media (min-width: 900px) and (orientation: landscape) {
@@ -145,8 +166,6 @@
     width: 90%;
     margin: auto;
   }
-
-
 
   .description {
     margin: 15vh auto;
@@ -164,10 +183,17 @@
   }
 
   .login-options {
+    width: 20%;
+    min-width: 200px;
     margin-left: auto;
-    background: #f4faf4;
-    padding: 50px 10px;
+    background-color: rgba(244, 250, 244, 0.5);
+    padding: 7px 10px 60px;
     height: 40px;
+    border-radius: 10px;
+
+    .button-container {
+      margin: auto;
+    }
   }
 }
 

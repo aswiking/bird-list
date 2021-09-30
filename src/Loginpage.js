@@ -111,11 +111,12 @@ export default function LoginPage(props) {
           </div>
         </div>
         <div className="login-options">
+        <p className="login-options-title">Log in or sign up</p>
           <a
             href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=https://localhost:3000/&scope=user_profile,user_media&response_type=code`}
           >
             <div className="button-container">
-              <button className="instagram-button">
+              <button className="instagram-button hover-pointer">
                 <FontAwesomeIcon
                   icon={faInstagram}
                   className="instagramIcon"
@@ -123,7 +124,7 @@ export default function LoginPage(props) {
                   title="instagram"
                   size="2x"
                 />
-                <p>Sign in with Instagram</p>
+                <p>Instagram</p>
               </button>
             </div>
           </a>
