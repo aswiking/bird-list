@@ -10,11 +10,10 @@ export default function Bird(props) {
   const { currentUser, setError, birdDetails, setBirdDetails, birdID } = props;
 
   useEffect(() => {
-    if (!props.birdID) { 
+    if (!props.birdID) {
       return;
     }
     async function fetchBird() {
-
       let token;
       try {
         token = await currentUser.getIdToken();
@@ -28,22 +27,22 @@ export default function Bird(props) {
 
       let res;
 
-      const url=`/api/birds/${birdID}`
+      const url = `/api/birds/${birdID}`;
 
       try {
-      res = await apiFetch(
-        url,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        res = await apiFetch(
+          url,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        },
-        "Could not fetch bird details"
-      );
-    } catch (error) {
-      setError(error);
-      return;
-    }
+          "Could not fetch bird details"
+        );
+      } catch (error) {
+        setError(error);
+        return;
+      }
 
       const birdData = await res.json();
 
@@ -51,7 +50,6 @@ export default function Bird(props) {
     }
     fetchBird();
   }, [currentUser, setError, birdID, props.birdID, setBirdDetails]);
-
 
   function toggleDisplayBirdDetails() {
     setDisplayBirdDetails(!displayBirdDetails);
@@ -84,20 +82,20 @@ export default function Bird(props) {
             />
           )}
         </div>
-        <div className='full-details-container'>
-        <div
-          className={`full-details ${
-            displayBirdDetails ? "active" : "inactive"
-          }`}
-        >
-          <h3>Family:</h3>
-          <h4>{birdDetails.group.common}</h4>
-          <h4 className="scientific">{birdDetails.group.scientific}</h4>
-          <h3>UK status:</h3>
-          <h4>{birdDetails.uk_status}</h4>
+        <div className="full-details-container">
+          <div
+            className={`full-details ${
+              displayBirdDetails ? "active" : "inactive"
+            }`}
+          >
+            <h3>Family:</h3>
+            <h4>{birdDetails.group.common}</h4>
+            <h4 className="scientific">{birdDetails.group.scientific}</h4>
+            <h3>UK status:</h3>
+            <h4>{birdDetails.uk_status}</h4>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
