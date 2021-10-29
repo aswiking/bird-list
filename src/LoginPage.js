@@ -15,7 +15,7 @@ export default function LoginPage(props) {
   const { setInstagramToken, setInstagramUid } = props;
   const history = useHistory();
 
-  console.log("process.env.PUBLIC_URL is", process.env.PUBLIC_URL)
+  console.log("process.env.URL is", process.env.URL)
 
   const location = useLocation();
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function LoginPage(props) {
         <div className="login-options">
         <p className="login-options-title">Log in or sign up</p>
           <a
-            href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=${(process.env.NODE_ENV === 'production') ? process.env.PUBLIC_URL : 'https://localhost:3000'}/&scope=user_profile,user_media&response_type=code`}
+            href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=${(process.env.NODE_ENV === 'production') ? process.env.URL : 'https://localhost:3000'}/&scope=user_profile,user_media&response_type=code`}
           >
             <div className="button-container">
               <button className="instagram-button hover-pointer">
