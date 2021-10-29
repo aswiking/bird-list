@@ -15,6 +15,8 @@ export default function LoginPage(props) {
   const { setInstagramToken, setInstagramUid } = props;
   const history = useHistory();
 
+  console.log("process.env.PUBLIC_URL is", process.env.PUBLIC_URL)
+
   const location = useLocation();
   useEffect(() => {
     const parsed = queryString.parse(location.search);
