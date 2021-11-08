@@ -24,7 +24,7 @@ export default function LoginPage(props) {
     console.log('parsed is', parsed)
 
     if (parsed.code) {
-      history.replace({ search: "" });
+      history.replace({ search: "" }); //returns you to homepage
 
       async function retrieveToken() {
         let res;
@@ -41,6 +41,8 @@ export default function LoginPage(props) {
         const response = await res.json();
 
         setInstagramToken(response.instagramToken);
+
+        console.log('instagramToken', response.instagramToken)
 
         localStorage.setItem("instagramToken", response.instagramToken);
 
