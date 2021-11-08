@@ -21,6 +21,8 @@ export default function LoginPage(props) {
   useEffect(() => {
     const parsed = queryString.parse(location.search);
 
+    console.log('parsed is', parsed)
+
     if (parsed.code) {
       history.replace({ search: "" });
 
