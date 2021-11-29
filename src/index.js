@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === "production" ? "/cocktail" : "/"}>
     <App key='app'/>
     </BrowserRouter>
   </React.StrictMode>,
