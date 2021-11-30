@@ -41,17 +41,10 @@ export default function LoggedInPages(props) {
       return;
     }
 
-    let url;
-    if (process.env.NODE_ENV === 'production') {
-      url = "https://hidden-tor-50969.herokuapp.com/api/sightings";
-    } else {
-      url = "/api/sightings";
-    }
-    
     let res;
     try {
       res = await apiFetch(
-        url,
+        "/api/sightings",
         {
           headers: {
             Authorization: `Bearer ${token}`,
