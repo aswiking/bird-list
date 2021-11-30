@@ -55,6 +55,7 @@
   }
 }
 
+/* instagram login
 .button-container {
   padding: 0 24px;
   width: 140px;
@@ -75,13 +76,15 @@
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border: none;
   background-color: $contrast-color;
+ 
 
   p {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 14px;
   }
-}
+} */
+
 //tablet portrait up
 @media (min-width: 600px) and (orientation: portrait) {
   .body {
@@ -110,6 +113,8 @@
     left: 0;
     transform: none;
     margin: auto;
+    width: 50%;
+    padding: 10px;
 
    .login-options-title {
       font-size: 1.6em;
@@ -183,13 +188,12 @@
   }
 
   .login-options {
-    width: 20%;
     min-width: 200px;
     margin-left: auto;
     background-color: rgba(244, 250, 244, 0.5);
-    padding: 7px 10px 60px;
-    height: 40px;
+    padding: 7px 10px;
     border-radius: 10px;
+    width: 30%;
 
     .button-container {
       margin: auto;

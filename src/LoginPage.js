@@ -12,6 +12,8 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {  faMapMarkerAlt, faCalendar, faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function LoginPage(props) {
+
+  /* Instagram login
   const { setInstagramToken, setInstagramUid } = props;
   const history = useHistory();
 
@@ -55,14 +57,15 @@ export default function LoginPage(props) {
       //log in to firebase
     }
   }, [location.search, setInstagramToken, setInstagramUid, history]);
+  */
 
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: "popup",
-    // We will display Google and Facebook as auth providers. *DISABLED FOR NOW
+    // We will display Google and Facebook as auth providers.
     signInOptions: [
-      // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
       // Avoid redirects after sign-in.
@@ -118,6 +121,7 @@ export default function LoginPage(props) {
         </div>
         <div className="login-options">
         <p className="login-options-title">Log in or sign up</p>
+        {/* Instagram login
           <a
             href={`https://api.instagram.com/oauth/authorize?client_id=1440877326102459&redirect_uri=${(process.env.NODE_ENV === 'production') ? 'https://aswiking-fledgling.netlify.app' : 'https://localhost:3000'}/&scope=user_profile,user_media&response_type=code`}
           >
@@ -134,6 +138,7 @@ export default function LoginPage(props) {
               </button>
             </div>
           </a>
+        */}
           <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </div>
       </div>
