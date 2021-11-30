@@ -41,6 +41,8 @@ export default function LoggedInPages(props) {
       return;
     }
 
+console.log('public url is', process.env.PUBLIC_URL)
+
     let res;
     try {
       res = await apiFetch(
