@@ -44,7 +44,7 @@ export default function LoggedInPages(props) {
     let res;
     try {
       res = await apiFetch(
-        "/api/sightings",
+        `${(process.env.NODE_ENV === 'production') ? '/fledgling' : ''}/api/sightings`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
