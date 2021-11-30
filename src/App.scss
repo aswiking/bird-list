@@ -3,27 +3,32 @@
 
 html {
   box-sizing: border-box;
-  background-image: 
-    url(./images/stilts-cropped-2.png);
+  background-image: url(./images/farne-islands.svg);
+  // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
+  background-size: 150%, 100%;
+  //background-image: 
+  //  url(./images/stilts-cropped-2.png);
   // simonrumi 'Black Necked Stilts at Dawn' https://www.flickr.com/photos/22896868@N05/46421110841/in/photolist-2dJ5jY2-2jp8N1J-2hTCJst-KGXQGZ-2gWxXJc-24asMXc-2gpNuqj-2jaFt26-qc7HaB-GLWnAR-aqqai6-aqsKvu-FVvryj-fvk3Qe-fvk1Qi-fvk1Jv-fvzj9f-uHeWkR-fvk2Pn-fvk37n-fvziSh-fvk3VB-fvk3o4-fvk2fk-vBM96J-fvziXG-XXvHdd-fvk1m2-7US8Dn-25kYD5d-fvk1Ev-fvk29V-2jpa2tV-LwS91P-24Yvmva-2cbgjTm-xMeM8B-8wW9UE-ooEScs-92BJsc-bUwqw9-2jsQ49H-92ERrs-2iWoj6e-2jsKXC6-2cbgk53-NvQSSW-prqGvX-2g6nGDF-jYYJVF/
-  background-position: center bottom;
+  
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 122%, 100%;
+  //background-size: 122%, 100%;
   min-height: 100vh;
   background-color: $primary-color;
   font-size: 16px;
 }
 
+/*
 //background image for landscape screens
 @media (orientation: landscape) {
 
   html {
-    background-image: url(./images/farne-islands.jpg);
+    background-image: url(./images/farne-islands.svg);
     // Robert Drummond, Farne Islands, Taken on July 23, 2015, https://www.flickr.com/photos/47229455@N04/19938787676/in/photolist-wnVuVj-w8JJwX-w8JxUK-w8JKog-wnVtFW-w8JDVT-i45spg-wqeZtx-wqeHPM-wqGRUr-wqeGSr-w8BDnS-wnVqxG-wqGutv-w8C3pf-wqex7V-vtd763-w8Coy1-vtnbUH-w8CfaY-vte4hW-vtnD3p-vtdYkb-wpyFxN-vtdykC-w8JAMP-261GVoz-w8KaHD-vtea7S-vte9E9-wqGAut-wqGuKH-wqGaak-w8Ktv2-wnVUzo-wnVuab-wqeD4e-vtmRtt-vtmQwt-wnUUqY-w8CKLd-wnVEXd-w8Kd76-w8Jyya-w8Jtok-wpyZP7-w8BUGE-vtdVzb-w8K9Ue-w8K7dn
     background-size: 150%, 100%;
   }
 }
+*/
 
 
 h1,
