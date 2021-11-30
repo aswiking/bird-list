@@ -152,6 +152,7 @@ export default function Sighting(props) {
           <div className="note-box">
             <p>{sightingDetails.notes ? sightingDetails.notes : 'No notes recorded'}</p>
           </div>
+          {/* instagram content
           <h3>Photos</h3>
           <div className="photos">
             {(sightingDetails.photos.length > 0) ?
@@ -167,6 +168,7 @@ export default function Sighting(props) {
                 );
               })) : <p>No photos</p> }
           </div>
+            */}
         </div>
       </div>
     </div>

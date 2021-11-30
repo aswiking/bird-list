@@ -263,10 +263,12 @@ export default function SightingForm(props) {
                 Double click to place a pin on the spot of your sighting
               </p>
             </div>
+            {/* instagram content
             <div className="images-container">
               <h3>Photos</h3>
               <div>{photosContent}</div>
             </div>
+            */}
             <li className="notes">
               <h3>
                 <label htmlFor="notes">Notes</label>
