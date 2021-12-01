@@ -39,9 +39,10 @@ export default function LoggedInPages(props) {
         message: "Could not authorise",
       });
       return;
-    }
+    };
 
-    console.log('process.env is', process.env)
+    console.log('process.env is', process.env);
+    console.log('domain is', window.location.host);
 
     let url;
 
