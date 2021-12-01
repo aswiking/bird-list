@@ -59,7 +59,7 @@ export default function Sighting(props) {
 
       let res;
 
-      const fetchUrl = `${url}${sightingID}`;
+      const fetchUrl = `${url}/${sightingID}`;
       try {
         res = await apiFetch(
           fetchUrl,

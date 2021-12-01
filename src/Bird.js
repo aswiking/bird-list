@@ -34,7 +34,7 @@ export default function Bird(props) {
 
       let res;
 
-      const fetchUrl = `${url}${birdID}`;
+      const fetchUrl = `${url}/${birdID}`;
 
       try {
         res = await apiFetch(
