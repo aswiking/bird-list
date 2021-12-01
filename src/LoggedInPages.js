@@ -41,12 +41,18 @@ export default function LoggedInPages(props) {
       return;
     }
 
-console.log('public url is', process.env.PUBLIC_URL)
+    let url;
+
+    if(process.env.NODE_ENV === 'production') {
+      url = "/fledgling/api/sightings"
+    } else {
+      url = "/api/sightings"
+    }
 
     let res;
     try {
       res = await apiFetch(
-        "/api/sightings",
+        url,
         {
           headers: {
             Authorization: `Bearer ${token}`,
