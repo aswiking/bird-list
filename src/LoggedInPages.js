@@ -41,6 +41,8 @@ export default function LoggedInPages(props) {
       return;
     }
 
+    console.log('process.env is', process.env)
+
     let url;
 
     if(process.env.NODE_ENV === 'production') {
