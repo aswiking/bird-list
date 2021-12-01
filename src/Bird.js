@@ -9,6 +9,13 @@ export default function Bird(props) {
 
   const { currentUser, setError, birdDetails, setBirdDetails, birdID } = props;
 
+  let url;
+  if(window.location.host === 'www.aswiking.com') {
+    url = "/fledgling/api/birds"
+  } else {
+    url = "/api/birds"
+  }
+
   useEffect(() => {
     if (!props.birdID) {
       return;
@@ -27,11 +34,11 @@ export default function Bird(props) {
 
       let res;
 
-      const url = `/api/birds/${birdID}`;
+      const fetchUrl = `${url}${birdID}`;
 
       try {
         res = await apiFetch(
-          url,
+          fetchUrl,
           {
             headers: {
               Authorization: `Bearer ${token}`,

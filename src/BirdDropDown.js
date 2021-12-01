@@ -51,9 +51,16 @@ export default function BirdDropDown(props) {
       return;
     }
 
+    let url;
+    if(window.location.host === 'www.aswiking.com') {
+      url = "/fledgling/api/birds"
+    } else {
+      url = "/api/birds"
+    }
+
     let res;
     res = await apiFetch(
-      `/api/birds?query=${inputValue}`,
+      `${url}?query=${inputValue}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

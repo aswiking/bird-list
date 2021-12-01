@@ -37,6 +37,13 @@ export default function Sighting(props) {
       return;
     }
 
+    let url;
+    if(window.location.host === 'www.aswiking.com') {
+      url = "/fledgling/api/sightings"
+    } else {
+      url = "/api/sightings"
+    };
+
     async function fetchSighting() {
       let token;
 
@@ -52,10 +59,10 @@ export default function Sighting(props) {
 
       let res;
 
-      const url = `/api/sightings/${sightingID}`;
+      const fetchUrl = `${url}${sightingID}`;
       try {
         res = await apiFetch(
-          url,
+          fetchUrl,
           {
             headers: {
               Authorization: `Bearer ${token}`,
