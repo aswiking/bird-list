@@ -46,7 +46,7 @@ export default function LoggedInPages(props) {
 
     let url;
 
-    if(process.env.NODE_ENV === 'production') {
+    if(window.location.host === 'www.aswiking.com') {
       url = "/fledgling/api/sightings"
     } else {
       url = "/api/sightings"
