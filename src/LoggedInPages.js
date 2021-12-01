@@ -28,6 +28,13 @@ export default function LoggedInPages(props) {
   const history = useHistory();
   const { currentUser } = props;
 
+  let url;
+  if(window.location.host === 'www.aswiking.com') {
+    url = "/fledgling/api/sightings"
+  } else {
+    url = "/api/sightings"
+  }
+
   async function fetchSightings() {
     //moved this to outside the useEffect so I can call it from elsewhere. is allowed?
     let token;
@@ -41,16 +48,6 @@ export default function LoggedInPages(props) {
       return;
     };
 
-    console.log('process.env is', process.env);
-    console.log('domain is', window.location.host);
-
-    let url;
-
-    if(window.location.host === 'www.aswiking.com') {
-      url = "/fledgling/api/sightings"
-    } else {
-      url = "/api/sightings"
-    }
 
     let res;
     try {
@@ -75,6 +72,7 @@ export default function LoggedInPages(props) {
     fetchSightings();
   }, [currentUser]);
 
+  /* instagram
   useEffect(() => {
     async function getUserDetails() {
       let res;
@@ -93,6 +91,7 @@ export default function LoggedInPages(props) {
       setUserName(currentUser.displayName);
     }
   }, [props.instagramToken, currentUser.displayName]);
+  */
 
   function selectSpecies(option, action) {
     if (action.action === "select-option") {
@@ -129,8 +128,6 @@ export default function LoggedInPages(props) {
     event.target.reset();
 
     console.log("newSighting:", newSighting);
-
-    const url = "/api/sightings";
 
     let token;
     try {
@@ -208,12 +205,12 @@ export default function LoggedInPages(props) {
 
     console.log("updatedSighting", updatedSighting);
 
-    const url = `/api/sightings/${originalSighting.id}`;
+    const putUrl = `${url}${originalSighting.id}`;
 
     let res;
     try {
       res = await apiFetch(
-        url,
+        putUrl,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -234,12 +231,12 @@ export default function LoggedInPages(props) {
   }
 
   async function deleteSighting(event, id) {
-    const url = `/api/sightings/${id}`;
+    const deleteUrl = `${url}${id}`;
 
     let res;
     try {
       res = await apiFetch(
-        url,
+        deleteUrl,
         {
           method: "DELETE",
         },
