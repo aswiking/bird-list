@@ -19,7 +19,7 @@ export default function Header(props) {
     <div className="header">
       <Link to="/" className="logo-and-name">
         {" "}
-        <img className="fledglingLogo" src={logo} alt="tbc"></img>
+        <img className="fledglingLogo" src={logo} alt="fledgling logo"></img>
         <h1>Fledgling</h1>
       </Link>
       {props.loggedin && (
