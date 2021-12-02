@@ -28,12 +28,14 @@ export default function LoggedInPages(props) {
   const history = useHistory();
   const { currentUser } = props;
 
-  let url;
+  /*let url;
   if(window.location.host === 'www.aswiking.com') {
     url = "/fledgling/api/sightings"
   } else {
     url = "/api/sightings"
-  }
+  }*/
+  const url = "/api/sightings";
+
 
   async function fetchSightings() {
     //moved this to outside the useEffect so I can call it from elsewhere. is allowed?

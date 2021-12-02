@@ -20,12 +20,15 @@ export default function AllBirds(props) {
   });
   const [displayMenu, setDisplayMenu] = useState(false);
 
+  /*
   let url;
   if(window.location.host === 'www.aswiking.com') {
     url = "/fledgling/api/birds"
   } else {
     url = "/api/birds"
   }
+  */
+  const url = "/api/birds";
 
   useEffect(() => {
     async function fetchBirds() {

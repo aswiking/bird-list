@@ -9,12 +9,14 @@ export default function Bird(props) {
 
   const { currentUser, setError, birdDetails, setBirdDetails, birdID } = props;
 
-  let url;
+  /*let url;
   if(window.location.host === 'www.aswiking.com') {
     url = "/fledgling/api/birds"
   } else {
     url = "/api/birds"
-  }
+  }*/
+
+  const url = "/api/birds";
 
   useEffect(() => {
     if (!props.birdID) {

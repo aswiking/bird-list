@@ -37,12 +37,13 @@ export default function Sighting(props) {
       return;
     }
 
-    let url;
+    /*let url;
     if(window.location.host === 'www.aswiking.com') {
       url = "/fledgling/api/sightings"
     } else {
       url = "/api/sightings"
-    };
+    };*/
+    const url = "/api/sightings";
 
     async function fetchSighting() {
       let token;
