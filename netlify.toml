@@ -1,13 +1,9 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://hidden-tor-50969.herokuapp.com/api/:splat"
+  to = "https://fledgling-server.onrender.com/api/:splat"
   status = 200
   
-  [[redirects]]
+[[redirects]]
   from = "/*"
   to = "/"
   status = 200
-
-
-
-  
